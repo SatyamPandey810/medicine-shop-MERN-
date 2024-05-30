@@ -12,15 +12,23 @@ export default function Login() {
         email: '',
         password: ''
     });
+    let { email, password } = data
 
     const togglePasswordVisibility = () => {
         setShowpassword(!showpassword);
     };
 
-    const handleOnChange = (event) => {
-        co
-
+    const inputChange = (event) => {
+        setData((prevValue) => ({
+            ...prevValue,
+            [event.target.name]: event.target.value
+        }))
     }
+    const submit = (event) => {
+        event.preventDefault();
+    }
+
+    console.log(data);
     return (
         <div>
             <section className="login-block">
@@ -28,11 +36,17 @@ export default function Login() {
                     <div className="row d-flex justify-content-center align-items-center">
                         <div className="col-md-4 login-sec">
                             <h2 className="text-center">Login Now</h2>
-                            <form className="login-form">
+                            <form className="login-form" onSubmit={submit}>
                                 <div className="form-group">
-                                    <label for="exampleInputEmail1" className="text-uppercase fw-bold fs-6">Username</label>
-                                    <input type="text" className="form-control" placeholder="" />
-
+                                    <label for="exampleInputEmail1" className="text-uppercase fw-bold fs-6">Email</label>
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        placeholder=""
+                                        onChange={inputChange}
+                                        name='email'
+                                        value={data.email}
+                                        required />
                                 </div>
                                 <div className="form-group position-relative">
                                     <label htmlFor="exampleInputPassword1" className="text-uppercase fw-bold fs-6">Password</label>
@@ -41,6 +55,9 @@ export default function Login() {
                                         className="form-control"
                                         placeholder=""
                                         id="exampleInputPassword1"
+                                        onChange={inputChange}
+                                        name='password'
+                                        value={data.password}
                                     />
                                     <span className="password-toggle-icon" onClick={togglePasswordVisibility}>
                                         <FontAwesomeIcon icon={showpassword ? faEyeSlash : faEye} />
