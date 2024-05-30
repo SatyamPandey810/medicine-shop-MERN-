@@ -1,0 +1,262 @@
+import React from 'react'
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+import 'font-awesome/css/font-awesome.min.css';
+import { Link } from 'react-router-dom';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
+export default function Home() {
+  return (
+    <div className="site-wrap">
+
+
+      <div className="site-blocks-cover" style={{ backgroundImage: "url('images/hero_1.jpg')" }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-7 mx-auto order-lg-2 align-self-center">
+              <div className="site-block-cover-content text-center">
+                <h2 className="sub-title">Effective Medicine, New Medicine Everyday</h2>
+                <h1>Welcome To Pharma</h1>
+                <p>
+                  <a href="#" className="btn btn-primary px-5 py-3">Shop Now</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="site-section">
+        <div className="container">
+          <div className="row align-items-stretch section-overlap">
+            <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
+              <div className="banner-wrap bg-primary h-100">
+                <a href="#" className="h-100">
+                  <h5>Free <br /> Shipping</h5>
+                  <p>
+                    Amet sit amet dolor
+                    <strong>Lorem, ipsum dolor sit amet consectetur adipisicing.</strong>
+                  </p>
+                </a>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
+              <div className="banner-wrap h-100">
+                <a href="#" className="h-100">
+                  <h5>Season <br /> Sale 50% Off</h5>
+                  <p>
+                    Amet sit amet dolor
+                    <strong>Lorem, ipsum dolor sit amet consectetur adipisicing.</strong>
+                  </p>
+                </a>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
+              <div className="banner-wrap bg-warning h-100">
+                <a href="#" className="h-100">
+                  <h5>Buy <br /> A Gift Card</h5>
+                  <p>
+                    Amet sit amet dolor
+                    <strong>Lorem, ipsum dolor sit amet consectetur adipisicing.</strong>
+                  </p>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div className="site-section">
+        <div className="container">
+          <div className="row">
+            <div className="title-section text-center col-12">
+              <h2 className="text-uppercase">Popular Products</h2>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-sm-6 col-lg-4 text-center item mb-4">
+              <span className="tag">30% OFF</span>
+              <a href="shop-single.html"> <img src="images/product_01.png" alt="Image" /></a>
+              <h3 className="text-dark">Select healthy products</h3>
+              <p className="price">Incorporating these healthy products into your diet</p>
+              {/* <h4 className="offer">30% OFF</h4> */}
+             
+            <Link to='/category/health'><h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3></Link>  
+            </div>
+            <div className="col-sm-6 col-lg-4 text-center item mb-4">
+              <a href="shop-single.html"> <img src="images/product_02.png" alt="Image" /></a>
+              <h3 className="text-dark"><a href="shop-single.html">Chanca Piedra</a></h3>
+              <p className="price">$70.00</p>
+              <h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3>
+            </div>
+            <div className="col-sm-6 col-lg-4 text-center item mb-4">
+              <a href="shop-single.html"> <img src="images/product_03.png" alt="Image" /></a>
+              <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
+              <p className="price">$120.00</p>
+              <h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3>
+            </div>
+
+            <div className="col-sm-6 col-lg-4 text-center item mb-4">
+
+              <a href="shop-single.html"> <img src="images/product_04.png" alt="Image" /></a>
+              <h3 className="text-dark"><a href="shop-single.html">Cetyl Pure</a></h3>
+              <p className="price"><del>45.00</del> &mdash; $20.00</p>
+              <h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3>
+            </div>
+            <div className="col-sm-6 col-lg-4 text-center item mb-4">
+              <a href="shop-single.html"> <img src="images/product_05.png" alt="Image" /></a>
+              <h3 className="text-dark"><a href="shop-single.html">CLA Core</a></h3>
+              <p className="price">$38.00</p>
+              <h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3>
+            </div>
+            <div className="col-sm-6 col-lg-4 text-center item mb-4">
+              <span className="tag">Sale</span>
+              <a href="shop-single.html"> <img src="images/product_06.png" alt="Image" /></a>
+              <h3 className="text-dark"><a href="shop-single.html">Beauty-care product</a></h3>
+              <p className="price"><del>$89</del> &mdash; $38.00</p>
+              <h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3>
+            </div>
+          </div>
+          <div className="row mt-5">
+            <div className="col-12 text-center">
+              <a href="shop.html" className="btn btn-warning px-4 py-3">View All Products</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div className="site-section bg-light">
+        <div className="container">
+          <div className="row">
+            <div className="title-section text-center col-12">
+              <h2 className="text-uppercase">New Products</h2>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12 block-3 products-wrap">
+              <OwlCarousel className='owl-theme nonloop-block-3' loop margin={10} nav>
+                <div className="text-center item mb-4">
+                  <a href="shop-single.html"> <img src="images/product_03.png" alt="Image" /></a>
+                  <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
+                  <p className="price">$120.00</p>
+                </div>
+
+                <div className="text-center item mb-4">
+                  <a href="shop-single.html"> <img src="images/product_01.png" alt="Image" /></a>
+                  <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
+                  <p className="price">$120.00</p>
+                </div>
+
+                <div className="text-center item mb-4">
+                  <a href="shop-single.html"> <img src="images/product_02.png" alt="Image" /></a>
+                  <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
+                  <p className="price">$120.00</p>
+                </div>
+
+                <div className="text-center item mb-4">
+                  <a href="shop-single.html"> <img src="images/product_04.png" alt="Image" /></a>
+                  <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
+                  <p className="price">$120.00</p>
+                </div>
+              </OwlCarousel>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="site-section">
+        <div className="container">
+          <div className="row">
+            <div className="title-section text-center col-12">
+              <h2 className="text-uppercase">Testimonials</h2>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12 block-3 products-wrap">
+              <div className="nonloop-block-3 no-direction owl-carousel">
+
+                <div className="testimony">
+                  <blockquote>
+                    <img src="images/person_1.jpg" alt="Image" className="img-fluid w-25 mb-4 rounded-circle" />
+                    <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat unde.&rdquo;</p>
+                  </blockquote>
+
+                  <p>&mdash; Kelly Holmes</p>
+                </div>
+
+                <div className="testimony">
+                  <blockquote>
+                    <img src="images/person_2.jpg" alt="Image" className="img-fluid w-25 mb-4 rounded-circle" />
+                    <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore
+                      obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat
+                      unde.&rdquo;</p>
+                  </blockquote>
+
+                  <p>&mdash; Rebecca Morando</p>
+                </div>
+
+                <div className="testimony">
+                  <blockquote>
+                    <img src="images/person_3.jpg" alt="Image" className="img-fluid w-25 mb-4 rounded-circle" />
+                    <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore
+                      obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat
+                      unde.&rdquo;</p>
+                  </blockquote>
+
+                  <p>&mdash; Lucas Gallone</p>
+                </div>
+
+                <div className="testimony">
+                  <blockquote>
+                    <img src="images/person_4.jpg" alt="Image" className="img-fluid w-25 mb-4 rounded-circle" />
+                    <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore
+                      obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat
+                      unde.&rdquo;</p>
+                  </blockquote>
+
+                  <p>&mdash; Andrew Neel</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="site-section bg-secondary bg-image" style={{ backgroundImage: "url('images/bg_2.jpg')" }}>
+        <div className="container">
+          <div className="row align-items-stretch">
+            <div className="col-lg-6 mb-5 mb-lg-0">
+              <a href="#" className="banner-1 h-100 d-flex" style={{ backgroundImage: "url('images/bg_1.jpg')" }}>
+                <div className="banner-1-inner align-self-center">
+                  <h2>Pharma Products</h2>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
+                  </p>
+                </div>
+              </a>
+            </div>
+            <div className="col-lg-6 mb-5 mb-lg-0">
+              <a href="#" className="banner-1 h-100 d-flex" style={{ backgroundImage: "url('images/bg_2.jpg')" }}>
+                <div className="banner-1-inner ml-auto  align-self-center">
+                  <h2>Rated by Experts</h2>
+                  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  )
+}
