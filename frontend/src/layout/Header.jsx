@@ -7,6 +7,10 @@ export default function Header() {
 
   const user = useSelector(state => state?.user?.user)
   console.log('userHeader', user);
+
+  const userLogout=async()=>{
+
+  }
   return (
     <div className="site-navbar py-2">
 
