@@ -10,6 +10,7 @@ import PageNotFound from '../pages/PageNotFound'
 import HealthProduct from '../category-front/Health-product'
 import Login from '../pages/Login'
 import ForgotPassword from '../pages/Forgot-password'
+import Signup from '../pages/Signup'
 
 export default function Router() {
     return (
@@ -29,6 +30,7 @@ export default function Router() {
                 <Route path='' element={<Login />} />
                 <Route path='forgotpassword' element={<ForgotPassword />} />
             </Route>
+            <Route path='/signup' element={<Signup />} />
 
             <Route path='*' element={<PageNotFound />} />
         </Routes>

@@ -37,8 +37,10 @@ export default function Login() {
                         <div className="col-md-4 login-sec">
                             <h2 className="text-center">Login Now</h2>
                             <form className="login-form" onSubmit={submit}>
+                                
+                                
                                 <div className="form-group">
-                                    <label for="exampleInputEmail1" className="text-uppercase fw-bold fs-6">Email</label>
+                                    <label htmlFor="exampleInputEmail1" className="text-uppercase fw-bold fs-6">Email</label>
                                     <input
                                         type="email"
                                         className="form-control"
@@ -72,8 +74,10 @@ export default function Login() {
                                     </label>
                                     <button type="submit" className="btn btn-primary float-right fw-bold">Login</button>
                                 </div>
-
                             </form>
+                            <div className='text-center mt-4'>
+                                <p>I don't have an account <Link to={'/signup'}><span>Sign up</span></Link></p>
+                            </div>
                         </div>
 
                     </div>
