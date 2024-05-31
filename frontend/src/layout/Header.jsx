@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faEye, faEyeSlash, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
 export default function Header() {
+
+  const user = useSelector(state => state?.user?.user)
+  console.log('userHeader', user);
   return (
     <div className="site-navbar py-2">
 
@@ -26,7 +30,7 @@ export default function Header() {
             <nav className="site-navigation text-right text-md-center" role="navigation">
               <ul className="site-menu js-clone-nav d-none d-lg-block">
                 <li className="active"><Link to="/">Home</Link></li>
-                <li><a href="shop.html">Store</a></li>
+                <li><Link to="/">Store</Link></li>
                 <li className="has-children">
                   <a href="#">Shop</a>
                   <ul className="dropdown">
@@ -56,10 +60,19 @@ export default function Header() {
             <a href="#" className="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
               className="icon-menu"></span></a> */}
             {/* <Link className='btn btn-warning mx-5'>Login</Link> */}
-            <Link to="/login" className='mx-3'> <FontAwesomeIcon icon={faUser} style={{fontSize:"26px"}}/> <span style={{fontSize:"20px"}}> Account</span> </Link>
+            <Link to="/login" className='mx-3'> <FontAwesomeIcon icon={faUser} style={{ fontSize: "26px", textTransform: "capitalize" }} /> <span style={{ fontSize: "20px" }}>
+              {
+                user?.name ? (
+                  user.name
+                ) : (
+                  "Account"
+                )
+              }
+
+            </span> </Link>
             <Link to="/" className="icons-btn d-inline-block bag">
               {/* <span className="icon-shopping-bag"></span> */}
-              <FontAwesomeIcon icon={faCartShopping} style={{fontSize:"26px"}}/>
+              <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: "26px" }} />
               <span className="number">2</span>
             </Link>
           </div>
