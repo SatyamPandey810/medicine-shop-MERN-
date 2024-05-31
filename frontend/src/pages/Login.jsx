@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
-// import '@fortawesome/fontawesome-free/css/all.min.css';
-// import 'font-awesome/css/font-awesome.min.css';
-// import '@fortawesome/fontawesome-free/css/all.min.css';
+import React, { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import SummaryApi from '../common';
 import { toast } from 'react-toastify';
+import Context from '../context';
 
 export default function Login() {
     const [showpassword, setShowpassword] = useState(false);
@@ -15,9 +13,7 @@ export default function Login() {
         password: ''
     });
     const navigate = useNavigate();
-
-
-
+    const { fetchuserDetails } = useContext(Context);
 
     let { email, password } = data
 
@@ -47,7 +43,8 @@ export default function Login() {
             toast.success(dataApi.message)
             setTimeout(() => {
                 navigate('/')
-            },2000)
+                fetchuserDetails()
+            }, 2000)
         }
         if (dataApi.error) {
             toast.error(dataApi.message)
