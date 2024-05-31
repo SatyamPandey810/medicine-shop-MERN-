@@ -1,26 +1,11 @@
 const express = require('express');
 
 const router = express.Router();
-const userSignUpController = require('../controller/user-form/userSignUp')
+const userSignUpController = require('../controller/user-form/userSignUp');
+const userLoginController = require('../controller/user-form/userLogin');
 
 router.post('/signup', userSignUpController)
-// router.post('/example', async (req, res) => {
-//     // const result = await someAsyncFunction();
-//     res.send("result");
-// });
-// router.get('/', (req, res, next) => {
-//     productData.find().then(result => {
-//         res.status(200).json({
-//             msg: "result"
-//         })
-//     }).catch(err => {
-//         console.log(err);
-//         res.status(500).json({
-//             error: err
-//         })
-//     })
-// })
-
+router.post('/login',userLoginController)
 
 
 module.exports = router

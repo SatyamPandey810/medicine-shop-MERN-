@@ -4,7 +4,9 @@ import React, { useState } from 'react'
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import SummaryApi from '../common';
+import { toast } from 'react-toastify';
 
 export default function Login() {
     const [showpassword, setShowpassword] = useState(false);
@@ -12,6 +14,11 @@ export default function Login() {
         email: '',
         password: ''
     });
+    const navigate = useNavigate();
+
+
+
+
     let { email, password } = data
 
     const togglePasswordVisibility = () => {
@@ -24,11 +31,31 @@ export default function Login() {
             [event.target.name]: event.target.value
         }))
     }
-    const submit = (event) => {
+    const submit = async (event) => {
         event.preventDefault();
+
+        const dataResponse = await fetch(SummaryApi.userLogin.url, {
+            method: SummaryApi.userLogin.method,
+            credentials: "include",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        const dataApi = await dataResponse.json()
+        if (dataApi.success) {
+            toast.success(dataApi.message)
+            setTimeout(() => {
+                navigate('/')
+            },2000)
+        }
+        if (dataApi.error) {
+            toast.error(dataApi.message)
+
+        }
+
     }
 
-    console.log(data);
     return (
         <div>
             <section className="login-block">
@@ -37,8 +64,8 @@ export default function Login() {
                         <div className="col-md-4 login-sec">
                             <h2 className="text-center">Login Now</h2>
                             <form className="login-form" onSubmit={submit}>
-                                
-                                
+
+
                                 <div className="form-group">
                                     <label htmlFor="exampleInputEmail1" className="text-uppercase fw-bold fs-6">Email</label>
                                     <input
@@ -72,7 +99,7 @@ export default function Login() {
 
                                         <Link to='/login/forgotpassword' className='fw-bold fs-6'>Forgot password</Link>
                                     </label>
-                                    <button type="submit" className="btn btn-primary float-right fw-bold">Login</button>
+                                    <button className="btn btn-primary float-right fw-bold">Login</button>
                                 </div>
                             </form>
                             <div className='text-center mt-4'>

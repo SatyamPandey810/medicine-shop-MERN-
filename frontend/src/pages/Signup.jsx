@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Link, json } from 'react-router-dom';
+import { Link, json, useNavigate } from 'react-router-dom';
 import SummaryApi from '../common';
 import { toast } from 'react-toastify';
 
 export default function Signup() {
     const [showpassword, setShowpassword] = useState(false);
     const [showConfirmPassword, setshowConfirmPassword] = useState(false);
-
     const [data, setData] = useState({
         name: '',
         email: '',
         password: '',
         confirmPassword: ''
     });
+    const navigate = useNavigate()
+
     let { name, email, password, confirmPassword } = data
 
     const togglePasswordVisibility = () => {
@@ -43,8 +44,19 @@ export default function Signup() {
                 body: JSON.stringify(data)
             })
             const dataApi = await dataResponse.json()
-            toast(dataApi.message)
-            console.log(dataApi);
+
+            if (dataApi.success) {
+                toast.success(dataApi.message)
+                setTimeout(() => {
+                    navigate('/login')
+
+                }, 2000)
+            }
+            if (dataApi.error) {
+                toast.error(dataApi.message)
+
+            }
+
         } else {
             console.log('please check password and confirm password');
         }

@@ -32,6 +32,7 @@ async function userSignUpController(req, res) {
 
         const payload = {
             ...req.body,
+            role: "GENERAL",
             password: hashPassword
         }
 
@@ -45,8 +46,7 @@ async function userSignUpController(req, res) {
             message: "User created successfully"
         })
 
-    } catch (error) {
-        console.log();
+    } catch (error) {       
         res.status(500).json({
             message: error.message || error,
             error: true,
