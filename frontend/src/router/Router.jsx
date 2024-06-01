@@ -11,6 +11,7 @@ import HealthProduct from '../category-front/Health-product'
 import Login from '../pages/Login'
 import ForgotPassword from '../pages/Forgot-password'
 import Signup from '../pages/Signup'
+import AdminPanel from '../pages/admin/AdminPanel'
 
 export default function Router() {
     return (
@@ -33,6 +34,8 @@ export default function Router() {
             <Route path='/signup' element={<Signup />} />
 
             <Route path='*' element={<PageNotFound />} />
+            <Route path='/admin-panel' element={<AdminPanel />} />
+
         </Routes>
 
     )

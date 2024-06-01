@@ -2,13 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SummaryApi from '../common';
 import { toast } from 'react-toastify';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { setUserDetails } from '../store/userSlice';
 
 
 export default function Header() {
+  const disaptch = useDispatch();
   const user = useSelector(state => state?.user?.user)
   console.log('userHeader', user);
 
@@ -20,6 +22,7 @@ export default function Header() {
     const data = await fetchData.json()
     if (data.success) {
       toast.success(data.message)
+      disaptch(setUserDetails(null))
     }
 
     if (data.error) {
@@ -92,17 +95,26 @@ export default function Header() {
             </span> </Link> */}
             <Dropdown >
               <Dropdown.Toggle variant="success" id="dropdown-basic" className='drop-btn'>
-                <FontAwesomeIcon icon={faUser} style={{ fontSize: "26px" }} />  {
-                  user?.name ? (
-                    user.name
-                  ) : (
-                    "Account"
-                  )
-                }
+                <FontAwesomeIcon icon={faUser} style={{ fontSize: "26px" }} />
+                &nbsp; account
+
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item> <Link to='/login'>Login</Link></Dropdown.Item>
+                <Dropdown.Item>
+                  {
+                    user?._id ? (
+                      <Link to="">Profile</Link>
+                    ) : (<></>)
+                  }
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  {
+                    user?._id ? (
+                      <span onClick={userLogout}>Logout</span>
+                    ) : (<Link to='/login'>Login</Link>)
+                  }
+                </Dropdown.Item>
                 <Dropdown.Item><Link to='/signup'>Sign up</Link></Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
