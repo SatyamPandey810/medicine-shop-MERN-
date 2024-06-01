@@ -3,12 +3,28 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
-export default function Header() {
+import SummaryApi from '../common';
+import { toast } from 'react-toastify';
+import Dropdown from 'react-bootstrap/Dropdown';
 
+
+export default function Header() {
   const user = useSelector(state => state?.user?.user)
   console.log('userHeader', user);
 
-  const userLogout=async()=>{
+  const userLogout = async () => {
+    const fetchData = await fetch(SummaryApi.logout_user.url, {
+      method: SummaryApi.logout_user.method,
+      credentials: "include"
+    })
+    const data = await fetchData.json()
+    if (data.success) {
+      toast.success(data.message)
+    }
+
+    if (data.error) {
+      toast.error(data.message)
+    }
 
   }
   return (
@@ -58,27 +74,46 @@ export default function Header() {
               </ul>
             </nav>
           </div>
-          <div className="icons">
+          <div className="icons d-flex justify-content-center align-items-center">
             {/* <a href="#" className="icons-btn d-inline-block js-search-open"><span className="icon-search"></span></a>
            
             <a href="#" className="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
               className="icon-menu"></span></a> */}
             {/* <Link className='btn btn-warning mx-5'>Login</Link> */}
-            <Link to="/login" className='mx-3'> <FontAwesomeIcon icon={faUser} style={{ fontSize: "26px", textTransform: "capitalize" }} /> <span style={{ fontSize: "20px" }}>
+            {/* <Link to="/login" className='mx-3'> <FontAwesomeIcon icon={faUser} style={{ fontSize: "26px", textTransform: "capitalize" }} /> <span style={{ fontSize: "20px" }}>
               {
                 user?.name ? (
                   user.name
                 ) : (
-                  "Account"
+                  "Login"
                 )
               }
 
-            </span> </Link>
-            <Link to="/" className="icons-btn d-inline-block bag">
-              {/* <span className="icon-shopping-bag"></span> */}
-              <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: "26px" }} />
-              <span className="number">2</span>
-            </Link>
+            </span> </Link> */}
+            <Dropdown >
+              <Dropdown.Toggle variant="success" id="dropdown-basic" className='drop-btn'>
+                <FontAwesomeIcon icon={faUser} style={{ fontSize: "26px" }} />  {
+                  user?.name ? (
+                    user.name
+                  ) : (
+                    "Account"
+                  )
+                }
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item> <Link to='/login'>Login</Link></Dropdown.Item>
+                <Dropdown.Item><Link to='/signup'>Sign up</Link></Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <div>
+              <Link to="/" className="icons-btn d-inline-block bag mx-3">
+                {/* <span className="icon-shopping-bag"></span> */}
+                <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: "26px" }} />
+                <span className="number">2</span>
+              </Link>
+            </div>
+
           </div>
         </div>
       </div>

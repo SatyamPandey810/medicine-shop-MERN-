@@ -1858,3 +1858,17 @@ text-decoration: underline;
 .password-toggle-icon:hover {
   color: #333;
 }
+.drop-btn{
+  background-color: #51eaea;
+  border: none;
+  width: 100%;
+  padding: 9px;
+  font-size: 18px;
+  border-radius: 10px;
+  text-transform: capitalize;
+  color: #000;
+}
+.drop-btn:hover{
+  background-color: #51eaea;
+
+}
