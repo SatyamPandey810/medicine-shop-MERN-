@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faKeyboard } from '@fortawesome/free-solid-svg-icons';
+import { faChartBar, faKeyboard, faTachometerAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default function AdminPanel() {
 
@@ -23,7 +23,7 @@ export default function AdminPanel() {
                             </div>
                         </div>
                         <div className="navbar-nav w-100">
-                            <a href="index.html" className="nav-item nav-link text-light"><i className="fa fa-tachometer-alt me-2"></i><span className='mx-2'>Dashboard</span></a>
+                            <a href="index.html" className="nav-item nav-link text-light"> <FontAwesomeIcon icon={faTachometerAlt} className="me-2" /><span className='mx-2'>Dashboard</span></a>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>Elements</a>
                                 <div className="dropdown-menu bg-transparent border-0">
@@ -33,9 +33,9 @@ export default function AdminPanel() {
                                 </div>
                             </div>
                             <a href="widget.html" className="nav-item nav-link text-light"><i className="fa fa-th me-2"></i>Widgets</a>
-                            <a href="form.html" className="nav-item nav-link text-light"><i className="fa fa-keyboard me-2"></i>Forms</a>
+                            <a href="form.html" className="nav-item nav-link text-light"> <FontAwesomeIcon icon={faKeyboard} className="me-2" /> <span className='mx-2'>Forms</span></a>
                             <a href="table.html" className="nav-item nav-link text-light"><i className="fa fa-table me-2"></i>Tables</a>
-                            <a href="chart.html" className="nav-item nav-link text-light"><i className="fa fa-chart-bar me-2"></i>Charts</a>
+                            <a href="chart.html" className="nav-item nav-link text-light">    <FontAwesomeIcon icon={faChartBar} className="me-2" /><span className='mx-2'>Charts</span></a>
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"><i className="far fa-file-alt me-2"></i>Pages</a>
                                 <div className="dropdown-menu bg-transparent border-0">
