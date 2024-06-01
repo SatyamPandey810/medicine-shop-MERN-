@@ -10,6 +10,7 @@ import { setUserDetails } from '../store/userSlice';
 
 
 export default function Header() {
+  
   const disaptch = useDispatch();
   const user = useSelector(state => state?.user?.user)
   console.log('userHeader', user);

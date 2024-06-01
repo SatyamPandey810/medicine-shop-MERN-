@@ -1876,6 +1876,7 @@ text-decoration: underline;
 
 
 /********** Template CSS **********/
+/********** Template CSS **********/
 :root {
   --primary: #EB1616;
   --secondary: #191C24;
@@ -1998,19 +1999,20 @@ text-decoration: underline;
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
   padding: 7px 20px;
-  color: var(--light);
+  /* color: var(--light); */
+  color: white;
   font-weight: 500;
   border-left: 3px solid var(--secondary);
   border-radius: 0 30px 30px 0;
   outline: none;
 }
 
-/* .sidebar .navbar .navbar-nav .nav-link:hover,
+.sidebar .navbar .navbar-nav .nav-link:hover,
 .sidebar .navbar .navbar-nav .nav-link.active {
   color: var(--primary);
   background: var(--dark);
   border-color: var(--primary);
-} */
+}
 
 .sidebar .navbar .navbar-nav .nav-link i {
   width: 40px;
@@ -2018,14 +2020,14 @@ text-decoration: underline;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* background: var(--dark); */
+  background: var(--dark);
   border-radius: 40px;
 }
 
-/* .sidebar .navbar .navbar-nav .nav-link:hover i,
+.sidebar .navbar .navbar-nav .nav-link:hover i,
 .sidebar .navbar .navbar-nav .nav-link.active i {
   background: var(--secondary);
-} */
+}
 
 .sidebar .navbar .dropdown-toggle::after {
   position: absolute;
@@ -2045,7 +2047,7 @@ text-decoration: underline;
 .sidebar .navbar .dropdown-item {
   padding-left: 25px;
   border-radius: 0 30px 30px 0;
-  color: var(--light);
+  color: white;
 }
 
 .sidebar .navbar .dropdown-item:hover,
@@ -2056,7 +2058,7 @@ text-decoration: underline;
 .content .navbar .navbar-nav .nav-link {
   margin-left: 25px;
   padding: 12px 0;
-  color: var(--light);
+  color: white;
   outline: none;
 }
 
@@ -2164,3 +2166,15 @@ text-decoration: underline;
   background: var(--dark);
   border-color: var(--primary);
 }
+.me-2 {
+  margin-right: .5rem !important;
+}
+/* .admin-icon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark);
+  border-radius: 40px;
+} */
