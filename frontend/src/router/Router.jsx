@@ -11,7 +11,7 @@ import HealthProduct from '../category-front/Health-product'
 import Login from '../pages/Login'
 import ForgotPassword from '../pages/Forgot-password'
 import Signup from '../pages/Signup'
-import UserProfile from '../pages/userProfile'
+import UserProfile from '../pages/UserProfile'
 import AdminPanel from '../pages/admin/AdminPanel'
 import AllUser from '../pages/admin/AllUser'
 

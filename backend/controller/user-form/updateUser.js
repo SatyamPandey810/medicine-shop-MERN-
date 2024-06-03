@@ -1,0 +1,38 @@
+const userModel = require("../../models/usermodel/userModel")
+
+async function updateUser(req, res) {
+    try {
+        const sessionUser = req.userId
+
+        const { userId, email, name } = req.body
+        const payload = {
+            ...(email && { email: email }),
+            ...(name && { name: name })
+        }
+
+        const user = await userModel.findById(sessionUser)
+        console.log("user-role", user.role);
+
+
+
+        const updateUser = await userModel.findByIdAndDelete(userId, payload)
+        if (updateUser) {
+            res.json({
+                data: updateUser,
+                message: "User updated successfully",
+                success: true,
+                error: false
+
+            })
+        }
+
+    } catch (error) {
+        res.status(400).json({
+            message: error.message || error,
+            error: true,
+            success: false
+
+        })
+    }
+}
+module.exports = updateUser

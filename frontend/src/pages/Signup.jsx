@@ -58,7 +58,7 @@ export default function Signup() {
             }
 
         } else {
-            console.log('please check password and confirm password');
+            toast.error('password did not match')
         }
 
 

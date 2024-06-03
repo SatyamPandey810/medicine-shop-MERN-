@@ -1,39 +1,89 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import SummaryApi from '../common';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function userProfile() {
+export default function UserProfile() {
+  const [openUdateUser, setOpenUdateUser] = useState(false)
+   const [userRole, setUserRole] = useState()
+
+   const user = useSelector(state => state?.user?.user)
+ 
+  
+
+
+
+ 
+  const updateUserName = async () => {
+    const fetchResponse = await fetch(SummaryApi.updateUser.url, {
+      method: SummaryApi.updateUser.method,
+      credentials: "include",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        name: userRole
+      })
+    })
+    const responseData = await fetchResponse.json()
+    console.log("name-updated", responseData);
+  }
+
   return (
-    <div class="container text-dark">
-        <div class="row mt-4">
-            <div class="col-12 ">
-                <h4 class="text-center">Hello mr due</h4>
-            </div>
+    <div className="container text-dark">
+      <div className="row mt-4">
+        <div className="col-12 ">
+          <h4 className="text-center">Hello mr {user?.name}</h4>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <form>
-                        <div>
-                            <label>Name:</label>
-                            <input type="email" class="user-form" value="Jhon doe"/>
-                        </div>
-                        <div>
-                            <label>Gmail:</label>
-                            <input type="email" class="user-form" value="Jhon@gmail.com"/>
-                        </div>
-                        <div>
-                            <label>Address:</label>
-                            <input type="email" class="user-form" value="street no-2 noida sec-44"/>
-                        </div>
-                        <button class="btn btn-primary fw-bold">Edit <i class="fa-solid fa-pen"></i></button>
+      </div>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-6">
+            <p>Name: <span className='text-capitalize'>{user?.name}</span></p>
+            <p>Email: <span>{user?.email}</span></p>
+            {/* <p>email:{email}</p> */}
+            <button onClick={() => setOpenUdateUser(true)} >change</button>
 
-                    </form>
+          </div>
+
+
+
+        </div>
+
+        {
+          openUdateUser && (
+            <div className='row mt-4 background-op'>
+              <div className='col-sm-6'>
+                <div className='box'>
+                  <div className='box-child'>
+                    <div className='d-flex justify-content-end p-2' >
+
+                      <FontAwesomeIcon icon={faXmark} className='cancle-btn' onClick={() => setOpenUdateUser(false)} />
+                    </div>
+                    <div className='p-3'>
+                      <h3>Change Details</h3>
+                      <p>Name: <span>test</span></p>
+                      <p>email: <span>email@gmail.com</span></p>
+                      <p>address: <span>street no 3 noida</span></p>
+                      <div className='d-flex justify-content-between'>
+                        <button className='btn btn-primary'>Submit</button>
+                        <button className='btn btn-warning' onClick={() => setOpenUdateUser(false)}>Cancle</button>
+                      </div>
+
+                    </div>
+
+                  </div>
+
                 </div>
-
-
+              </div>
 
             </div>
+          )
+        }
 
-        </div>
+      </div>
 
 
     </div>
