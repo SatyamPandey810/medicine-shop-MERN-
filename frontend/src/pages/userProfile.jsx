@@ -7,15 +7,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function UserProfile() {
   const [openUdateUser, setOpenUdateUser] = useState(false)
-   const [userRole, setUserRole] = useState()
+  const [userRole, setUserRole] = useState()
 
-   const user = useSelector(state => state?.user?.user)
- 
-  
+  const user = useSelector(state => state?.user?.user)
 
 
 
- 
+
+
+
   const updateUserName = async () => {
     const fetchResponse = await fetch(SummaryApi.updateUser.url, {
       method: SummaryApi.updateUser.method,
@@ -84,7 +84,13 @@ export default function UserProfile() {
         }
 
       </div>
+      <div className='row mt-5'>
+        <div className='col-sm-12'>
+          <h2>Shopping details</h2>
 
+        </div>
+
+      </div>
 
     </div>
   )
