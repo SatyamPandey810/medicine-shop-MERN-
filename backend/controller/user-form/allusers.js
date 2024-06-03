@@ -1,7 +1,17 @@
-async function allUsers(req,res){
+const userModel = require("../../models/usermodel/userModel");
+
+async function allUsers(req, res) {
     try {
-console.log("userId",req.userId);
-        
+        console.log("allusers here", req.userId);
+        const allUsers = await userModel.find()
+
+        res.json({
+            message: "All user",
+            data: allUsers,
+            success: true,
+            error: false
+        })
+
     } catch (error) {
         res.status(400).json({
             message: error.message || error,
@@ -11,4 +21,4 @@ console.log("userId",req.userId);
         })
     }
 }
-module.exports=allUsers
+module.exports = allUsers

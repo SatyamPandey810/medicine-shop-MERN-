@@ -11,6 +11,7 @@ import HealthProduct from '../category-front/Health-product'
 import Login from '../pages/Login'
 import ForgotPassword from '../pages/Forgot-password'
 import Signup from '../pages/Signup'
+import UserProfile from '../pages/userProfile'
 import AdminPanel from '../pages/admin/AdminPanel'
 import AllUser from '../pages/admin/AllUser'
 
@@ -39,9 +40,13 @@ export default function Router() {
             {/* admin panel route */}
             <Route path='/admin-panel'>
                 <Route path='' element={<AdminPanel />} />
-                <Route path='alluser' element={<AllUser />} />
             </Route>
 
+            <Route path='/user' element={<AllUser/>}/>
+
+
+            {/* userProfile */}
+            <Route path='/profile' element={<UserProfile/>}/>
         </Routes>
 
     )

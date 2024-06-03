@@ -13,7 +13,6 @@ export default function Header() {
   
   const disaptch = useDispatch();
   const user = useSelector(state => state?.user?.user)
-  console.log('userHeader', user);
 
   const userLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -105,7 +104,7 @@ export default function Header() {
                 <Dropdown.Item>
                   {
                     user?._id ? (
-                      <Link to="">Profile</Link>
+                      <Link to="/profile">Profile</Link>
                     ) : (<></>)
                   }
                 </Dropdown.Item>

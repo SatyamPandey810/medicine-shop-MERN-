@@ -14,6 +14,6 @@ router.get('/user-details', authToken, userDetailsController)
 router.get('/userLogout', authToken, userLogout)
 
 // admin panel router
-router.get('/all-user', allUsers)
+router.get('/all-user',authToken, allUsers)
 
 module.exports = router

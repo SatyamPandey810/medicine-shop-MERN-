@@ -24,7 +24,6 @@ export default function App() {
       dispatch(setUserDetails(dataApi.data))
     }
 
-    console.log(dataResponse);
 
   }
   useEffect(() => {

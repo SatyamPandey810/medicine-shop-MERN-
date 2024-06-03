@@ -1999,7 +1999,6 @@ text-decoration: underline;
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
   padding: 7px 20px;
-  /* color: var(--light); */
   color: white;
   font-weight: 500;
   border-left: 3px solid var(--secondary);
@@ -2047,7 +2046,7 @@ text-decoration: underline;
 .sidebar .navbar .dropdown-item {
   padding-left: 25px;
   border-radius: 0 30px 30px 0;
-  color: white;
+  color: var(--light);
 }
 
 .sidebar .navbar .dropdown-item:hover,
@@ -2058,7 +2057,7 @@ text-decoration: underline;
 .content .navbar .navbar-nav .nav-link {
   margin-left: 25px;
   padding: 12px 0;
-  color: white;
+  color: var(--light);
   outline: none;
 }
 
@@ -2166,15 +2165,10 @@ text-decoration: underline;
   background: var(--dark);
   border-color: var(--primary);
 }
-.me-2 {
-  margin-right: .5rem !important;
+.user-form{
+  border: none;
+  background-color: inherit;
+}  
+.user-form:focus{
+  outline: none;
 }
-/* .admin-icon {
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--dark);
-  border-radius: 40px;
-} */
