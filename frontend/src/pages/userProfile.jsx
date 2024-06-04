@@ -7,30 +7,43 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function UserProfile() {
   const [openUdateUser, setOpenUdateUser] = useState(false)
-  const [userRole, setUserRole] = useState()
+  const [userName, setUserName] = useState();
+  const [updateuserDetails, setUpdateUserDetails] = useState({
+    email: "",
+    name: "",
+    _id:""
+  })
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   const user = useSelector(state => state?.user?.user)
 
+  const fetchLoggedInUser = async () => {
+    try {
+      const fetchData = await fetch(SummaryApi.loggedInUser.url, {
+        method: SummaryApi.loggedInUser.method,
+        credentials: 'include'
+      });
+      const dataResponse = await fetchData.json();
+
+      if (dataResponse.success) {
+        setLoggedInUser(dataResponse.data);
+      } else if (dataResponse.error) {
+        toast.error(dataResponse.message);
+      }
+      console.log("loggedInUser dataResponse", dataResponse);
+    } catch (error) {
+      console.error("Error fetching logged-in user:", error);
+    }
+  };
+
+ useEffect(() => {
+    fetchLoggedInUser();
+  }, []);
 
 
 
 
-
-  const updateUserName = async () => {
-    const fetchResponse = await fetch(SummaryApi.updateUser.url, {
-      method: SummaryApi.updateUser.method,
-      credentials: "include",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify({
-        name: userRole
-      })
-    })
-    const responseData = await fetchResponse.json()
-    console.log("name-updated", responseData);
-  }
-
+ 
   return (
     <div className="container text-dark">
       <div className="row mt-4">
@@ -44,7 +57,8 @@ export default function UserProfile() {
             <p>Name: <span className='text-capitalize'>{user?.name}</span></p>
             <p>Email: <span>{user?.email}</span></p>
             {/* <p>email:{email}</p> */}
-            <button onClick={() => setOpenUdateUser(true)} >change</button>
+            <button onClick={() =>{ setOpenUdateUser(true)
+               setUpdateUserDetails(user)}} >change</button>
 
           </div>
 
@@ -64,8 +78,9 @@ export default function UserProfile() {
                     </div>
                     <div className='p-3'>
                       <h3>Change Details</h3>
-                      <p>Name: <span>test</span></p>
-                      <p>email: <span>email@gmail.com</span></p>
+                      <p>Name: <span className='text-capitalize'>{updateuserDetails.name}</span></p>
+                      <p>email: <span>{updateuserDetails.email}</span></p>
+                      <p>User id: <span>{updateuserDetails._id}</span></p>
                       <p>address: <span>street no 3 noida</span></p>
                       <div className='d-flex justify-content-between'>
                         <button className='btn btn-primary'>Submit</button>

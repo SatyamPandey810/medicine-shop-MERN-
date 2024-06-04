@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux'
 import DashboardSidebar from '../../components/Dashboard-sidebar'
 import { toast } from 'react-toastify'
 import moment from "moment"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ChangeUserDetails from '../../components/Change-user-details'
+
 
 export default function AllUser() {
     const [allUser, setAllUser] = useState([])
@@ -23,7 +26,6 @@ export default function AllUser() {
         if (dataResponse.error) {
             toast.error(dataResponse.message)
         }
-        console.log("dataResponse", dataResponse);
     }
 
     useEffect(() => {
@@ -38,9 +40,11 @@ export default function AllUser() {
                         <tr>
                             <th>S No.</th>
                             <th>Name</th>
-                            <th> customer Id</th>
+                            <th>customer Id</th>
                             <th>Gmail id</th>
+                            <th>Role</th>
                             <th>Active date</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,7 +57,9 @@ export default function AllUser() {
                                         <td className='text-capitalize'>{el?.name}</td>
                                         <td>{el?._id}</td>
                                         <td>{el?.email}</td>
+                                        <td>{el?.role}</td>
                                         <td>{moment(el?.createdAt).format('ll')}</td>
+                                        <td><button className='btn btn-warning'>Edit</button></td>
                                     </tr>
                                 )
                             })
@@ -61,7 +67,7 @@ export default function AllUser() {
 
                     </tbody>
                 </table>
-
+                <ChangeUserDetails />
             </div >
 
         </>

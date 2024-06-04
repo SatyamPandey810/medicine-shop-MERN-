@@ -40,13 +40,13 @@ export default function Router() {
             {/* admin panel route */}
             <Route path='/admin-panel'>
                 <Route path='' element={<AdminPanel />} />
+                <Route path='all-user' element={<AllUser />} />
             </Route>
 
-            <Route path='/user' element={<AllUser/>}/>
 
 
             {/* userProfile */}
-            <Route path='/profile' element={<UserProfile/>}/>
+            <Route path='/profile' element={<UserProfile />} />
         </Routes>
 
     )

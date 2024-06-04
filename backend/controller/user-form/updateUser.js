@@ -4,10 +4,11 @@ async function updateUser(req, res) {
     try {
         const sessionUser = req.userId
 
-        const { userId, email, name } = req.body
+        const { userId, email, name, role } = req.body
         const payload = {
             ...(email && { email: email }),
-            ...(name && { name: name })
+            ...(name && { name: name }),
+            ...(role && { role: role })
         }
 
         const user = await userModel.findById(sessionUser)
@@ -15,7 +16,7 @@ async function updateUser(req, res) {
 
 
 
-        const updateUser = await userModel.findByIdAndDelete(userId, payload)
+        const updateUser = await userModel.findByIdAndUpdate(userId, payload)
         if (updateUser) {
             res.json({
                 data: updateUser,

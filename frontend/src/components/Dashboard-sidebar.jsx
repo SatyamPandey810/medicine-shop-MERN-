@@ -21,7 +21,7 @@ export default function DashboardSidebar() {
                         </div>
                         <div className="navbar-nav w-100">
                             <a href="index.html" className="nav-item nav-link active"><i className="fa fa-laptop me-2"></i>Dashboard</a>
-                            <Link to="/user" className="nav-item nav-link"><i className="fa fa-th me-2"></i>User</Link>
+                            <Link to="/admin-panel/all-user" className="nav-item nav-link"><i className="fa fa-th me-2"></i>User</Link>
 
                             <a href="widget.html" className="nav-item nav-link"><i className="fa fa-th me-2"></i>Widgets</a>
                             <a href="form.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i>Forms</a>
