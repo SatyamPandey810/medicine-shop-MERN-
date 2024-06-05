@@ -14,6 +14,7 @@ import Signup from '../pages/Signup'
 // import UserProfile from '../pages/UserProfile'
 import AdminPanel from '../pages/admin/AdminPanel'
 import AllUser from '../pages/admin/AllUser'
+import AllProducts from '../pages/admin/AllProducts'
 
 export default function Router() {
     return (
@@ -41,6 +42,7 @@ export default function Router() {
             <Route path='/admin-panel'>
                 <Route path='' element={<AdminPanel />} />
                 <Route path='all-user' element={<AllUser />} />
+                <Route path='all-products' element={<AllProducts/>}/>
             </Route>
 
 

@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import moment from "moment"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChangeUserDetails from '../../components/Change-user-details'
+import AdminPanel from './AdminPanel'
 
 
 export default function AllUser() {
@@ -40,7 +41,7 @@ export default function AllUser() {
     }, [])
     return (
         <>
-            <DashboardSidebar />
+        <DashboardSidebar/>
             <div className='content container mt-5'>
                 <table className="table table-bordered">
                     <thead className='bg-dark text-light'>

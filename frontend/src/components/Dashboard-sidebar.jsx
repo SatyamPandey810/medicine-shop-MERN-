@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 
 export default function DashboardSidebar() {
     const user = useSelector(state => state?.user?.user)
+    
 
 
   return (
@@ -25,14 +26,23 @@ export default function DashboardSidebar() {
                         </div>
                         <div className="navbar-nav w-100">
                             <a href="index.html" className="nav-item nav-link active"><i className="fa fa-laptop me-2"></i>Dashboard</a>
-                            <Link to="/admin-panel/all-user" className="nav-item nav-link"><i className="fa fa-th me-2"></i>User</Link>
+                            <Link to="/admin-panel/all-user" className="nav-item nav-link"><i className="fa fa-th me-2"></i><span className='mx-2'>User</span></Link>
 
-                            <a href="widget.html" className="nav-item nav-link"><i className="fa fa-th me-2"></i>Widgets</a>
-                            <a href="form.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i>Forms</a>
-                            <a href="table.html" className="nav-item nav-link"><i className="fa fa-table me-2"></i>Tables</a>
-                            <a href="chart.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i>Charts</a>
+                            {/* <Link to="/admin-panel/all-products" className="nav-item nav-link"><i className="fa fa-th me-2"></i></Link> */}
                             <div className="nav-item dropdown">
-                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i>Pages</a>
+                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-th me-2"></i><span className='mx-2'>Products</span></a>
+                                <div className="dropdown-menu bg-transparent border-0">
+                                    <Link to="/admin-panel/all-products" className="dropdown-item">All Products</Link>
+                                    <a href="signup.html" className="dropdown-item">Upload products</a>
+                                    <a href="404.html" className="dropdown-item">404 Error</a>
+                                    <a href="blank.html" className="dropdown-item">Blank Page</a>
+                                </div>
+                            </div>
+                            <a href="form.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Forms</span></a>
+                            <a href="table.html" className="nav-item nav-link"><i className="fa fa-table me-2"></i><span className='mx-2'>Tables</span></a>
+                            <a href="chart.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Charts</span></a>
+                            <div className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Pages</span></a>
                                 <div className="dropdown-menu bg-transparent border-0">
                                     <a href="signin.html" className="dropdown-item">Sign In</a>
                                     <a href="signup.html" className="dropdown-item">Sign Up</a>

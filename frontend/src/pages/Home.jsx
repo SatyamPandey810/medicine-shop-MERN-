@@ -89,9 +89,9 @@ export default function Home() {
             </div>
             <div className="col-sm-6 col-lg-4 text-center item mb-4">
               <a href="shop-single.html"> <img src="images/product_02.png" alt="Image" /></a>
-              <h3 className="text-dark"><a href="shop-single.html">Chanca Piedra</a></h3>
-              <p className="price">$70.00</p>
-              <h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3>
+              <h3 className="text-dark"><a href="shop-single.html">The Ultimate Cosmetic Experience</a></h3>
+              <p className="price">Elevate Your Look with Our Signature Collection</p>
+              <Link to='/category/health'><h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3></Link>
             </div>
             <div className="col-sm-6 col-lg-4 text-center item mb-4">
               <a href="shop-single.html"> <img src="images/product_03.png" alt="Image" /></a>
@@ -121,11 +121,11 @@ export default function Home() {
               <h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3>
             </div>
           </div>
-          <div className="row mt-5">
+          {/* <div className="row mt-5">
             <div className="col-12 text-center">
               <a href="shop.html" className="btn btn-warning px-4 py-3">View All Products</a>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
