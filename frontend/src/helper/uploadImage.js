@@ -1,16 +1,18 @@
-const url = `https://api.cloudinary.com/v1_1/:cloud_name/:action/${process.env.REACT_APP_CLOUD_NAME_CLOUDINARY}/image/upload`
 
-const uploadIamge = async (image) => {
+const url = `https://api.cloudinary.com/v1_1/dctjaduoc/image/upload`
+const uploadIamgeCloud = async (image) => {
 
-    const formData = new formData()
+
+    const formData = new FormData()
     formData.append("file", image)
-    formData.append("upload_preset", "medicine_products")
+    formData.append("upload_preset", "medicine_product")
 
 
     const dataResponse = await fetch(url, {
         method: "post",
         body: formData
     })
+    console.log(dataResponse);
     return dataResponse.json()
 }
-export default uploadIamge()
+export default uploadIamgeCloud
