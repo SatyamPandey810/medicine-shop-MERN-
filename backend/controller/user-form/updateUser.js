@@ -17,7 +17,7 @@ async function updateUser(req, res) {
 
 
         const updateUser = await userModel.findByIdAndUpdate(userId, payload)
-        if (updateUser) {
+        
             res.json({
                 data: updateUser,
                 message: "User updated successfully",
@@ -25,7 +25,7 @@ async function updateUser(req, res) {
                 error: false
 
             })
-        }
+        
 
     } catch (error) {
         res.status(400).json({

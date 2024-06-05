@@ -11,7 +11,7 @@ import HealthProduct from '../category-front/Health-product'
 import Login from '../pages/Login'
 import ForgotPassword from '../pages/Forgot-password'
 import Signup from '../pages/Signup'
-import UserProfile from '../pages/UserProfile'
+// import UserProfile from '../pages/UserProfile'
 import AdminPanel from '../pages/admin/AdminPanel'
 import AllUser from '../pages/admin/AllUser'
 
@@ -46,7 +46,7 @@ export default function Router() {
 
 
             {/* userProfile */}
-            <Route path='/profile' element={<UserProfile />} />
+            {/* <Route path='/profile' element={<UserProfile />} /> */}
         </Routes>
 
     )

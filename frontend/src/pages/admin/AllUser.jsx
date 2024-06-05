@@ -10,6 +10,13 @@ import ChangeUserDetails from '../../components/Change-user-details'
 
 export default function AllUser() {
     const [allUser, setAllUser] = useState([])
+    const [updateUserDetails, setUpdateUserDetails] = useState({
+        email: "",
+        name: "",
+        role: "",
+        _id:"",
+    })
+    const [openUpdateRole, setOpenUpdateRole] = useState(false)
     // const user = useSelector(state => state?.user?.user)
     // console.log("alluser",user);
 
@@ -36,11 +43,11 @@ export default function AllUser() {
             <DashboardSidebar />
             <div className='content container mt-5'>
                 <table className="table table-bordered">
-                    <thead>
+                    <thead className='bg-dark text-light'>
                         <tr>
                             <th>S No.</th>
                             <th>Name</th>
-                            <th>customer Id</th>
+                            <th>Customer Id</th>
                             <th>Gmail id</th>
                             <th>Role</th>
                             <th>Active date</th>
@@ -52,14 +59,20 @@ export default function AllUser() {
                         {
                             allUser.map((el, index) => {
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                         <td>{index + 1}</td>
                                         <td className='text-capitalize'>{el?.name}</td>
                                         <td>{el?._id}</td>
                                         <td>{el?.email}</td>
                                         <td>{el?.role}</td>
                                         <td>{moment(el?.createdAt).format('ll')}</td>
-                                        <td><button className='btn btn-warning'>Edit</button></td>
+                                        <td><button className='btn btn-warning'
+                                            onClick={() => {
+                                                setUpdateUserDetails(el)
+                                                setOpenUpdateRole(true)
+
+                                            }}
+                                        >Edit</button></td>
                                     </tr>
                                 )
                             })
@@ -67,7 +80,20 @@ export default function AllUser() {
 
                     </tbody>
                 </table>
-                <ChangeUserDetails />
+                {
+                    openUpdateRole && (
+                        <ChangeUserDetails
+                            onClose={() => setOpenUpdateRole(false)}
+                            name={updateUserDetails.name}
+                            email={updateUserDetails.email}
+                            role={updateUserDetails.role}
+                            userId={updateUserDetails._id}
+                            callFunc={fetchAllUsers}
+
+                        />
+                    )
+                }
+
             </div >
 
         </>
