@@ -1,13 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardSidebar from '../../components/Dashboard-sidebar'
 import UploadProducts from '../../components/UploadProducts'
+import SummaryApi from '../../common'
+import EditProduct from '../../components/EditProduct'
+import AdminProductCard from '../../components/AdminProductCard'
 
-export default function AllProducts() {
+export default function AllProducts({ data, onClose }) {
     const [openUploadProduct, setOpenUploadProduct] = useState(false)
+    const [allProduct, setAllproduct] = useState([])
+    const [editProduct, setEditProduct] = useState(false)
+
+
+
+
+    const fetchAllProduct = async () => {
+        const response = await fetch(SummaryApi.allProduct.url)
+        const dataResponse = await response.json()
+
+        setAllproduct(dataResponse?.data || [])
+
+    }
+    useEffect(() => {
+        fetchAllProduct()
+    }, [])
+
     return (
         <>
             <DashboardSidebar />
-            <div className='content container mt-4'>
+            <div className='content container  mt-4'>
                 <div className='row d-flex justify-content-between p-4'>
                     <div className=''>
                         <h1 >All products</h1>
@@ -22,7 +42,45 @@ export default function AllProducts() {
                         <UploadProducts onClose={() => setOpenUploadProduct(false)} />
                     )
                 }
+                {/* {
+                    editProduct && (
+                        <EditProduct productData={data} onClose={() => setEditProduct(false)} />
+                    )
+                } */}
+
+                <table className="table table-bordered scrollable">
+                    <thead>
+                        <tr>
+
+                            <th>Product name</th>
+                            <th>Product brand</th>
+                            <th>Price</th>
+                            <th>Selling price</th>
+                            <th>category</th>
+                            <th>product image</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+                    {
+
+
+                        allProduct.map((product, index) => {
+
+                            return (
+
+
+                                <AdminProductCard data={product} key={index + "allProduct"} />
+
+                            )
+                        })
+                    }
+                </table>
             </div>
+
+
+
+
 
         </>
     )

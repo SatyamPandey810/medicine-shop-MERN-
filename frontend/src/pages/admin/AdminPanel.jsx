@@ -19,7 +19,7 @@ export default function AdminPanel() {
     };
 
     // useEffect(() => {
-    //     if (user?.role !== ROLE.ADMIN) {
+    //     if (user?.role === ROLE.ADMIN) {
     //         navigate('/')
 
     //     }

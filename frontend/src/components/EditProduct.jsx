@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import productCategory from '../helper/ProductCategory';
+// import productCategory from '../helper/ProductCategory';
 import uploadIamgeCloud from '../helper/uploadImage';
-import SummaryApi from '../common';
+// import SummaryApi from '../common';
 import { toast } from 'react-toastify'
+import SummaryApi from '../common';
+import productCategory from '../helper/ProductCategory';
 
+export default function EditProduct({ onClose, productData }) {
 
-export default function UploadProducts({ onClose }) {
     const [data, setData] = useState({
-        productName: "",
-        brandName: "",
-        category: "",
-        productImage: [],
-        description: "",
-        price: "",
-        sellingPrice: ""
+        productName: productData?.productName,
+        brandName: productData?.brandName,
+        category: productData?.category,
+        productImage: productData?.productImage || [],
+        description: productData?.description,
+        price: productData?.price,
+        sellingPrice: productData?.sellingPrice
     })
+    console.log(productData);
 
     const [uploadImage, setUploadImage] = useState("")
 
@@ -69,16 +72,14 @@ export default function UploadProducts({ onClose }) {
         console.log("upload image", uploadIamgeCloudinary);
     }
 
-
-
     return (
         <div className='container'>
             <div className='row d-flex justify-content-between p-3'>
                 <div>
-                    <h2>upload product</h2>
+                    <h2>Edit product</h2>
                 </div>
                 <div>
-                    <FontAwesomeIcon icon={faXmark} className='cancle-btn'  onClick={onClose}/>
+                    <FontAwesomeIcon icon={faXmark} className='cancle-btn' onClick={onClose} />
                 </div>
 
             </div>
@@ -200,6 +201,7 @@ export default function UploadProducts({ onClose }) {
                 </div>
 
             </div>
+
         </div>
     )
 }

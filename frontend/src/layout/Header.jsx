@@ -111,7 +111,7 @@ export default function Header() {
                 <Dropdown.Item>
                   {
                     user?._id ? (
-                      <span onClick={userLogout}>Logout</span>
+                      <Link onClick={userLogout} to={'/'} >Logout</Link>
                     ) : (<Link to='/login'>Login</Link>)
                   }
                 </Dropdown.Item>
