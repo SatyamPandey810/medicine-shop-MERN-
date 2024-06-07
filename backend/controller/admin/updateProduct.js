@@ -1,3 +1,4 @@
+const productUploadpermission = require("../../helper/productUploadPermission")
 const productUploadModel = require("../../models/adminmodel.js/productUpload")
 
 async function updateProductController(req, res) {
@@ -6,8 +7,7 @@ async function updateProductController(req, res) {
             throw new Error('Permission denid')
         }
         const { _id, ...resBody } = req.body
-
-        const updateProduct = await productUploadModel.findByIdUpdate(_id, resBody)
+        const updateProduct = await productUploadModel.findByIdAndUpdate(_id, resBody)
 
         res.json({
             message: "Product updated successfully",

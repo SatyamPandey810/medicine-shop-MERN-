@@ -5,12 +5,14 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import uploadIamgeCloud from '../helper/uploadImage';
 // import SummaryApi from '../common';
 import { toast } from 'react-toastify'
-import SummaryApi from '../common';
+// import SummaryApi from '../common';
 import productCategory from '../helper/ProductCategory';
+import SummaryApi from '../common';
 
-export default function EditProduct({ onClose, productData }) {
+export default function EditProduct({ onClose, productData, fetchdata }) {
 
     const [data, setData] = useState({
+        ...productData,
         productName: productData?.productName,
         brandName: productData?.brandName,
         category: productData?.category,
@@ -36,8 +38,8 @@ export default function EditProduct({ onClose, productData }) {
 
     const submit = async (event) => {
         event.preventDefault()
-        const response = await fetch(SummaryApi.uploadProduct.url, {
-            method: SummaryApi.uploadProduct.method,
+        const response = await fetch(SummaryApi.updateProduct.url, {
+            method: SummaryApi.updateProduct.method,
             credentials: 'include',
             headers: {
                 "content-type": "application/json"
@@ -48,6 +50,8 @@ export default function EditProduct({ onClose, productData }) {
 
         if (responseData.success) {
             toast.success(responseData?.message)
+            onClose()
+            fetchdata()
         }
 
         if (responseData.error) {
@@ -74,7 +78,7 @@ export default function EditProduct({ onClose, productData }) {
 
     return (
         <div className='container'>
-            <div className='row d-flex justify-content-between p-3'>
+            <div className='d-flex justify-content-between p-3'>
                 <div>
                     <h2>Edit product</h2>
                 </div>
@@ -84,7 +88,7 @@ export default function EditProduct({ onClose, productData }) {
 
             </div>
             <div className='row'>
-                <div className='col'>
+                <div className='col-sm-6'>
                     <form onSubmit={submit}>
                         <div className="mb-3">
                             <label htmlFor="productName" className="form-label">Product name</label>
@@ -187,7 +191,7 @@ export default function EditProduct({ onClose, productData }) {
                             <label htmlFor="description" className="form-label">Product discription</label><br />
                             <textarea
                                 className='resize-none p-2'
-                                rows={6} cols={155}
+                                rows={6} cols={10}
                                 placeholder='Enter product  description'
                                 name='description'
                                 // id='description'
@@ -195,13 +199,13 @@ export default function EditProduct({ onClose, productData }) {
                                 value={data.description}
                             ></textarea>
                         </div>
-                        <button className='btn btn-success'>submit</button>
+                        <button className='btn btn-success'>Update product</button>
                     </form>
 
+
+
                 </div>
-
             </div>
-
         </div>
     )
 }

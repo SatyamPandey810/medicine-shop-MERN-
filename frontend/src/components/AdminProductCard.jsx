@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import EditProduct from './EditProduct'
 
-export default function AdminProductCard({ data }) {
+export default function AdminProductCard({ data,fetchdata }) {
     const [editProduct, setEditProduct] = useState(false)
     return (
         <>
-          {
-                editProduct && (
-                    <EditProduct productData={data} onClose={() => setEditProduct(false)} />
-                )
-            }
+
+                {
+                    editProduct && (
+                        <EditProduct productData={data} onClose={() => setEditProduct(false)} fetchdata={fetchdata}/>
+                    )
+                }
             <tbody>
                 <tr>
 
@@ -23,9 +24,10 @@ export default function AdminProductCard({ data }) {
                         <button className='btn btn-danger mx-2'>Delete</button>
                     </td>
                 </tr>
-            </tbody>
 
-          
+            </tbody>
+           
+
 
         </>
     )

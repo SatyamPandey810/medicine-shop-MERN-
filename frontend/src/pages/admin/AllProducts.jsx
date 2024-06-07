@@ -70,7 +70,7 @@ export default function AllProducts({ data, onClose }) {
                             return (
 
 
-                                <AdminProductCard data={product} key={index + "allProduct"} />
+                                <AdminProductCard data={product} key={index + "allProduct"} fetchdata={fetchAllProduct}/>
 
                             )
                         })
