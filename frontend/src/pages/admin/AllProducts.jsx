@@ -5,10 +5,10 @@ import SummaryApi from '../../common'
 import EditProduct from '../../components/EditProduct'
 import AdminProductCard from '../../components/AdminProductCard'
 
-export default function AllProducts({ data, onClose }) {
+export default function AllProducts() {
     const [openUploadProduct, setOpenUploadProduct] = useState(false)
     const [allProduct, setAllproduct] = useState([])
-    const [editProduct, setEditProduct] = useState(false)
+    // const [editProduct, setEditProduct] = useState(false)
 
 
 

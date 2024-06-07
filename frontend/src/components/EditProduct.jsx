@@ -88,7 +88,7 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
 
             </div>
             <div className='row'>
-                <div className='col-sm-6'>
+                <div className='col-sm-12'>
                     <form onSubmit={submit}>
                         <div className="mb-3">
                             <label htmlFor="productName" className="form-label">Product name</label>

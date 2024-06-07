@@ -1,11 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import AllUser from '../pages/admin/AllUser'
 import { useSelector } from 'react-redux'
+import ROLE from '../common/role'
 
 export default function DashboardSidebar() {
     const user = useSelector(state => state?.user?.user)
-    
+    const navigate = useNavigate();
+
+    //  useEffect(() => {
+    //     if (user?.role !== ROLE.ADMIN) {
+    //         navigate('/')
+
+    //     }
+    // }, [user])
+
 
 
   return (

@@ -3,7 +3,10 @@ const productUploadModel = require("../../models/adminmodel.js/productUpload")
 
 async function updateProductController(req, res) {
     try {
-        if (!productUploadpermission(req.userId)) {
+        
+        const sessionUserId = req.userId
+        
+        if (!productUploadpermission(sessionUserId)) {
             throw new Error('Permission denid')
         }
         const { _id, ...resBody } = req.body

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const uploadProductSchema = mongoose.Schema({
+const uploadProductSchema = new mongoose.Schema({
     productName: String,
     brandName: String,
     category: String,
@@ -10,5 +10,5 @@ const uploadProductSchema = mongoose.Schema({
     sellingPrice: Number
 }, { timestamps: true })
 
-const productUploadModel = mongoose.model("Products", uploadProductSchema)
+const productUploadModel = mongoose.model("products", uploadProductSchema)
 module.exports = productUploadModel
