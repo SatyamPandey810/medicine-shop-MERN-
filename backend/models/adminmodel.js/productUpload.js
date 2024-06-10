@@ -4,6 +4,7 @@ const uploadProductSchema = new mongoose.Schema({
     productName: String,
     brandName: String,
     category: String,
+    subcategory: String,
     productImage: [],
     description: String,
     price: Number,

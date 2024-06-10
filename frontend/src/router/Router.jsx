@@ -15,6 +15,7 @@ import Signup from '../pages/Signup'
 import AdminPanel from '../pages/admin/AdminPanel'
 import AllUser from '../pages/admin/AllUser'
 import AllProducts from '../pages/admin/AllProducts'
+import CosmaticsProduct from '../category-front/CosmaticsProduct'
 
 export default function Router() {
     return (
@@ -29,6 +30,7 @@ export default function Router() {
             {/* nasted route */}
             <Route path='/category'>
                 <Route path="health" element={<HealthProduct />} />
+                <Route path='cosmatics' element={<CosmaticsProduct/>}/>
             </Route>
             <Route path='/login'>
                 <Route path='' element={<Login />} />

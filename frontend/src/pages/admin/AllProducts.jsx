@@ -39,7 +39,7 @@ export default function AllProducts() {
                 </div>
                 {
                     openUploadProduct && (
-                        <UploadProducts onClose={() => setOpenUploadProduct(false)} />
+                        <UploadProducts onClose={() => setOpenUploadProduct(false)} fetchData={fetchAllProduct}/>
                     )
                 }
                 {/* {
@@ -55,9 +55,10 @@ export default function AllProducts() {
                             <th>Product name</th>
                             <th>Product brand</th>
                             <th>Price</th>
-                            <th>Selling price</th>
+                            <th className='text-nowrap'>Selling price</th>
                             <th>category</th>
-                            <th>product image</th>
+                            <th className='text-nowrap'>sub category</th>
+                            <th className='text-nowrap'>product image</th>
                             <th>Action</th>
 
                         </tr>

@@ -3,62 +3,56 @@ import 'nouislider/dist/nouislider.css';
 import noUiSlider from 'nouislider';
 import SummaryApi from '../common';
 
-export default function HealthProduct() {
-  // const [value, setValue] = useState(10);
-  const [rangeValues, setRangeValues] = useState([20, 80]);
-  const [categoryProduct, setCategoryProduct] = useState([])
-  const [loading, setLoading] = useState(false)
-
-  const sliderRef = useRef(null);
-  const amountRef = useRef(null);
-
-  // product category lisiting
-
-  const fetchCategoryProduct = async () => {
-    setLoading(true)
-    const response = await fetch(SummaryApi.categoryProduct.url)
-    const dataResponse = await response.json()
-    console.log(dataResponse);
-    setCategoryProduct(dataResponse.data)
-  }
-
-  useEffect(() => {
-    fetchCategoryProduct()
-  }, [])
-
-
-  // range value customziation
-  useEffect(() => {
-    if (!sliderRef.current) return;
-
-    noUiSlider.create(sliderRef.current, {
-      start: rangeValues,
-      connect: true,
-      range: {
-        min: 0,
-        max: 1000
-      }
-    });
-
-    sliderRef.current.noUiSlider.on('update', (values, handle) => {
-      setRangeValues(values.map(value => Math.round(value)));
-    });
-
-    return () => {
-      if (sliderRef.current && sliderRef.current.noUiSlider) {
-        sliderRef.current.noUiSlider.destroy();
-      }
-    };
-  }, [])
-
-  useEffect(() => {
-    if (amountRef.current) {
-      amountRef.current.value = `${rangeValues[0]} - ${rangeValues[1]}`;
+export default function CosmaticsProduct() {
+    const [rangeValues, setRangeValues] = useState([20, 80]);
+    const [categoryProduct, setCategoryProduct] = useState([])
+    const [loading, setLoading] = useState(false)
+  
+    const sliderRef = useRef(null);
+    const amountRef = useRef(null);
+  
+    // product category lisiting
+  
+    const fetchCategoryProduct = async () => {
+      setLoading(true)
+      const response = await fetch(SummaryApi.categoryProduct.url)
+      const dataResponse = await response.json()
+      console.log(dataResponse);
+      setCategoryProduct(dataResponse.data)
     }
-  }, [rangeValues])
-
-
-
+  
+    useEffect(() => {
+      fetchCategoryProduct()
+    }, [])
+  // range value customziation
+    useEffect(() => {
+        if (!sliderRef.current) return;
+    
+        noUiSlider.create(sliderRef.current, {
+          start: rangeValues,
+          connect: true,
+          range: {
+            min: 0,
+            max: 1000
+          }
+        });
+    
+        sliderRef.current.noUiSlider.on('update', (values, handle) => {
+          setRangeValues(values.map(value => Math.round(value)));
+        });
+    
+        return () => {
+          if (sliderRef.current && sliderRef.current.noUiSlider) {
+            sliderRef.current.noUiSlider.destroy();
+          }
+        };
+      }, [])
+    
+      useEffect(() => {
+        if (amountRef.current) {
+          amountRef.current.value = `${rangeValues[0]} - ${rangeValues[1]}`;
+        }
+      }, [rangeValues])
 
 
 

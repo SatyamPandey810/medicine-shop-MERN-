@@ -91,7 +91,7 @@ export default function Home() {
               <a href="shop-single.html"> <img src="images/product_02.png" alt="Image" /></a>
               <h3 className="text-dark"><a href="shop-single.html">The Ultimate Cosmetic Experience</a></h3>
               <p className="price">Elevate Your Look with Our Signature Collection</p>
-              <Link to='/category/health'><h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3></Link>
+              <Link to='/category/cosmatics'><h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3></Link>
             </div>
             <div className="col-sm-6 col-lg-4 text-center item mb-4">
               <a href="shop-single.html"> <img src="images/product_03.png" alt="Image" /></a>

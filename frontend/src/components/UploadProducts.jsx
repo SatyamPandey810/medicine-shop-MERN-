@@ -7,11 +7,12 @@ import SummaryApi from '../common';
 import { toast } from 'react-toastify'
 
 
-export default function UploadProducts({ onClose }) {
+export default function UploadProducts({ onClose, fetchData }) {
     const [data, setData] = useState({
         productName: "",
         brandName: "",
         category: "",
+        subcategory: "",
         productImage: [],
         description: "",
         price: "",
@@ -45,6 +46,8 @@ export default function UploadProducts({ onClose }) {
 
         if (responseData.success) {
             toast.success(responseData?.message)
+            onClose()
+            fetchData()
         }
 
         if (responseData.error) {
@@ -78,7 +81,7 @@ export default function UploadProducts({ onClose }) {
                     <h2>upload product</h2>
                 </div>
                 <div>
-                    <FontAwesomeIcon icon={faXmark} className='cancle-btn'  onClick={onClose}/>
+                    <FontAwesomeIcon icon={faXmark} className='cancle-btn' onClick={onClose} />
                 </div>
 
             </div>
@@ -126,6 +129,17 @@ export default function UploadProducts({ onClose }) {
                                 }
                             </select>
                         </div>
+                        {data.category && (
+                            <div className="mb-3">
+                                <label htmlFor="subcategory" className="form-label">Subcategory</label>
+                                <select className='form-control' onChange={inputChange} name='subcategory' required>
+                                    <option>Select subcategory</option>
+                                    {productCategory.find(category => category.value === data.category)?.subcategories?.map((subcategory) => (
+                                        <option key={subcategory.id} value={subcategory.value}>{subcategory.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
                         <div className="mb-3">
                             <label htmlFor="uploadImageInput" className="form-label">Image</label>
                             <input

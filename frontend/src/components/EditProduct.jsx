@@ -16,6 +16,7 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
         productName: productData?.productName,
         brandName: productData?.brandName,
         category: productData?.category,
+        subcategory: productData?.subcategory,
         productImage: productData?.productImage || [],
         description: productData?.description,
         price: productData?.price,
@@ -88,7 +89,7 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
 
             </div>
             <div className='row'>
-                <div className='col-sm-12'>
+                <div className='col-md-12 d-grid'>
                     <form onSubmit={submit}>
                         <div className="mb-3">
                             <label htmlFor="productName" className="form-label">Product name</label>
@@ -131,6 +132,17 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
                                 }
                             </select>
                         </div>
+                        {data.category && (
+                            <div className="mb-3">
+                                <label htmlFor="subcategory" className="form-label">Subcategory</label>
+                                <select className='form-control' onChange={inputChange} name='subcategory' required>
+                                    <option>Select subcategory</option>
+                                    {productCategory.find(category => category.value === data.category)?.subcategories?.map((subcategory) => (
+                                        <option key={subcategory.id} value={subcategory.value}>{subcategory.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
                         <div className="mb-3">
                             <label htmlFor="uploadImageInput" className="form-label">Image</label>
                             <input
@@ -191,7 +203,7 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
                             <label htmlFor="description" className="form-label">Product discription</label><br />
                             <textarea
                                 className='resize-none p-2'
-                                rows={6} cols={10}
+                                rows={6} cols={70}
                                 placeholder='Enter product  description'
                                 name='description'
                                 // id='description'
