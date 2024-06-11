@@ -3,10 +3,9 @@ import EditProduct from './EditProduct'
 
 export default function AdminProductCard({ data, fetchdata }) {
     const [editProduct, setEditProduct] = useState(false)
-    return (
 
-        <>
-            
+    return (
+        <>            
             <tbody>
                 <tr>
                     <td className='text-capitalize'>{data?.productName}</td>
@@ -25,7 +24,6 @@ export default function AdminProductCard({ data, fetchdata }) {
                     </td>
                 </tr>
             </tbody>
-
             <div>
                 {
                     editProduct && (

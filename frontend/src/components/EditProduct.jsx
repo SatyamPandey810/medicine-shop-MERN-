@@ -22,7 +22,6 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
         price: productData?.price,
         sellingPrice: productData?.sellingPrice
     })
-    console.log(productData);
 
     const [uploadImage, setUploadImage] = useState("")
 

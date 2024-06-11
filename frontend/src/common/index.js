@@ -48,6 +48,10 @@ const SummaryApi = {
     getHomeCategoryProduct: {
         url: `${backendDomain}/api/get-home`,
         method: "get"
+    },
+    updateHomeCategoryProduct:{
+        url:`${backendDomain}/api/update-home`,
+        method:"post"
     }
 
 

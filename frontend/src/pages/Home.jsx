@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -7,7 +7,28 @@ import { Link } from 'react-router-dom';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
+import SummaryApi from '../common';
 export default function Home() {
+  const [categoryProduct, setCategoryProduct] = useState([])
+  const [loading, setLoading] = useState()
+
+
+  const fetchProductCategory = async () => {
+    setLoading(true)
+    const response = await fetch(SummaryApi.getHomeCategoryProduct.url)
+    const dataResponse = await response.json()
+    setLoading(false)
+    setCategoryProduct(dataResponse.data)
+    console.log(dataResponse.data);
+  }
+
+  useEffect(() => {
+    fetchProductCategory()
+  }, [])
+
+
+
+
   return (
     <div className="site-wrap">
 
@@ -69,7 +90,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="site-section">
+      <div className="site-section p-4">
         <div className="container">
           <div className="row">
             <div className="title-section text-center col-12">
@@ -78,16 +99,22 @@ export default function Home() {
           </div>
 
           <div className="row">
-            <div className="col-sm-6 col-lg-4 text-center item mb-4">
-              <span className="tag">30% OFF</span>
-              <a href="shop-single.html"> <img src="images/product_01.png" alt="Image" /></a>
-              <h3 className="text-dark">Select healthy products</h3>
-              <p className="price">Incorporating these healthy products into your diet</p>
-              {/* <h4 className="offer">30% OFF</h4> */}
-             
-            <Link to='/category/health'><h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3></Link>  
-            </div>
-            <div className="col-sm-6 col-lg-4 text-center item mb-4">
+            {
+              categoryProduct.map((product, index) => (
+                <div className="col-sm-6 col-lg-4 text-center item mb-4" key={index}>
+                  {/* <span className="tag">30% OFF</span> */}
+                   <img src={product?.productCategoryimage} alt="Image" className='popular-img'/>
+                  <h3 className="text-dark">{product?.productCategoryName}</h3>
+                  <p className="price">{product?.productCategoryDescription}</p>
+                  {/* <h4 className="offer">30% OFF</h4> */}
+
+                  <Link to='/category/health'><h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3></Link>
+                </div>
+
+              ))
+            }
+
+            {/* <div className="col-sm-6 col-lg-4 text-center item mb-4">
               <a href="shop-single.html"> <img src="images/product_02.png" alt="Image" /></a>
               <h3 className="text-dark"><a href="shop-single.html">The Ultimate Cosmetic Experience</a></h3>
               <p className="price">Elevate Your Look with Our Signature Collection</p>
@@ -119,7 +146,7 @@ export default function Home() {
               <h3 className="text-dark"><a href="shop-single.html">Beauty-care product</a></h3>
               <p className="price"><del>$89</del> &mdash; $38.00</p>
               <h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3>
-            </div>
+            </div> */}
           </div>
           {/* <div className="row mt-5">
             <div className="col-12 text-center">

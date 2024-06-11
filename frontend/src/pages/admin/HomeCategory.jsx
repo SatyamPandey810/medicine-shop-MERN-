@@ -55,18 +55,17 @@ export default function HomeCategory() {
                         <tr>
                             <th>Product name</th>
                             <th>Descriptionn</th>
+                            <th>Category</th>
                             <th className='text-nowrap'>Product image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     {
-
-
                         allHomeProduct.map((product, index) => {
 
                             return (
-                                // <AdminProductCard data={product} key={index + "allProduct"} fetchdata={fetchAllProduct}/>
-                                <AdminHomeCategoryCard data={product} key={index + "allProduct"} fetchdata={fetchAllProduct} />
+                               
+                                <AdminHomeCategoryCard data={product} key={index + "allHomeProduct"} fetchdata={fetchAllProduct} />
 
                             )
                         })

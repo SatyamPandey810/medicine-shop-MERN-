@@ -14,6 +14,7 @@ const updateProductController = require('../controller/admin/updateProduct');
 const getCategoryProduct = require('../controller/admin/getCategoryProduct');
 const homeCategoryUploadController = require('../controller/admin/homeCategory');
 const getAllHomeProductController = require('../controller/admin/getAllHomeProduct');
+const updateHomeCategoryController = require('../controller/admin/updateHomeCategory');
 
 router.post('/signup', userSignUpController)
 router.post('/login', userLoginController)
@@ -32,16 +33,19 @@ router.post('/upload-product', authToken, uploadProductController)
 // get products route
 router.get('/get-product', getProductController)
 
-//upload product
+// update product
 router.post('/update-product', authToken, updateProductController)
 
 // product categories route
 router.get('/get-categoryProduct', getCategoryProduct)
 
-//home category route
+// upload home category route
 router.post('/home-product', authToken, homeCategoryUploadController)
 
-// home category Product category
-router.get('/get-home',getAllHomeProductController)
+// get home category Product category
+router.get('/get-home', getAllHomeProductController)
+
+// update home category product
+router.post('/update-home', authToken, updateHomeCategoryController)
 
 module.exports = router
