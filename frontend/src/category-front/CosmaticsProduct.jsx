@@ -2,75 +2,73 @@ import React, { useEffect, useRef, useState } from 'react'
 import 'nouislider/dist/nouislider.css';
 import noUiSlider from 'nouislider';
 import SummaryApi from '../common';
+import SearchBar from '../components/SearchBar';
 
 export default function CosmaticsProduct() {
-    const [rangeValues, setRangeValues] = useState([20, 80]);
-    const [categoryProduct, setCategoryProduct] = useState([])
-    const [loading, setLoading] = useState(false)
-  
-    const sliderRef = useRef(null);
-    const amountRef = useRef(null);
-  
-    // product category lisiting
-  
-    const fetchCategoryProduct = async () => {
-      setLoading(true)
-      const response = await fetch(SummaryApi.categoryProduct.url)
-      const dataResponse = await response.json()
-      console.log(dataResponse);
-      setCategoryProduct(dataResponse.data)
-    }
-  
-    useEffect(() => {
-      fetchCategoryProduct()
-    }, [])
+  const [rangeValues, setRangeValues] = useState([20, 80]);
+  const [categoryProduct, setCategoryProduct] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  const sliderRef = useRef(null);
+  const amountRef = useRef(null);
+
+  // product category lisiting
+
+  const fetchCategoryProduct = async () => {
+    setLoading(true)
+    const response = await fetch(SummaryApi.categoryProduct.url)
+    const dataResponse = await response.json()
+    console.log(dataResponse);
+    setCategoryProduct(dataResponse.data)
+  }
+
+  useEffect(() => {
+    fetchCategoryProduct()
+  }, [])
   // range value customziation
-    useEffect(() => {
-        if (!sliderRef.current) return;
-    
-        noUiSlider.create(sliderRef.current, {
-          start: rangeValues,
-          connect: true,
-          range: {
-            min: 0,
-            max: 1000
-          }
-        });
-    
-        sliderRef.current.noUiSlider.on('update', (values, handle) => {
-          setRangeValues(values.map(value => Math.round(value)));
-        });
-    
-        return () => {
-          if (sliderRef.current && sliderRef.current.noUiSlider) {
-            sliderRef.current.noUiSlider.destroy();
-          }
-        };
-      }, [])
-    
-      useEffect(() => {
-        if (amountRef.current) {
-          amountRef.current.value = `${rangeValues[0]} - ${rangeValues[1]}`;
-        }
-      }, [rangeValues])
+  useEffect(() => {
+    if (!sliderRef.current) return;
+
+    noUiSlider.create(sliderRef.current, {
+      start: rangeValues,
+      connect: true,
+      range: {
+        min: 0,
+        max: 1000
+      }
+    });
+
+    sliderRef.current.noUiSlider.on('update', (values, handle) => {
+      setRangeValues(values.map(value => Math.round(value)));
+    });
+
+    return () => {
+      if (sliderRef.current && sliderRef.current.noUiSlider) {
+        sliderRef.current.noUiSlider.destroy();
+      }
+    };
+  }, [])
+
+  useEffect(() => {
+    if (amountRef.current) {
+      amountRef.current.value = `${rangeValues[0]} - ${rangeValues[1]}`;
+    }
+  }, [rangeValues])
 
 
-
+  
   return (
     <div>
-      <div className="bg-light py-3">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12 mb-0"><a href="index.html">Home</a> <span className="mx-2 mb-0">/</span> <strong className="text-black">Store</strong></div>
-          </div>
-        </div>
-      </div>
+     
 
       <div className="site-section">
         <div className="container">
-
           <div className="row">
-            <div className="col-lg-6">
+            <div className='col-md-12'>
+
+            <SearchBar/>
+            </div>
+            {/* <div className="col-lg-6">
               <h3 className="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
               <div id="slider-range" ref={sliderRef} classNameName="border-primary"></div>
               <div className='d-flex mt-3 align-items-center c-d'>
@@ -84,23 +82,9 @@ export default function CosmaticsProduct() {
                   // value={`&#x20B9; ${amount}`}
                   disabled
                 />   <span>₹</span>
-              </div>
-
-
-              {/* <input type="text" name="text" id="amount" className="form-control border-0 pl-0 bg-white" disabled="" /> */}
-              {/* <RangeSlider id='slider-range' value={value} onChange={handleSliderChange}
-            min={0}
-            max={100} />
-             <input
-            type="text"
-            name="text"
-            id="amount"
-            classNameName="form-control border-0 pl-0 bg-white"
-            value={value}
-            disabled
-          /> */}
-            </div>
-            <div className="col-lg-6">
+              </div>             
+            </div> */}
+            {/* <div className="col-lg-6">
               <h3 className="mb-3 h6 text-uppercase text-black d-block">Filter by Reference</h3>
               <button type="button" className="btn btn-secondary btn-md dropdown-toggle px-4" id="dropdownMenuReference"
                 data-toggle="dropdown">Reference</button>
@@ -112,9 +96,9 @@ export default function CosmaticsProduct() {
                 <a className="dropdown-item" href="#">Price, low to high</a>
                 <a className="dropdown-item" href="#">Price, high to low</a>
               </div>
-            </div>
+            </div> */}
           </div>
-
+          
           <div className="row">
             <div className="col-sm-6 col-lg-4 text-center item mb-4">
               {/* <div className='card'>

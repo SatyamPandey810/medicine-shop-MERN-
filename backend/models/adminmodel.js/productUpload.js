@@ -11,5 +11,9 @@ const uploadProductSchema = new mongoose.Schema({
     sellingPrice: Number
 }, { timestamps: true })
 
+
+
+
 const productUploadModel = mongoose.model("products", uploadProductSchema)
+
 module.exports = productUploadModel

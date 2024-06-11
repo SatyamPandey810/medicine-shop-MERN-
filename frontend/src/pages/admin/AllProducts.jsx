@@ -39,7 +39,7 @@ export default function AllProducts() {
                 </div>
                 {
                     openUploadProduct && (
-                        <UploadProducts onClose={() => setOpenUploadProduct(false)} fetchData={fetchAllProduct}/>
+                        <UploadProducts onClose={() => setOpenUploadProduct(false)} fetchData={fetchAllProduct} />
                     )
                 }
                 {/* {
@@ -48,7 +48,7 @@ export default function AllProducts() {
                     )
                 } */}
 
-                <table className="table table-bordered scrollable">
+                <table className="table table-bordered">
                     <thead>
                         <tr>
 
@@ -64,15 +64,9 @@ export default function AllProducts() {
                         </tr>
                     </thead>
                     {
-
-
                         allProduct.map((product, index) => {
-
                             return (
-
-
-                                <AdminProductCard data={product} key={index + "allProduct"} fetchdata={fetchAllProduct}/>
-
+                                <AdminProductCard data={product} key={index + "allProduct"} fetchdata={fetchAllProduct} />
                             )
                         })
                     }

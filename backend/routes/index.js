@@ -12,28 +12,36 @@ const uploadProductController = require('../controller/admin/uploadProduct');
 const getProductController = require('../controller/admin/getAllProduct');
 const updateProductController = require('../controller/admin/updateProduct');
 const getCategoryProduct = require('../controller/admin/getCategoryProduct');
+const homeCategoryUploadController = require('../controller/admin/homeCategory');
+const getAllHomeProductController = require('../controller/admin/getAllHomeProduct');
 
 router.post('/signup', userSignUpController)
 router.post('/login', userLoginController)
 router.get('/user-details', authToken, userDetailsController)
 router.get('/userLogout', authToken, userLogout)
 
-// admin panel router
+// admin panel router route
 router.get('/all-user', authToken, allUsers)
 
-// user updated
+// user updated route
 router.post('/update-user', authToken, updateUser)
 
-// upload products
+// upload products route
 router.post('/upload-product', authToken, uploadProductController)
 
-// get products
+// get products route
 router.get('/get-product', getProductController)
 
 //upload product
 router.post('/update-product', authToken, updateProductController)
 
-// product categories
+// product categories route
 router.get('/get-categoryProduct', getCategoryProduct)
+
+//home category route
+router.post('/home-product', authToken, homeCategoryUploadController)
+
+// home category Product category
+router.get('/get-home',getAllHomeProductController)
 
 module.exports = router

@@ -108,14 +108,14 @@ a:hover {
   box-shadow: none !important;
 }
 
-.site-section {
+/* .site-section {
   padding: 2.5em 0;
-}
+} */
 
 @media (min-width: 768px) {
-  .site-section {
+  /* .site-section {
     padding: 5em 0;
-  }
+  } */
 }
 
 .site-section.site-section-sm {
@@ -1661,8 +1661,10 @@ text-decoration: underline;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
-  padding: 50px;
+  /* height: 300px; */
+  /* padding: 50px; */
+  height: 181px;
+    padding: 100px;
   background: #f0f0f0;
 }
 
@@ -2218,4 +2220,11 @@ text-decoration: underline;
 }
 .se{
   width: 100%;
+}
+.clear-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: -30px; /* Adjust this value based on your styling needs */
 }

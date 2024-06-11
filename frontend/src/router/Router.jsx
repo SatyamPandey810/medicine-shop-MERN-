@@ -16,6 +16,8 @@ import AdminPanel from '../pages/admin/AdminPanel'
 import AllUser from '../pages/admin/AllUser'
 import AllProducts from '../pages/admin/AllProducts'
 import CosmaticsProduct from '../category-front/CosmaticsProduct'
+import HomeCategory from '../pages/admin/HomeCategory'
+// import HomeCategory from '../pages/admin/HomeCategory'
 
 export default function Router() {
     return (
@@ -45,6 +47,7 @@ export default function Router() {
                 <Route path='' element={<AdminPanel />} />
                 <Route path='all-user' element={<AllUser />} />
                 <Route path='all-products' element={<AllProducts/>}/>
+                <Route path='home-category' element={<HomeCategory/>}/>
             </Route>
 
 
