@@ -54,6 +54,15 @@ const productCategory = [
         { id: 502, label: "Over-the-counter drugs", value: "Over-the-counter drugs" },
       ] 
     },
+    { 
+      id: 6, 
+      label: "other", 
+      value: "other", 
+      subcategories: [
+        { id: 501, label: "Prescription drugs", value: "Prescription drugs" },
+        { id: 502, label: "Over-the-counter drugs", value: "Over-the-counter drugs" },
+      ] 
+    },
    
   ];
   

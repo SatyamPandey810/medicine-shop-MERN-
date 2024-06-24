@@ -122,13 +122,7 @@ export default function HealthProduct() {
           </div>
 
           <div className="row">
-            <div className="col-sm-6 col-lg-4 text-center item mb-4">
-              {/* <div className='card'>
-              <span className="tag">Sale</span>
-              <a href="shop-single.html"> <img src="/images/product_01.png" alt="Image" /></a>
-              <h3 className="text-dark"><a href="shop-single.html">Bioderma</a></h3>
-              <p className="price"><del>95.00</del> &mdash; $55.00</p>
-              </div> */}
+            <div className="col-sm-6 col-lg-4 text-center item mb-4">             
               <div class="product-card">
                 <div class="badge">Hot</div>
                 <div class="product-tumb">

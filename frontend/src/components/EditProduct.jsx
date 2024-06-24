@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 // import productCategory from '../helper/ProductCategory';
@@ -10,13 +10,14 @@ import productCategory from '../helper/ProductCategory';
 import SummaryApi from '../common';
 
 export default function EditProduct({ onClose, productData, fetchdata }) {
+    const[categories,setCategories]= useState([])
+
 
     const [data, setData] = useState({
         ...productData,
         productName: productData?.productName,
         brandName: productData?.brandName,
         category: productData?.category,
-        subcategory: productData?.subcategory,
         productImage: productData?.productImage || [],
         description: productData?.description,
         price: productData?.price,
@@ -24,6 +25,17 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
     })
 
     const [uploadImage, setUploadImage] = useState("")
+
+
+    const fetchAllProduct = async () => {
+        const response = await fetch(SummaryApi.getHomeCategoryProduct.url)
+        const dataResponse = await response.json()
+        setCategories(dataResponse?.data)
+    }
+    useEffect(() => {
+        fetchAllProduct()
+    }, [])
+
 
 
     const inputChange = (event) => {
@@ -123,25 +135,15 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
                             <select className='form-control' onChange={inputChange} name='category' required>
                                 <option>Select category</option>
                                 {
-                                    productCategory.map((el, index) => {
+                                    categories.map((category) => {
                                         return (
-                                            <option value={el.value} key={index}>{el.label}</option>
+                                            <option value={category._id} key={category._id}>{category.productCategoryName}</option>
                                         )
                                     })
                                 }
+                                
                             </select>
-                        </div>
-                        {data.category && (
-                            <div className="mb-3">
-                                <label htmlFor="subcategory" className="form-label">Subcategory</label>
-                                <select className='form-control' onChange={inputChange} name='subcategory' required>
-                                    <option>Select subcategory</option>
-                                    {productCategory.find(category => category.value === data.category)?.subcategories?.map((subcategory) => (
-                                        <option key={subcategory.id} value={subcategory.value}>{subcategory.label}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        )}
+                        </div>                       
                         <div className="mb-3">
                             <label htmlFor="uploadImageInput" className="form-label">Image</label>
                             <input

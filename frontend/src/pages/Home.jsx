@@ -8,18 +8,23 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import SummaryApi from '../common';
+import { TailSpin } from 'react-loader-spinner'
+
+
 export default function Home() {
   const [categoryProduct, setCategoryProduct] = useState([])
   const [loading, setLoading] = useState()
 
 
+
   const fetchProductCategory = async () => {
+
     setLoading(true)
     const response = await fetch(SummaryApi.getHomeCategoryProduct.url)
     const dataResponse = await response.json()
     setLoading(false)
     setCategoryProduct(dataResponse.data)
-    console.log(dataResponse.data);
+    // console.log(dataResponse.data);
   }
 
   useEffect(() => {
@@ -100,18 +105,36 @@ export default function Home() {
 
           <div className="row">
             {
-              categoryProduct.map((product, index) => (
-                <div className="col-sm-6 col-lg-4 text-center item mb-4" key={index}>
-                  {/* <span className="tag">30% OFF</span> */}
-                   <img src={product?.productCategoryimage} alt="Image" className='popular-img'/>
-                  <h3 className="text-dark">{product?.productCategoryName}</h3>
-                  <p className="price">{product?.productCategoryDescription}</p>
-                  {/* <h4 className="offer">30% OFF</h4> */}
+              loading ? (
+                <TailSpin
+                  visible={true}
+                  height="80"
+                  width="80"
+                  color="#4fa94d"
+                  ariaLabel="tail-spin-loading"
+                  radius="1"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              ) : (
+                categoryProduct?.map((product, index) => (
+                  <div className="col-sm-6 col-lg-4 text-center item mb-4" key={index}>
+                    {/* <span className="tag">30% OFF</span> */}
+                    <img src={product?.productCategoryimage} alt="Image" className='popular-img' />
+                    <h3 className="text-dark text-capitalize">{product?.productCategoryName}</h3>
+                    <p className="price">{product?.productCategoryDescription}</p>
+                    {/* <p className="price">{product?._id}</p> */}
+                    {/* <h4 className="offer">30% OFF</h4> */}
 
-                  <Link to='/category/health'><h3 className='text-dark btn btn-primary fw-bold'>Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} /></h3></Link>
-                </div>
+                    <Link to={`/category/${product?._id}`}>
+                      {/* <Link to={`/products/${product?._id}`}> */}
+                      <h3 className='text-dark btn btn-primary fw-bold'>
+                        Shop now  <FontAwesomeIcon icon={faAnglesRight} style={{ fontSize: "18px" }} />
+                      </h3>
+                    </Link>
+                  </div>
 
-              ))
+                )))
             }
 
             {/* <div className="col-sm-6 col-lg-4 text-center item mb-4">

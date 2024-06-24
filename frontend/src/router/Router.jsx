@@ -17,7 +17,12 @@ import AllUser from '../pages/admin/AllUser'
 import AllProducts from '../pages/admin/AllProducts'
 import CosmaticsProduct from '../category-front/CosmaticsProduct'
 import HomeCategory from '../pages/admin/HomeCategory'
+import CategoryProduct from '../category-front/CategoryProduct'
+import AllProductCart from '../pages/AllProductCart'
 // import HomeCategory from '../pages/admin/HomeCategory'
+import addToCart from '../pages/addtocart/AddToCart';
+import CartView from '../pages/addtocart/CartView'
+
 
 export default function Router() {
     return (
@@ -28,12 +33,17 @@ export default function Router() {
             <Route path='/online-buy' element={<OnlineBuy />} />
             <Route path='/news' element={<News />} />
             <Route path='/contact-us' element={<ContactUs />} />
+            <Route path='/cart-view' element={<CartView />} />
+            {/* <Route path="/addtocart" element={}/> */}
+
 
             {/* nasted route */}
-            <Route path='/category'>
+            {/* <Route path='/category'>
                 <Route path="health" element={<HealthProduct />} />
                 <Route path='cosmatics' element={<CosmaticsProduct/>}/>
-            </Route>
+            </Route> */}
+
+            <Route path="/category/:id" element={<CategoryProduct />} />
             <Route path='/login'>
                 <Route path='' element={<Login />} />
                 <Route path='forgotpassword' element={<ForgotPassword />} />
@@ -46,8 +56,8 @@ export default function Router() {
             <Route path='/admin-panel'>
                 <Route path='' element={<AdminPanel />} />
                 <Route path='all-user' element={<AllUser />} />
-                <Route path='all-products' element={<AllProducts/>}/>
-                <Route path='home-category' element={<HomeCategory/>}/>
+                <Route path='all-products' element={<AllProducts />} />
+                <Route path='home-category' element={<HomeCategory />} />
             </Route>
 
 

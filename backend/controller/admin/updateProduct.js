@@ -6,9 +6,9 @@ async function updateProductController(req, res) {
         
         const sessionUserId = req.userId
         
-        if (!productUploadpermission(sessionUserId)) {
-            throw new Error('Permission denid')
-        }
+        // if (!productUploadpermission(sessionUserId)) {
+        //     throw new Error('Permission denid')
+        // }
         const { _id, ...resBody } = req.body
         const updateProduct = await productUploadModel.findByIdAndUpdate(_id, resBody)
 

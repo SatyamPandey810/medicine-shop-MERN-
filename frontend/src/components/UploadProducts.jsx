@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import productCategory from '../helper/ProductCategory';
@@ -8,11 +8,12 @@ import { toast } from 'react-toastify'
 
 
 export default function UploadProducts({ onClose, fetchData }) {
+    // const [allHomeProduct, setAllHomeproduct] = useState([])
+    const[categories,setCategories]= useState([])
     const [data, setData] = useState({
         productName: "",
         brandName: "",
-        category: "",
-        subcategory: "",
+        // category:"",
         productImage: [],
         description: "",
         price: "",
@@ -20,6 +21,18 @@ export default function UploadProducts({ onClose, fetchData }) {
     })
 
     const [uploadImage, setUploadImage] = useState("")
+
+    const fetchAllProduct = async () => {
+        const response = await fetch(SummaryApi.getHomeCategoryProduct.url)
+        const dataResponse = await response.json()
+
+        setCategories(dataResponse?.data)
+        console.log(dataResponse);
+
+    }
+    useEffect(() => {
+        fetchAllProduct()
+    }, [])
 
 
     const inputChange = (event) => {
@@ -121,15 +134,16 @@ export default function UploadProducts({ onClose, fetchData }) {
                             <select className='form-control' onChange={inputChange} name='category' required>
                                 <option>Select category</option>
                                 {
-                                    productCategory.map((el, index) => {
+                                    categories.map((category) => {
                                         return (
-                                            <option value={el.value} key={index}>{el.label}</option>
+                                            <option value={category._id} key={category._id}>{category.productCategoryName}</option>
                                         )
                                     })
                                 }
+                                
                             </select>
                         </div>
-                        {data.category && (
+                        {/* {data.category && (
                             <div className="mb-3">
                                 <label htmlFor="subcategory" className="form-label">Subcategory</label>
                                 <select className='form-control' onChange={inputChange} name='subcategory' required>
@@ -139,7 +153,7 @@ export default function UploadProducts({ onClose, fetchData }) {
                                     ))}
                                 </select>
                             </div>
-                        )}
+                        )} */}
                         <div className="mb-3">
                             <label htmlFor="uploadImageInput" className="form-label">Image</label>
                             <input

@@ -1,11 +1,17 @@
 const mongoose = require("mongoose")
 
 const homeCategoryProductSchema = new mongoose.Schema({
-    productCategoryName: { type: String, required: true, unique: true },
+    productCategoryName: {
+        type: String,
+        required: true,
+        unique: true
+    },
     productCategoryimage: [],
-    category: String,
-    subcategory: String,
-    productCategoryDescription: String
+    productCategoryDescription: {
+        type: String,
+        required: true,
+        unique: true
+    }
 }, { timestamps: true })
 
 

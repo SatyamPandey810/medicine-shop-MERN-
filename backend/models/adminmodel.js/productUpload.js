@@ -1,14 +1,19 @@
 const mongoose = require('mongoose')
 
 const uploadProductSchema = new mongoose.Schema({
-    productName: String,
+    productName:String,
+        // required: true   
     brandName: String,
-    category: String,
-    subcategory: String,
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'homeproduct'
+    },
+
     productImage: [],
+
     description: String,
     price: Number,
-    sellingPrice: Number
+    sellingPrice: Number,
 }, { timestamps: true })
 
 

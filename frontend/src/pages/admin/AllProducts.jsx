@@ -24,6 +24,8 @@ export default function AllProducts() {
         fetchAllProduct()
     }, [])
 
+
+    
     return (
         <>
             <DashboardSidebar />
@@ -57,7 +59,8 @@ export default function AllProducts() {
                             <th>Price</th>
                             <th className='text-nowrap'>Selling price</th>
                             <th>category</th>
-                            <th className='text-nowrap'>sub category</th>
+                            <th>description</th>
+                            {/* <th className='text-nowrap'>sub category</th> */}
                             <th className='text-nowrap'>product image</th>
                             <th>Action</th>
 

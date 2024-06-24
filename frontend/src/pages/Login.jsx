@@ -13,7 +13,7 @@ export default function Login() {
         password: ''
     });
     const navigate = useNavigate();
-    const { fetchuserDetails } = useContext(Context);
+    const { fetchuserDetails,fetchUserAddToCart } = useContext(Context);
 
     let { email, password } = data
 
@@ -44,6 +44,7 @@ export default function Login() {
             setTimeout(() => {
                 navigate('/')
                 fetchuserDetails()
+                fetchUserAddToCart()
             }, 2000)
         }
         if (dataApi.error) {

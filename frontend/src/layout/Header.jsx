@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -7,10 +7,13 @@ import SummaryApi from '../common';
 import { toast } from 'react-toastify';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { setUserDetails } from '../store/userSlice';
+import Context from '../context';
 
 
 export default function Header() {
-  
+  const context = useContext(Context)
+
+
   const disaptch = useDispatch();
   const user = useSelector(state => state?.user?.user)
 
@@ -30,6 +33,7 @@ export default function Header() {
     }
 
   }
+  console.log("header", context);
   return (
     <div className="site-navbar py-2">
 
@@ -119,10 +123,14 @@ export default function Header() {
               </Dropdown.Menu>
             </Dropdown>
             <div>
-              <Link to="/" className="icons-btn d-inline-block bag mx-3">
+              <Link to="/cart-view" className="icons-btn d-inline-block bag mx-3">
                 {/* <span className="icon-shopping-bag"></span> */}
                 <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: "26px" }} />
-                <span className="number">2</span>
+                {
+                  user?._id && user?._id.length > 0 ? (
+                    <span className="number">{context.cartProductCount}</span>
+                  ) : <span className="number">0</span>
+                }
               </Link>
             </div>
 

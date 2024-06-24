@@ -6,12 +6,19 @@ async function homeCategoryUploadController(req, res) {
 
         const sessionUserId = req.userId
 
-        if (!productUploadpermission(sessionUserId)) {
-            throw new Error('Permission denid')
-        }
+        // if (!productUploadpermission(sessionUserId)) {
+        //     throw new Error('Permission denid')
+        // }
 
-        const uploadHomeCategory = new productCategoryModel(req.body)
-        const saveHomeCategory = await uploadHomeCategory.save()
+        const uploadHomeCategory = new productCategoryModel(req.body);
+        const saveHomeCategory = await uploadHomeCategory.save();
+
+        // const { productCategoryName, productCategoryDescription, productCategoryimage } = req.body;
+        // const homeCategory = await productCategoryModel.create({
+        //     productCategoryName,
+        //     productCategoryimage,
+        //     productCategoryDescription
+        // })
 
         res.status(201).json({
             message: "Product upload sucessfully",

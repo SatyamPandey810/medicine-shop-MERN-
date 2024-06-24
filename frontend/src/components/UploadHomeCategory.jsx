@@ -112,7 +112,7 @@ export default function UploadHomeCategory({ onClose, fetchdata }) {
                 required
               />
             </div>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label htmlFor="category" className="form-label">Category name</label>
               <select className='form-control' onChange={inputChange} name='category' required>
                 <option>Select category</option>
@@ -135,7 +135,7 @@ export default function UploadHomeCategory({ onClose, fetchdata }) {
                   ))}
                 </select>
               </div>
-            )}
+            )} */}
 
             <div className="mb-3">
               <label htmlFor="uploadImageInput" className="form-label">Image</label>

@@ -6,17 +6,18 @@ async function updateHomeCategoryController(req, res) {
 
         const sessionUserId = req.userId
 
-        if (!productUploadpermission(sessionUserId)) {
-            throw new Error('Permission denid')
-        }
+        // if (!productUploadpermission(sessionUserId)) {
+        //     throw new Error('Permission denid')
+        // }
+        console.log('req.body:', req.body);
         const { _id, ...resBody } = req.body
         const updateHomeProduct = await productCategoryModel.findByIdAndUpdate(_id, resBody)
-
+        console.log('_id:', _id);
         res.json({
             message: "Product updated successfully",
-            data: updateHomeProduct,
             success: true,
-            error: false
+            error: false,
+            data: updateHomeProduct
         })
 
     } catch (error) {

@@ -49,10 +49,27 @@ const SummaryApi = {
         url: `${backendDomain}/api/get-home`,
         method: "get"
     },
-    updateHomeCategoryProduct:{
-        url:`${backendDomain}/api/update-home`,
-        method:"post"
+    updateHomeCategoryProduct: {
+        url: `${backendDomain}/api/update-home`,
+        method: "post"
+    },
+    getCategoriesProduct: {
+        url: `${backendDomain}/api/category/:id`,
+        method: "get"
+    },
+    addToCartProduct: {
+        url: `${backendDomain}/api/addtocart`,
+        method: "post"
+    },
+    addTocardProductCount: {
+        url: `${backendDomain}/api/countAddToCardProduct`,
+        method: "get"
+    },
+    addToCartProductView: {
+        url: `${backendDomain}/api/view-cart-product`,
+        method: "get"
     }
+
 
 
 }

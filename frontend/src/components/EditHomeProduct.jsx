@@ -11,8 +11,8 @@ export default function EditHomeProduct({ onClose, productData, fetchdata }) {
     const [dataCategory, setDataCategory] = useState({
         ...productData,
         productCategoryName: productData?.productCategoryName,
-        category:productData?.category,
-        subcategory:productData?.subcategory,
+        // category:productData?.category,
+        // subcategory:productData?.subcategory,
         productCategoryimage:productData?.productCategoryimage || [],
         productCategoryDescription: productData?.productCategoryDescription
     
@@ -114,7 +114,7 @@ export default function EditHomeProduct({ onClose, productData, fetchdata }) {
             />
 
           </div>
-          <div className="mb-3">
+          {/* <div className="mb-3">
               <label htmlFor="category" className="form-label">Category name</label>
               <select className='form-control' onChange={inputChange} name='category' required>
                 <option>Select category</option>
@@ -137,7 +137,7 @@ export default function EditHomeProduct({ onClose, productData, fetchdata }) {
                   ))}
                 </select>
               </div>
-            )}
+            )} */}
 
 
           <div className="mb-3">

@@ -15,6 +15,10 @@ const getCategoryProduct = require('../controller/admin/getCategoryProduct');
 const homeCategoryUploadController = require('../controller/admin/homeCategory');
 const getAllHomeProductController = require('../controller/admin/getAllHomeProduct');
 const updateHomeCategoryController = require('../controller/admin/updateHomeCategory');
+const getProductbyCategoryController = require('../controller/admin/getProductByCategoryController');
+const addToCartController = require('../controller/user-form/addToCartController');
+const countAddToCartProduct = require('../controller/user-form/countAddToCard');
+const addToCartViewProduct = require('../controller/user-form/addToCartView');
 
 router.post('/signup', userSignUpController)
 router.post('/login', userLoginController)
@@ -47,5 +51,18 @@ router.get('/get-home', getAllHomeProductController)
 
 // update home category product
 router.post('/update-home', authToken, updateHomeCategoryController)
+
+// product find by category
+router.get('/category/:id', getProductbyCategoryController)
+// router.get('/category/:categoryId',getProductbyCategoryController)
+
+// add to cart route
+router.post('/addtocart', authToken, addToCartController)
+
+// count addtocart products
+router.get('/countAddToCardProduct', authToken, countAddToCartProduct)
+
+// user add to cart view products 
+router.get('/view-cart-product',authToken, addToCartViewProduct)
 
 module.exports = router
