@@ -18,10 +18,10 @@ import AllProducts from '../pages/admin/AllProducts'
 import CosmaticsProduct from '../category-front/CosmaticsProduct'
 import HomeCategory from '../pages/admin/HomeCategory'
 import CategoryProduct from '../category-front/CategoryProduct'
-import AllProductCart from '../pages/AllProductCart'
 // import HomeCategory from '../pages/admin/HomeCategory'
 import addToCart from '../pages/addtocart/AddToCart';
 import CartView from '../pages/addtocart/CartView'
+import Orders from '../pages/admin/Orders'
 
 
 export default function Router() {
@@ -58,6 +58,7 @@ export default function Router() {
                 <Route path='all-user' element={<AllUser />} />
                 <Route path='all-products' element={<AllProducts />} />
                 <Route path='home-category' element={<HomeCategory />} />
+                <Route path='user-order' element={<Orders />} />
             </Route>
 
 

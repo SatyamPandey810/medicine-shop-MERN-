@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const uploadProductSchema = new mongoose.Schema({
-    productName:String,
-        // required: true   
+    productName: String,
+    // required: true   
     brandName: String,
     category: {
         type: mongoose.Schema.Types.ObjectId,

@@ -33,7 +33,6 @@ export default function Header() {
     }
 
   }
-  console.log("header", context);
   return (
     <div className="site-navbar py-2">
 

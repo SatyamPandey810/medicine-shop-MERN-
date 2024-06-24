@@ -47,7 +47,7 @@ export default function DashboardSidebar() {
                                     <a href="blank.html" className="dropdown-item">Blank Page</a>
                                 </div>
                             </div>
-                            <a href="form.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Forms</span></a>
+                            <Link to="/admin-panel/user-order" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Orders</span></Link>
                             <a href="table.html" className="nav-item nav-link"><i className="fa fa-table me-2"></i><span className='mx-2'>Tables</span></a>
                             <a href="chart.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Charts</span></a>
                             <div className="nav-item dropdown">

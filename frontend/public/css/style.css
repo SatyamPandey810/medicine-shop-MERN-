@@ -1042,7 +1042,7 @@ a:hover {
 }
 
 .site-blocks-table td {
-  padding: 20px;
+  /* padding: 20px; */
   text-align: center;
   vertical-align: middle;
   color: #212529;
@@ -2232,4 +2232,32 @@ text-decoration: underline;
 .popular-img{
   width: 100%;
   height: 290px;
+}
+.product{
+  border:none !important;
+}
+.product img{
+  height: 150px;
+  width: auto;
+  margin-bottom: -50px;
+  margin-left: 1rem;
+  transition: 0.5s;
+}
+/* .product:hover img{
+  transform: scale(1.05) rotate(-10deg);
+} */
+.product .card-title{
+  margin-top: 50px;
+}
+
+.img-in-cart{
+  height: 50px;
+}
+/* .overflow-scroll{
+  overflow: scroll;
+} */
+
+.product-thumbnail img{
+  width: 100%;
+  height: 8rem;
 }

@@ -19,6 +19,7 @@ const getProductbyCategoryController = require('../controller/admin/getProductBy
 const addToCartController = require('../controller/user-form/addToCartController');
 const countAddToCartProduct = require('../controller/user-form/countAddToCard');
 const addToCartViewProduct = require('../controller/user-form/addToCartView');
+const updateAddToCartProduct = require('../controller/user-form/updateAddToCart');
 
 router.post('/signup', userSignUpController)
 router.post('/login', userLoginController)
@@ -63,6 +64,10 @@ router.post('/addtocart', authToken, addToCartController)
 router.get('/countAddToCardProduct', authToken, countAddToCartProduct)
 
 // user add to cart view products 
-router.get('/view-cart-product',authToken, addToCartViewProduct)
+router.get('/view-cart-product', authToken, addToCartViewProduct)
+
+// user add to cart update products 
+router.post('/update-cart-product', authToken, updateAddToCartProduct)
+
 
 module.exports = router

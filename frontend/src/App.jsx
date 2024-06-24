@@ -36,7 +36,7 @@ export default function App() {
       credentials: "include"
     })
     const dataApi = await dataResponse.json()
-    console.log(dataApi);
+    // console.log(dataApi);
     setCartProductCount(dataApi?.data?.count)
   }
 
