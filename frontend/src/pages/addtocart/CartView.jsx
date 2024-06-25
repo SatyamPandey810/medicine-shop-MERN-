@@ -6,7 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function CartView() {
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
+ 
     const context = useContext(Context)
     const loadingCart = new Array(context.cartProductCount).fill(null)
 
@@ -28,6 +28,9 @@ export default function CartView() {
         }
 
     }
+
+
+
     useEffect(() => {
         fetchData()
     }, [])
@@ -95,22 +98,31 @@ export default function CartView() {
         }
     }
 
-    // cart total
-    if (Array.isArray(data)) {
-        const totalQty = data.reduce((previousValue, currentValue) => {
-            // Ensure currentValue is an object and has a quantity property that is a number
-            if (currentValue && typeof currentValue.quantity === 'number') {
-                return previousValue + currentValue.quantity;
+
+    //-----------------total product qty---------------
+    let totalQuantity = 0;
+
+    data.forEach(innerArray => {
+        innerArray.forEach(obj => {
+            totalQuantity += obj.quantity;
+        });
+    });
+
+    //--------------total sellin price------------------
+    let totalSellingPrice = 0;
+
+    if (Array.isArray(data) && data.length > 0) {
+        data[0].forEach(item => {
+            if (item && item.productId && item.productId.sellingPrice && item.quantity) {
+                const sellingPrice = parseFloat(item.productId.sellingPrice);
+                const quantity = parseInt(item.quantity);
+
+                if (!isNaN(sellingPrice) && !isNaN(quantity) && quantity > 0) {
+                    totalSellingPrice += sellingPrice * quantity;
+                }
             }
-            // If the quantity property is not a number, just return the previousValue
-            return previousValue;
-        }, 0); // Initialize previousValue with 0
-        console.log(totalQty);
-    } else {
-        console.error('data is not an array');
+        });
     }
-
-
 
     return (
         <>
@@ -199,17 +211,18 @@ export default function CartView() {
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        {/* <td>${totalQty}</td> */}
+                                                        <td>${(product?.productId?.sellingPrice * product?.quantity).toFixed(2)}</td>
                                                         <td><p className="btn btn-primary height-auto btn-sm" onClick={() => deleteCartProduct(product?._id)}><FontAwesomeIcon icon={faTrash} /></p></td>
+                                                        {/* <td>{subtotal}</td> */}
                                                     </tr>
                                                 ))}
                                             </tbody>
                                         </table>
                                     </div>
 
+
                                 </form>
                             </div>
-
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="row mb-5">
@@ -243,10 +256,10 @@ export default function CartView() {
                                             </div>
                                             <div className="row mb-3">
                                                 <div className="col-md-6">
-                                                    <span className="text-black">Quentty</span>
+                                                    <span className="text-black">Quantity</span>
                                                 </div>
                                                 <div className="col-md-6 text-right">
-                                                    {/* <strong className="text-black">{totalQty}</strong> */}
+                                                    <strong className="text-black">{totalQuantity}</strong>
                                                 </div>
                                             </div>
                                             <div className="row mb-3">
@@ -262,7 +275,7 @@ export default function CartView() {
                                                     <span className="text-black">Total</span>
                                                 </div>
                                                 <div className="col-md-6 text-right">
-                                                    <strong className="text-black">$230.00</strong>
+                                                    <strong className="text-black">${totalSellingPrice}</strong>
                                                 </div>
                                             </div>
 
@@ -287,3 +300,4 @@ export default function CartView() {
         </>
     )
 }
+

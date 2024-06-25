@@ -22,6 +22,7 @@ import CategoryProduct from '../category-front/CategoryProduct'
 import addToCart from '../pages/addtocart/AddToCart';
 import CartView from '../pages/addtocart/CartView'
 import Orders from '../pages/admin/Orders'
+import SingleAddtocart from '../pages/addtocart/Single-addtocart'
 
 
 export default function Router() {
@@ -36,20 +37,20 @@ export default function Router() {
             <Route path='/cart-view' element={<CartView />} />
             {/* <Route path="/addtocart" element={}/> */}
 
+            {/* category product route */}
+            <Route path='/category/:id'>
+                <Route path="" element={<CategoryProduct />} />
+                <Route path="single-card" element={<SingleAddtocart/>}/>
+            </Route>
 
-            {/* nasted route */}
-            {/* <Route path='/category'>
-                <Route path="health" element={<HealthProduct />} />
-                <Route path='cosmatics' element={<CosmaticsProduct/>}/>
-            </Route> */}
-
-            <Route path="/category/:id" element={<CategoryProduct />} />
+            {/* login and signup route */}
             <Route path='/login'>
                 <Route path='' element={<Login />} />
                 <Route path='forgotpassword' element={<ForgotPassword />} />
             </Route>
             <Route path='/signup' element={<Signup />} />
 
+            {/* pagenotfound route */}
             <Route path='*' element={<PageNotFound />} />
 
             {/* admin panel route */}
@@ -60,6 +61,8 @@ export default function Router() {
                 <Route path='home-category' element={<HomeCategory />} />
                 <Route path='user-order' element={<Orders />} />
             </Route>
+
+            {/* single add to cart page route */}
 
 
 

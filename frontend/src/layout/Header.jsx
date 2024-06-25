@@ -16,6 +16,7 @@ export default function Header() {
 
   const disaptch = useDispatch();
   const user = useSelector(state => state?.user?.user)
+  console.log(user);
 
   const userLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
