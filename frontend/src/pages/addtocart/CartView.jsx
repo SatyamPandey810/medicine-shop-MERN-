@@ -33,7 +33,6 @@ export default function CartView() {
     }, [])
 
     // increse and decrase product updateQuantity
-
     const increseQuantity = async (id, qty) => {
         const response = await fetch(SummaryApi.updateCartProduct.url, {
             method: SummaryApi.updateCartProduct.method,
@@ -42,6 +41,7 @@ export default function CartView() {
                 "content-type": 'application/json'
             },
             body: JSON.stringify({
+                _id: id,
                 quantity: qty + 1
             })
         })
@@ -52,6 +52,7 @@ export default function CartView() {
         }
     }
 
+
     const decraseQuantity = async (id, qty) => {
         if (qty >= 2) {
             const response = await fetch(SummaryApi.updateCartProduct.url, {
@@ -61,7 +62,7 @@ export default function CartView() {
                     "content-type": 'application/json'
                 },
                 body: JSON.stringify({
-                    
+                    _id: id,
                     quantity: qty - 1
                 })
             })
@@ -69,9 +70,48 @@ export default function CartView() {
 
             if (responseData.success) {
                 fetchData()
+
             }
         }
     }
+    // delete cart product 
+    const deleteCartProduct = async (id) => {
+        const response = await fetch(SummaryApi.deleteCartProduct.url, {
+            method: SummaryApi.deleteCartProduct.method,
+            credentials: "include",
+            headers: {
+                "content-type": 'application/json'
+            },
+            body: JSON.stringify({
+                _id: id,
+
+            })
+        })
+        const responseData = await response.json()
+
+        if (responseData.success) {
+            fetchData()
+            context.fetchUserAddToCart()
+        }
+    }
+
+    // cart total
+    if (Array.isArray(data)) {
+        const totalQty = data.reduce((previousValue, currentValue) => {
+            // Ensure currentValue is an object and has a quantity property that is a number
+            if (currentValue && typeof currentValue.quantity === 'number') {
+                return previousValue + currentValue.quantity;
+            }
+            // If the quantity property is not a number, just return the previousValue
+            return previousValue;
+        }, 0); // Initialize previousValue with 0
+        console.log(totalQty);
+    } else {
+        console.error('data is not an array');
+    }
+
+
+
     return (
         <>
 
@@ -159,8 +199,8 @@ export default function CartView() {
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td>${product?.productId?.sellingPrice}</td>
-                                                        <td><p  className="btn btn-primary height-auto btn-sm"><FontAwesomeIcon icon={faTrash} /></p></td>
+                                                        {/* <td>${totalQty}</td> */}
+                                                        <td><p className="btn btn-primary height-auto btn-sm" onClick={() => deleteCartProduct(product?._id)}><FontAwesomeIcon icon={faTrash} /></p></td>
                                                     </tr>
                                                 ))}
                                             </tbody>
@@ -199,6 +239,14 @@ export default function CartView() {
                                             <div className="row">
                                                 <div className="col-md-12 text-right border-bottom mb-5">
                                                     <h3 className="text-black h4 text-uppercase">Cart Totals</h3>
+                                                </div>
+                                            </div>
+                                            <div className="row mb-3">
+                                                <div className="col-md-6">
+                                                    <span className="text-black">Quentty</span>
+                                                </div>
+                                                <div className="col-md-6 text-right">
+                                                    {/* <strong className="text-black">{totalQty}</strong> */}
                                                 </div>
                                             </div>
                                             <div className="row mb-3">
