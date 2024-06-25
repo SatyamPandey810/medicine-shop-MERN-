@@ -18,7 +18,6 @@ const addToCart = async (e, id) => {
   })
 
   const responseData = await response.json()
-  console.log(responseData);
 
   if (responseData.success) {
     toast.success(responseData.message)

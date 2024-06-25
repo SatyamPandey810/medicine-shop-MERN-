@@ -38,9 +38,10 @@ export default function Router() {
             {/* <Route path="/addtocart" element={}/> */}
 
             {/* category product route */}
+            {/* <Route path="/category/:id" element={<CategoryProduct />} /> */}
             <Route path='/category/:id'>
                 <Route path="" element={<CategoryProduct />} />
-                <Route path="single-card" element={<SingleAddtocart/>}/>
+                <Route path="single-card" element={<SingleAddtocart />} />
             </Route>
 
             {/* login and signup route */}
@@ -63,7 +64,6 @@ export default function Router() {
             </Route>
 
             {/* single add to cart page route */}
-
 
 
             {/* userProfile */}

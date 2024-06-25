@@ -9,13 +9,13 @@ const addToCartController = async (req, res) => {
         const isProductAvailable = await addToCartModel.findOne({ productId: productId })
         console.log("isProductAvailable", isProductAvailable);
 
-        if (isProductAvailable) {
-            return res.json({
-                message: "allready exits in add to cart",
-                success: false,
-                error: true
-            })
-        }
+        // if (isProductAvailable) {
+        //     return res.json({
+        //         message: "allready exits in add to cart",
+        //         success: false,
+        //         error: true
+        //     })
+        // }
 
         const payload = {
             productId: productId,

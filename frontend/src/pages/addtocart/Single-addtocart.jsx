@@ -1,30 +1,90 @@
 import React, { useEffect, useState } from 'react'
 import SummaryApi from '../../common'
+import { useParams } from 'react-router-dom';
 
 export default function SingleAddtocart() {
-    const [data, setData] = useState([])
+    const [data, setData] = useState(null)
+    const { id } = useParams();
 
+    // Find the product
     const fetchData = async () => {
-        const response = await fetch(SummaryApi.addToCartProductView.url, {
-            method: SummaryApi.addToCartProductView.method,
+        try {
+            const response = await fetch(SummaryApi.addToCartProductView.url, {
+                method: SummaryApi.addToCartProductView.method,
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const responseData = await response.json();
+            console.log('Fetch response data:', responseData);
+
+            if (responseData.success) {
+                const flatData = responseData.data.flat();
+                console.log('Flattened data:', flatData);
+
+
+                const product = flatData.find(
+                    (item) => item.productId?._id === id
+                );
+                console.log('Found product:', product);
+                setData(product);
+            } else {
+                console.error('Fetch failed:', responseData.message);
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [id]);
+
+
+    // increse and decrase product updateQuantity
+    const increseQuantity = async (id, qty) => {
+        const response = await fetch(SummaryApi.updateCartProduct.url, {
+            method: SummaryApi.updateCartProduct.method,
             credentials: "include",
             headers: {
                 "content-type": 'application/json'
             },
+            body: JSON.stringify({
+                _id: id,
+                quantity: qty + 1
+            })
         })
         const responseData = await response.json()
-        console.log("data", data);
+
         if (responseData.success) {
-            setData(responseData.data)
-
+            fetchData()
         }
-
     }
-    useEffect(() => {
-        fetchData()
-    }, [])
 
 
+    const decraseQuantity = async (id, qty) => {
+        if (qty >= 2) {
+            const response = await fetch(SummaryApi.updateCartProduct.url, {
+                method: SummaryApi.updateCartProduct.method,
+                credentials: "include",
+                headers: {
+                    "content-type": 'application/json'
+                },
+                body: JSON.stringify({
+                    _id: id,
+                    quantity: qty - 1
+                })
+            })
+            const responseData = await response.json()
+
+            if (responseData.success) {
+                fetchData()
+
+            }
+        }
+    }
 
 
     return (
@@ -33,7 +93,7 @@ export default function SingleAddtocart() {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 mb-0"><a href="index.html">Home</a> <span className="mx-2 mb-0">/</span> <a
-                            href="shop.html">Store</a> <span className="mx-2 mb-0">/</span> <strong className="text-black">Ibuprofen Tablets, 200mg</strong></div>
+                            href="shop.html">Store</a> <span className="mx-2 mb-0">/</span> <strong className="text-black">{data?.productId?.productName}</strong></div>
                     </div>
                 </div>
             </div>
@@ -42,29 +102,30 @@ export default function SingleAddtocart() {
                     <div className="row">
                         <div className="col-md-5 mr-auto">
                             <div className="border text-center addtocart">
-                                <img src="" alt="Image" className="img-fluid p-5" />
+                                <img src={data?.productId?.productImage[0]} alt="Image" className="img-fluid p-5" />
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <h2 className="text-black">abcd</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, vitae, explicabo? Incidunt facere, natus
-                                soluta dolores iusto! Molestiae expedita veritatis nesciunt doloremque sint asperiores fuga voluptas,
-                                distinctio, aperiam, ratione dolore.</p>
+                            <h2 className="text-black text-capitalize">{data?.productId?.productName}</h2>
+                            <p>{data?.productId?.description}</p>
 
 
-                            <p><del>$95.00</del>  <strong className="text-primary h4">$55.00</strong></p>
+                            <p>
+                                <del>${data?.productId?.price}</del>
+                                <strong className="text-primary h4 mx-4">${data?.productId?.sellingPrice}</strong>
+                            </p>
 
 
 
                             <div className="mb-5">
                                 <div className="input-group mb-3" style={{ maxWidth: "220px" }}>
                                     <div className="input-group-prepend">
-                                        <button className="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                        <button className="btn btn-outline-primary js-btn-minus" type="button" onClick={() => decraseQuantity(data?._id, data?.quantity)}>&minus;</button>
                                     </div>
-                                    <input type="text" className="form-control text-center" value="1" placeholder=""
+                                    <input type="text" className="form-control text-center" value={data?.quantity} placeholder=""
                                         aria-label="Example text with button addon" aria-describedby="button-addon1" />
                                     <div className="input-group-append">
-                                        <button className="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                                        <button onClick={() => increseQuantity(data?._id, data?.quantity)} className="btn btn-outline-primary js-btn-plus" type="button">+</button>
                                     </div>
                                 </div>
 
@@ -146,13 +207,6 @@ export default function SingleAddtocart() {
                 </div>
             </div>
 
-            {
-                data[0].map((product, index) => (
-                    <div key={product?._id}>
-                         <img src={product?.productId?.productImage[0]} alt="Image" className="img-fluid" />
-                    </div>
-                ))
-            }
 
 
 

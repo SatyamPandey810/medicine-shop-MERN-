@@ -17,7 +17,8 @@ export default function CategoryProduct() {
     await addToCart(e, id)
     fetchUserAddToCart()
     navigate(`/category/${id}/single-card`)
-    // navigate("/category/_id/single-card")
+    // navigate(`/category/${encodeURIComponent(product.productName)}/single-card`);
+    
   }
 
 
