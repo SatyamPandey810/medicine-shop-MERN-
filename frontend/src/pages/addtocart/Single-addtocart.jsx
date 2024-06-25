@@ -130,7 +130,7 @@ export default function SingleAddtocart() {
                                 </div>
 
                             </div>
-                            <p><a href="cart.html" className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary">Add To Cart</a></p>
+                            <p><a href="cart.html" className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary">Checkout</a></p>
 
                             <div className="mt-5">
                                 <ul className="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">

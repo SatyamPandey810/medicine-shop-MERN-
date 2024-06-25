@@ -333,7 +333,7 @@ a:hover {
 
 .site-navbar .site-navigation .site-menu {
   margin-left: 0;
-  padding-left: 0;
+  /* padding-left: 0; */
   margin-bottom: 0;
 }
 
@@ -1202,7 +1202,7 @@ a:hover {
 
 .bag .number {
   position: absolute;
-  top: -15px;
+  top: 0px;
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -1210,7 +1210,7 @@ a:hover {
   color: #000;
   font-size: 16px;
   background: #51eaea;
-  right: -18px;
+  right: 9px;
 }
 
 .search-wrap {
@@ -2055,9 +2055,7 @@ text-decoration: underline;
   border-radius: 0 30px 30px 0;
   color: white;
 }
-/* .me-2{
-  margin-left: 10px;
-} */
+
 .sidebar .navbar .dropdown-item:hover,
 .sidebar .navbar .dropdown-item.active {
   background: var(--dark);

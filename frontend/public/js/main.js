@@ -215,5 +215,17 @@ jQuery(document).ready(function ($) {
 		})
 	};
 	searchShow();
-
+	document.addEventListener("DOMContentLoaded", function() {
+		const menuToggle = document.querySelector('.js-menu-toggle');
+		const mainNav = document.querySelector('.main-nav');
+	  
+		menuToggle.addEventListener('click', function(e) {
+		  e.preventDefault();
+		  mainNav.classList.toggle('d-block');
+		});
+	  });
+	  
+	  
 });
+
+  
