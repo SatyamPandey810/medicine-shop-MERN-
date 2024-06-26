@@ -57,7 +57,7 @@ export default function CategoryProduct() {
 
 
   return (
-    <div>
+    <div className='container'>
       <div className="bg-light py-3">
         <div className="container">
           <div className="row">

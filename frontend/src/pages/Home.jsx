@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import SummaryApi from '../common';
-import { TailSpin } from 'react-loader-spinner'
+import { Oval, TailSpin } from 'react-loader-spinner'
 
 
 export default function Home() {
@@ -104,15 +104,16 @@ export default function Home() {
           </div>
 
           <div className="row">
+            
             {
               loading ? (
-                <TailSpin
+
+                <Oval
                   visible={true}
-                  height="80"
-                  width="80"
+                  height="50"
+                  width="50"
                   color="#4fa94d"
-                  ariaLabel="tail-spin-loading"
-                  radius="1"
+                  ariaLabel="oval-loading"
                   wrapperStyle={{}}
                   wrapperClass=""
                 />

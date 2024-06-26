@@ -90,7 +90,8 @@ export default function SingleAddtocart() {
 
     const handleCheckout = () => {
         if (data && data.productId) {
-            navigate(`/category/${id}/checkout/${encodeURIComponent(data.productId.productName)}`);
+            // navigate(`o/category/${id}/cart-view/${encodeURICompnent(data.productId.productName)}`);
+            navigate("/cart-view")
         }
     };
 

@@ -36,13 +36,13 @@ export default function Router() {
             <Route path='/online-buy' element={<OnlineBuy />} />
             <Route path='/news' element={<News />} />
             <Route path='/contact-us' element={<ContactUs />} />
-            <Route path='/cart-view' element={<CartView />} />
             {/* <Route path="/addtocart" element={}/> */}
 
             {/* category product route */}
             <Route path="/category/:id" element={<CategoryProduct />} />
             <Route path="/category/:id/single-card" element={<SingleAddtocart />} />
-            <Route path="/category/:id/checkout/:productName" element={<CheckOut />} />
+            {/* <Route path="/category/:id/checkout/:productName" element={<CheckOut />} /> */}
+            <Route path='/cart-view' element={<CartView />} />
 
 
 

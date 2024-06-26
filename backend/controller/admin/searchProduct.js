@@ -1,3 +1,4 @@
+const productCategoryModel = require("../../models/adminmodel.js/homeCategories");
 const productUploadModel = require("../../models/adminmodel.js/productUpload")
 
 const searchProduct = async (req, res) => {
@@ -6,19 +7,29 @@ const searchProduct = async (req, res) => {
 
         const regex = new RegExp(query, 'i', 'g');
 
-        const product = await productUploadModel.find({
-            "$or": [
-                {
-                    productName: regex
-                },
-                {
-                    brandName: regex
-                }
-            ]
-        })
+        const product = await Promise.all([
+            productUploadModel.find({
+                $or: [
+                    {
+                        productName: regex
+                    },
+                    {
+                        brandName: regex
+                    }
+                ]
+            }),
+            productCategoryModel.find({
+                $or: [
+                    {
+                        productCategoryName: regex
+                    }
+                ]
+            })
+        ])
+        const combinedResults = [].concat(...product);
 
         res.json({
-            data: product,
+            data: combinedResults,
             message: "search product list",
             error: false,
             success: true

@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import SummaryApi from '../common';
 import { toast } from 'react-toastify';
-import Dropdown from 'react-bootstrap/Dropdown';
 import { setUserDetails } from '../store/userSlice';
 import Context from '../context';
 
@@ -13,7 +12,10 @@ import Context from '../context';
 export default function Header() {
   const context = useContext(Context)
   const navigate = useNavigate()
+  const searchInput = useLocation()
+  const [search, setSearch] = useState(searchInput?.search?.split("=")[1])
 
+  // console.log("searchInput", searchInput);
 
   const disaptch = useDispatch();
   const user = useSelector(state => state?.user?.user)
@@ -38,9 +40,10 @@ export default function Header() {
   // search fanctonallty
   const handleSearch = (event) => {
     const { value } = event.target
+    setSearch(value)
     if (value) {
       navigate(`/search?q=${value}`)
-    }else{
+    } else {
       navigate('/search')
     }
 
@@ -54,7 +57,7 @@ export default function Header() {
         <div className="container">
           <a href="#" className="search-close js-search-close"><span className="icon-close2"></span></a>
           <form action="#" method="post">
-            <input type="text" className="form-control" placeholder="Search keyword and hit enter..." onChange={handleSearch} />
+            <input type="text" className="form-control" placeholder="Search keyword and hit enter..." onChange={handleSearch} value={search} />
           </form>
         </div>
       </div>
