@@ -23,6 +23,8 @@ import addToCart from '../pages/addtocart/AddToCart';
 import CartView from '../pages/addtocart/CartView'
 import Orders from '../pages/admin/Orders'
 import SingleAddtocart from '../pages/addtocart/Single-addtocart'
+import CheckOut from '../pages/addtocart/CheckOut'
+import SearchProduct from '../pages/SearchProduct'
 
 
 export default function Router() {
@@ -38,11 +40,20 @@ export default function Router() {
             {/* <Route path="/addtocart" element={}/> */}
 
             {/* category product route */}
-            {/* <Route path="/category/:id" element={<CategoryProduct />} /> */}
-            <Route path='/category/:id'>
+            <Route path="/category/:id" element={<CategoryProduct />} />
+            <Route path="/category/:id/single-card" element={<SingleAddtocart />} />
+            <Route path="/category/:id/checkout/:productName" element={<CheckOut />} />
+
+
+
+            {/* <Route path='/category/:id'>
                 <Route path="" element={<CategoryProduct />} />
                 <Route path="single-card" element={<SingleAddtocart />} />
-            </Route>
+                <Route path="checkout/:productName" element={<CheckOut />} />
+            </Route> */}
+
+            {/* product search routing */}
+            <Route path="/search" element={<SearchProduct />} />
 
             {/* login and signup route */}
             <Route path='/login'>

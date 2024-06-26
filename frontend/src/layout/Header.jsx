@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import Context from '../context';
 
 export default function Header() {
   const context = useContext(Context)
+  const navigate = useNavigate()
 
 
   const disaptch = useDispatch();
@@ -34,13 +35,26 @@ export default function Header() {
     }
 
   }
+  // search fanctonallty
+  const handleSearch = (event) => {
+    const { value } = event.target
+    if (value) {
+      navigate(`/search?q=${value}`)
+    }else{
+      navigate('/search')
+    }
+
+  }
+
+
+
   return (
     <div className="site-navbar py-2">
       <div className="search-wrap">
         <div className="container">
           <a href="#" className="search-close js-search-close"><span className="icon-close2"></span></a>
           <form action="#" method="post">
-            <input type="text" className="form-control" placeholder="Search keyword and hit enter..." />
+            <input type="text" className="form-control" placeholder="Search keyword and hit enter..." onChange={handleSearch} />
           </form>
         </div>
       </div>
@@ -148,10 +162,10 @@ export default function Header() {
           </div>
 
           <div class="icons">
-            {/* <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
             <a href="cart.html" class="icons-btn d-inline-block bag">
-             
-            </a> */}
+
+            </a>
             <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
               class="icon-menu"></span></a>
           </div>

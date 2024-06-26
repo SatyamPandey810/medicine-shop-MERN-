@@ -21,6 +21,7 @@ const countAddToCartProduct = require('../controller/user-form/countAddToCard');
 const addToCartViewProduct = require('../controller/user-form/addToCartView');
 const updateAddToCartProduct = require('../controller/user-form/updateAddToCart');
 const deleteAddToCartProduct = require('../controller/user-form/addToCartDelete');
+const searchProduct = require('../controller/admin/searchProduct');
 
 router.post('/signup', userSignUpController)
 router.post('/login', userLoginController)
@@ -39,7 +40,7 @@ router.post('/upload-product', authToken, uploadProductController)
 // get products route
 router.get('/get-product', getProductController)
 
-// update product
+// update product route
 router.post('/update-product', authToken, updateProductController)
 
 // product categories route
@@ -48,29 +49,32 @@ router.get('/get-categoryProduct', getCategoryProduct)
 // upload home category route
 router.post('/home-product', authToken, homeCategoryUploadController)
 
-// get home category Product category
+// get home category Product category route
 router.get('/get-home', getAllHomeProductController)
 
-// update home category product
+// update home category product route
 router.post('/update-home', authToken, updateHomeCategoryController)
 
-// product find by category
+// product find by category route
 router.get('/category/:id', getProductbyCategoryController)
 // router.get('/category/:categoryId',getProductbyCategoryController)
 
 // add to cart route
 router.post('/addtocart', authToken, addToCartController)
 
-// count addtocart products
+// count addtocart products route
 router.get('/countAddToCardProduct', authToken, countAddToCartProduct)
 
-// user add to cart view products 
+// user add to cart view products route
 router.get('/view-cart-product', authToken, addToCartViewProduct)
 
-// user add to cart update products 
+// user add to cart update products route
 router.post('/update-cart-product', authToken, updateAddToCartProduct)
 
-// user add to cart delete products 
+// user add to cart delete products route
 router.post("/delete-cart-product", authToken, deleteAddToCartProduct)
+
+// search product route
+router.get("/search-product", searchProduct)
 
 module.exports = router

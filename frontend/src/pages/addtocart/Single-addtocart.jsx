@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import SummaryApi from '../../common'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function SingleAddtocart() {
     const [data, setData] = useState(null)
     const { id } = useParams();
+    const [totalSellingPrice, setTotalSellingPrice] = useState(0);
+    const navigate = useNavigate()
 
     // Find the product
     const fetchData = async () => {
@@ -17,25 +19,24 @@ export default function SingleAddtocart() {
                 },
             });
             const responseData = await response.json();
-            console.log('Fetch response data:', responseData);
 
             if (responseData.success) {
                 const flatData = responseData.data.flat();
-                console.log('Flattened data:', flatData);
-
-
                 const product = flatData.find(
                     (item) => item.productId?._id === id
                 );
-                console.log('Found product:', product);
                 setData(product);
+                if (product) {
+                    const sellingPricePerUnit = product.productId?.sellingPrice || 0;
+                    const quantity = product.quantity || 0;
+                    setTotalSellingPrice(sellingPricePerUnit * quantity);
+                }
             } else {
                 console.error('Fetch failed:', responseData.message);
             }
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-
     };
 
     useEffect(() => {
@@ -87,6 +88,14 @@ export default function SingleAddtocart() {
     }
 
 
+    const handleCheckout = () => {
+        if (data && data.productId) {
+            navigate(`/category/${id}/checkout/${encodeURIComponent(data.productId.productName)}`);
+        }
+    };
+
+
+    //   console.log(data);
     return (
         <>
             <div className="bg-light py-3">
@@ -112,7 +121,7 @@ export default function SingleAddtocart() {
 
                             <p>
                                 <del>${data?.productId?.price}</del>
-                                <strong className="text-primary h4 mx-4">${data?.productId?.sellingPrice}</strong>
+                                <strong className="text-primary h4 mx-4">${totalSellingPrice}</strong>
                             </p>
 
 
@@ -130,7 +139,9 @@ export default function SingleAddtocart() {
                                 </div>
 
                             </div>
-                            <p><a href="cart.html" className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary">Checkout</a></p>
+                            <p>
+                                <button className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary" onClick={handleCheckout}>Checkout</button>
+                            </p>
 
                             <div className="mt-5">
                                 <ul className="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">
