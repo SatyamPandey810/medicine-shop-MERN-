@@ -223,7 +223,7 @@ export default function CartView() {
 
                                     <div className="row">
                                         <div className="col-md-12">
-                                            <button className="btn btn-primary btn-lg btn-block">Proceed To
+                                            <button className="btn btn-primary btn-lg">Proceed To
                                                 Checkout</button>
                                         </div>
                                     </div>
