@@ -7,24 +7,19 @@ import OnlineBuy from '../pages/Online-buy'
 import News from '../pages/News'
 import ContactUs from '../pages/Contact-us'
 import PageNotFound from '../pages/PageNotFound'
-import HealthProduct from '../category-front/Health-product'
 import Login from '../pages/Login'
 import ForgotPassword from '../pages/Forgot-password'
 import Signup from '../pages/Signup'
-// import UserProfile from '../pages/UserProfile'
 import AdminPanel from '../pages/admin/AdminPanel'
 import AllUser from '../pages/admin/AllUser'
 import AllProducts from '../pages/admin/AllProducts'
-import CosmaticsProduct from '../category-front/CosmaticsProduct'
 import HomeCategory from '../pages/admin/HomeCategory'
 import CategoryProduct from '../category-front/CategoryProduct'
-// import HomeCategory from '../pages/admin/HomeCategory'
-import addToCart from '../pages/addtocart/AddToCart';
 import CartView from '../pages/addtocart/CartView'
 import Orders from '../pages/admin/Orders'
 import SingleAddtocart from '../pages/addtocart/Single-addtocart'
-import CheckOut from '../pages/addtocart/CheckOut'
 import SearchProduct from '../pages/SearchProduct'
+import CheckOut from '../pages/addtocart/CheckOut'
 
 
 export default function Router() {
@@ -37,6 +32,7 @@ export default function Router() {
             <Route path='/news' element={<News />} />
             <Route path='/contact-us' element={<ContactUs />} />
             {/* <Route path="/addtocart" element={}/> */}
+            <Route path="/checkout" element={<CheckOut/>}/>
 
             {/* category product route */}
             <Route path="/category/:id" element={<CategoryProduct />} />
