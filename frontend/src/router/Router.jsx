@@ -32,7 +32,7 @@ export default function Router() {
             <Route path='/news' element={<News />} />
             <Route path='/contact-us' element={<ContactUs />} />
             {/* <Route path="/addtocart" element={}/> */}
-            <Route path="/checkout" element={<CheckOut/>}/>
+            <Route path="/checkout/:userId" element={<CheckOut/>}/>
 
             {/* category product route */}
             <Route path="/category/:id" element={<CategoryProduct />} />

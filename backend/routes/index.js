@@ -22,6 +22,8 @@ const addToCartViewProduct = require('../controller/user-form/addToCartView');
 const updateAddToCartProduct = require('../controller/user-form/updateAddToCart');
 const deleteAddToCartProduct = require('../controller/user-form/addToCartDelete');
 const searchProduct = require('../controller/admin/searchProduct');
+const createChekoutController = require('../controller/user-form/checkoutController');
+const getCheckoutController = require('../controller/user-form/checkoutGetController');
 
 router.post('/signup', userSignUpController)
 router.post('/login', userLoginController)
@@ -76,5 +78,12 @@ router.post("/delete-cart-product", authToken, deleteAddToCartProduct)
 
 // search product route
 router.get("/search-product", searchProduct)
+
+// createChekout product route
+router.post("/checkout",authToken, createChekoutController)
+
+router.get('/getcheckout/:id', getCheckoutController)
+//-------------------------------------
+// router.post('/createUser-address', authToken, createChekoutController.addAddress)
 
 module.exports = router

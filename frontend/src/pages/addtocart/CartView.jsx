@@ -3,9 +3,15 @@ import SummaryApi from '../../common'
 import Context from '../../context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 export default function CartView() {
     const [data, setData] = useState([])
+    const navigate = useNavigate()
+    const user = useSelector(state => state?.user?.user)
+    const userId = user?._id;
 
     const context = useContext(Context)
     const loadingCart = new Array(context.cartProductCount).fill(null)
@@ -24,16 +30,26 @@ export default function CartView() {
         // console.log(responseData.data);
         if (responseData.success) {
             setData(responseData.data)
+            
+        }
+        
+    }
 
+
+    
+    useEffect(() => {
+        fetchData()
+    }, [])
+    
+    const chekoutPage = () => {
+        if (userId) {
+            navigate(`/checkout/${userId}`); // Navigating to checkout page with userId
+        } else {
+            console.error('User ID not found.'); // Handle error scenario if userId is not available
         }
 
     }
 
-
-
-    useEffect(() => {
-        fetchData()
-    }, [])
 
     // increse and decrase product updateQuantity
     const increseQuantity = async (id, qty) => {
@@ -223,7 +239,7 @@ export default function CartView() {
 
                                     <div className="row">
                                         <div className="col-md-12">
-                                            <button className="btn btn-primary btn-lg">Proceed To
+                                            <button className="btn btn-primary btn-lg" onClick={chekoutPage}>Proceed To
                                                 Checkout</button>
                                         </div>
                                     </div>

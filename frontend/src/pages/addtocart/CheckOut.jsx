@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import SummaryApi from '../../common';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 
 const config = {
@@ -12,6 +16,24 @@ export default function CheckOut() {
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedState, setSelectedState] = useState('');
+  const [data, setData] = useState([])
+  // const [totalProducts, setTotalProducts] = useState(0);
+  // const { id} = useParams();
+
+
+  const [formData, setFormData] = useState({
+    // firstName: '',
+    // lastName: '',
+    name: '',
+    email: '',
+    phone: '',
+    address1: '',
+    address2: '',
+    city: '',
+    zipCode: '',
+    country: '',
+    state: '',
+  })
 
   useEffect(() => {
     loadCountries();
@@ -64,6 +86,99 @@ export default function CheckOut() {
     }
   };
 
+  // user information post
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
+  };
+
+  // shopping card total
+  const fetchData = async () => {
+    const response = await fetch(SummaryApi.addToCartProductView.url, {
+      method: SummaryApi.addToCartProductView.method,
+      credentials: "include",
+      headers: {
+        "content-type": 'application/json'
+      },
+    })
+    const responseData = await response.json()
+    // console.log(responseData);
+    setData(responseData.data)
+    if (responseData.success) {
+
+    }
+
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+   //-----------------total product qty---------------
+   let totalQuantity = 0;
+
+   data.forEach(innerArray => {
+       innerArray.forEach(obj => {
+           totalQuantity += obj.quantity;
+       });
+   });
+
+
+  const submit = async (event, id) => {
+    event?.preventDefault();
+    console.log("Product ID:", id);
+    const checkoutData = {
+      ...formData,
+      productsId: id, // Replace with actual product ID
+    };
+    console.log("Checkout Data:", checkoutData)
+    console.log("Product ID:", id);
+
+    try {
+      const dataResponse = await fetch(SummaryApi.createCheckout.url, {
+        method: SummaryApi.createCheckout.method,
+        credentials: 'include',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(checkoutData)
+      });
+
+      const dataApi = await dataResponse.json();
+      // console.log(dataApi);
+
+      if (dataApi.success) {
+        toast.success(dataApi.message);
+        // Optionally clear the form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          address1: '',
+          address2: '',
+          city: '',
+          zipCode: '',
+          country: '',
+          state: '',
+        });
+      } else {
+        toast.error(dataApi.message);
+      }
+    } catch (error) {
+      console.error('Error submitting checkout:', error);
+      toast.error('Failed to submit checkout');
+    }
+
+  }
+
+
+
+
+
   return (
     <div>
       <div className="bg-light py-3">
@@ -89,226 +204,155 @@ export default function CheckOut() {
             <div className="col-md-6 mb-5 mb-md-0">
               <h2 className="h3 mb-3 text-black">Billing Details</h2>
               <div className="p-3 p-lg-5 border">
+                <form onSubmit={submit}>
 
-                <div className="form-group row">
-                  <div className="col-md-6">
-                    <label  className="text-black">First Name <span className="text-danger">*</span></label>
-                    <input type="text" className="form-control"/>
+
+                  <div className="form-group row">
+                    <div className="col-md-6">
+                      <label htmlFor="name" className="text-black">First Name <span className="text-danger">*</span></label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="name"
+                        id="name"
+                        onChange={handleInputChange}
+                        value={formData.name}
+
+
+                      />
+                    </div>
+                    {/* <div className="col-md-6">
+                      <label className="text-black">Last Name <span className="text-danger">*</span></label>
+                      <input type="text" className="form-control" />
+                    </div> */}
                   </div>
-                  <div className="col-md-6">
-                    <label className="text-black">Last Name <span className="text-danger">*</span></label>
-                    <input type="text" className="form-control" />
-                  </div>
-                </div>
-
-                <div className="form-group row">
-                  <div className="col-md-12">
-                    <label  className="text-black">Email <span className="text-danger">*</span></label>
-                    <input type="email" className="form-control" />
-                  </div>
-                </div>
-
-                <div className="form-group row">
-                  <div className="col-md-12">
-                    <label className="text-black">Address <span className="text-danger">*</span></label>
-                    <input type="text" className="form-control" placeholder="Street address" />
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Apartment, suite, unit etc. (optional)" />
-                </div>
-
-                <div className="form-group row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <label for="c_country" className="text-black">Country <span className="text-danger">*</span></label>
-                      <select value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)} className='form-control'>
-                        <option value="">Select Country</option>
-                        {countries.map((country) => (
-                          <option key={country.iso2} value={country.iso2}>{country.name}</option>
-                        ))}
-                      </select>
+                  <div className="form-group row">
+                    <div className="col-md-12">
+                      <label htmlFor='email' className="text-black">Email <span className="text-danger">*</span></label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        name='email'
+                        id="email"
+                        onChange={handleInputChange}
+                        value={formData.email}
+                        required
+                      />
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <label>State:</label>
-                      <select value={selectedState} onChange={(e) => setSelectedState(e.target.value)} disabled={!selectedCountry} className='form-control'>
-                        <option value="">Select State</option>
-                        {states.map((state) => (
-                          <option key={state.iso2} value={state.iso2}>{state.name}</option>
-                        ))}
-                      </select>
+                  <div className="form-group row">
+                    <div className="col-md-12">
+                      <label htmlFor='number' className="text-black">Phone <span className="text-danger">*</span></label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        name='phone'
+                        id='phone'
+                        onChange={handleInputChange}
+                        value={formData.phone}
+                      />
                     </div>
                   </div>
-                </div>
-
-                <div className="form-group row mb-5">
-                  <div className="col-md-6">
-                    <label>City:</label>
-                    <select disabled={!selectedState}  className='form-control'>
-                      <option value="">Select City</option>
-                      {cities.map((city) => (
-                        <option key={city.iso2} value={city.iso2}>{city.name}</option>
-                      ))}
-                    </select>
-
+                  <div className="form-group row">
+                    <div className="col-md-12">
+                      <label htmlFor='address1' className="text-black">Address 1<span className="text-danger">*</span></label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Street address"
+                        name='address1'
+                        id='address1'
+                        onChange={handleInputChange}
+                        value={formData.address1}
+                      />
+                    </div>
                   </div>
-                  <div className="col-md-6">
-                    <label className="text-black">Posta / Zip <span className="text-danger">*</span></label>
-                    <input type="number" className="form-control" />
+                  <div className="form-group row">
+                    <div className="col-md-12">
+                      <label htmlFor='address2' className="text-black">Address 2<span className="text-danger">*</span></label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Apartment, suite, unit etc. (optional)"
+                        name='address2'
+                        id='address2'
+                        onChange={handleInputChange}
+                        value={formData.address2}
+                      />
+                    </div>
+                    {/* <input type="text" className="form-control" placeholder="Apartment, suite, unit etc. (optional)" /> */}
                   </div>
-                </div>
-
-                <div className="form-group">
-                  <label for="c_create_account" className="text-black" data-toggle="collapse" href="#create_an_account"
-                    role="button" aria-expanded="false" aria-controls="create_an_account"><input type="checkbox" value="1"
-                      id="c_create_account" /> Create an account?</label>
-                  <div className="collapse" id="create_an_account">
-                    <div className="py-2">
-                      <p className="mb-3">Create an account by entering the information below. If you are a returning customer
-                        please login at the top of the page.</p>
+                  <div className="form-group row">
+                    <div className="col-md-6">
                       <div className="form-group">
-                        <label for="c_account_password" className="text-black">Account Password</label>
-                        <input type="email" className="form-control" id="c_account_password" name="c_account_password"
-                          placeholder="" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div className="form-group">
-                  <label for="c_ship_different_address" className="text-black" data-toggle="collapse"
-                    href="#ship_different_address" role="button" aria-expanded="false"
-                    aria-controls="ship_different_address"><input type="checkbox" value="1" id="c_ship_different_address" />
-                    Ship To A Different Address?</label>
-                  <div className="collapse" id="ship_different_address">
-                    <div className="py-2">
-
-                      <div className="form-group">
-                        <label for="c_diff_country" className="text-black">Country <span className="text-danger">*</span></label>
-                        <select id="c_diff_country" className="form-control">
-                          <option value="1">Select a country</option>
-                          <option value="2">bangladesh</option>
-                          <option value="3">Algeria</option>
-                          <option value="4">Afghanistan</option>
-                          <option value="5">Ghana</option>
-                          <option value="6">Albania</option>
-                          <option value="7">Bahrain</option>
-                          <option value="8">Colombia</option>
-                          <option value="9">Dominican Republic</option>
+                        <label htmlFor='country' className="text-black">Country <span className="text-danger">*</span></label>
+                        <select value={formData.country} name="country" id="country" onChange={handleInputChange} className='form-control'>
+                          <option value="">Select Country</option>
+                          {countries.map((country) => (
+                            <option key={country.iso2} value={country.iso2}>{country.name}</option>
+                          ))}
                         </select>
                       </div>
-
-
-                      <div className="form-group row">
-                        <div className="col-md-6">
-                          <label for="c_diff_fname" className="text-black">First Name <span className="text-danger">*</span></label>
-                          <input type="text" className="form-control" id="c_diff_fname" name="c_diff_fname" />
-                        </div>
-                        <div className="col-md-6">
-                          <label for="c_diff_lname" className="text-black">Last Name <span className="text-danger">*</span></label>
-                          <input type="text" className="form-control" id="c_diff_lname" name="c_diff_lname" />
-                        </div>
-                      </div>
-
-                      <div className="form-group row">
-                        <div className="col-md-12">
-                          <label for="c_diff_companyname" className="text-black">Company Name </label>
-                          <input type="text" className="form-control" id="c_diff_companyname" name="c_diff_companyname" />
-                        </div>
-                      </div>
-
-                      <div className="form-group row">
-                        <div className="col-md-12">
-                          <label for="c_diff_address" className="text-black">Address <span className="text-danger">*</span></label>
-                          <input type="text" className="form-control" id="c_diff_address" name="c_diff_address"
-                            placeholder="Street address" />
-                        </div>
-                      </div>
-
+                    </div>
+                    <div className="col-md-6">
                       <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Apartment, suite, unit etc. (optional)" />
+                        <label>State:</label>
+                        <select value={selectedState} onChange={(e) => setSelectedState(e.target.value)} disabled={!selectedCountry} className='form-control'>
+                          <option value="">Select State</option>
+                          {states.map((state) => (
+                            <option key={state.iso2} value={state.iso2}>{state.name}</option>
+                          ))}
+                        </select>
                       </div>
+                    </div>
+                  </div>
 
-                      <div className="form-group row">
-                        <div className="col-md-6">
-                          <label for="c_diff_state_country" className="text-black">State / Country <span
-                            className="text-danger">*</span></label>
-                          <input type="text" className="form-control" id="c_diff_state_country" name="c_diff_state_country" />
-                        </div>
-                        <div className="col-md-6">
-                          <label for="c_diff_postal_zip" className="text-black">Posta / Zip <span
-                            className="text-danger">*</span></label>
-                          <input type="text" className="form-control" id="c_diff_postal_zip" name="c_diff_postal_zip" />
-                        </div>
-                      </div>
-
-                      <div className="form-group row mb-5">
-                        <div className="col-md-6">
-                          <label for="c_diff_email_address" className="text-black">Email Address <span
-                            className="text-danger">*</span></label>
-                          <input type="text" className="form-control" id="c_diff_email_address" name="c_diff_email_address" />
-                        </div>
-                        <div className="col-md-6">
-                          <label for="c_diff_phone" className="text-black">Phone <span className="text-danger">*</span></label>
-                          <input type="text" className="form-control" id="c_diff_phone" name="c_diff_phone"
-                            placeholder="Phone Number" />
-                        </div>
-                      </div>
+                  <div className="form-group row mb-5">
+                    <div className="col-md-6">
+                      <label>City:</label>
+                      <select disabled={!selectedState} className='form-control'>
+                        <option value="">Select City</option>
+                        {cities.map((city) => (
+                          <option key={city.iso2} value={city.iso2}>{city.name}</option>
+                        ))}
+                      </select>
 
                     </div>
-
+                    <div className="col-md-6">
+                      <label className="text-black">Posta / Zip <span className="text-danger">*</span></label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        name='zipCode'
+                        id='zipCode'
+                        onChange={handleInputChange}
+                        value={formData.zipCode}
+                      />
+                    </div>
                   </div>
-                </div>
-
-                <div className="form-group">
-                  <label for="c_order_notes" className="text-black">Order Notes</label>
-                  <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" className="form-control"
-                    placeholder="Write your notes here..."></textarea>
-                </div>
-
+                  <button className='btn btn-primary' type='submit'>Submit</button>
+                </form>
               </div>
             </div>
             <div className="col-md-6">
-
-              <div className="row mb-5">
-                <div className="col-md-12">
-                  <h2 className="h3 mb-3 text-black">Coupon Code</h2>
-                  <div className="p-3 p-lg-5 border">
-
-                    <label for="c_code" className="text-black mb-3">Enter your coupon code if you have one</label>
-                    <div className="input-group w-75">
-                      <input type="text" className="form-control" id="c_code" placeholder="Coupon Code" aria-label="Coupon Code"
-                        aria-describedby="button-addon2" />
-                      <div className="input-group-append">
-                        <button className="btn btn-primary btn-sm px-4" type="button" id="button-addon2">Apply</button>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
               <div className="row mb-5">
                 <div className="col-md-12">
                   <h2 className="h3 mb-3 text-black">Your Order</h2>
                   <div className="p-3 p-lg-5 border">
                     <table className="table site-block-order-table mb-5">
-                      <thead>
+                      {/* <thead>
                         <th>Product</th>
                         <th>Total</th>
-                      </thead>
+                      </thead> */}
                       <tbody>
-                        <tr>
-                          <td>Bioderma <strong className="mx-2">x</strong> 1</td>
-                          <td>$55.00</td>
+                      <tr>
+                          <td> total Product</td>
+                          {/* <td>{totalProducts}</td> */}
                         </tr>
+
                         <tr>
-                          <td>Ibuprofeen <strong className="mx-2">x</strong> 1</td>
-                          <td>$45.00</td>
+                          <td>Product qurantity</td>
+                          <td>{totalQuantity}</td>
                         </tr>
                         <tr>
                           <td className="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>

@@ -27,7 +27,7 @@ export default function UploadProducts({ onClose, fetchData }) {
         const dataResponse = await response.json()
 
         setCategories(dataResponse?.data)
-        console.log(dataResponse);
+        // console.log(dataResponse);
 
     }
     useEffect(() => {
