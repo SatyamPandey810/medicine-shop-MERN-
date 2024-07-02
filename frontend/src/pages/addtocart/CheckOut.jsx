@@ -3,7 +3,7 @@ import axios from 'axios';
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const config = {
@@ -16,6 +16,7 @@ export default function CheckOut() {
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedState, setSelectedState] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
   const [data, setData] = useState([])
   // const [totalProducts, setTotalProducts] = useState(0);
   // const { id} = useParams();
@@ -34,6 +35,10 @@ export default function CheckOut() {
     country: '',
     state: '',
   })
+
+  const navigate = useNavigate()
+  const user = useSelector(state => state?.user?.user)
+  const userId = user?._id;
 
   useEffect(() => {
     loadCountries();
@@ -97,43 +102,23 @@ export default function CheckOut() {
     })
   };
 
-  // shopping card total
-  const fetchData = async () => {
-    const response = await fetch(SummaryApi.addToCartProductView.url, {
-      method: SummaryApi.addToCartProductView.method,
-      credentials: "include",
-      headers: {
-        "content-type": 'application/json'
-      },
-    })
-    const responseData = await response.json()
-    // console.log(responseData);
-    setData(responseData.data)
-    if (responseData.success) {
-
-    }
-
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
-   //-----------------total product qty---------------
-   let totalQuantity = 0;
-
-   data.forEach(innerArray => {
-       innerArray.forEach(obj => {
-           totalQuantity += obj.quantity;
-       });
-   });
-
 
   const submit = async (event, id) => {
     event?.preventDefault();
-    console.log("Product ID:", id);
+
+    const requiredFields = ['name', 'email', 'phone', 'address1', 'zipCode', ];
+    const isFormValid = requiredFields.every(field => formData[field] && formData[field].trim() !== '');
+
+    if (!isFormValid) {
+      toast.error('Please fill in all required fields.');
+      return;
+    }
     const checkoutData = {
       ...formData,
-      productsId: id, // Replace with actual product ID
+      country: selectedCountry,
+      state: selectedState,
+      city: selectedCity,
+
     };
     console.log("Checkout Data:", checkoutData)
     console.log("Product ID:", id);
@@ -152,8 +137,7 @@ export default function CheckOut() {
       // console.log(dataApi);
 
       if (dataApi.success) {
-        toast.success(dataApi.message);
-        // Optionally clear the form after successful submission
+        // toast.success(dataApi.message);
         setFormData({
           name: '',
           email: '',
@@ -165,6 +149,12 @@ export default function CheckOut() {
           country: '',
           state: '',
         });
+        setTimeout(() => {
+          navigate(`/payment/${userId}`);
+        }, 1000);
+
+
+
       } else {
         toast.error(dataApi.message);
       }
@@ -175,7 +165,13 @@ export default function CheckOut() {
 
   }
 
+  // const navigateHandle = () => {
+  //   setTimeout(()=>{
+  //     navigate(`/payment/${userId}`)
 
+  //   },3000)
+
+  // }
 
 
 
@@ -193,23 +189,15 @@ export default function CheckOut() {
       </div>
       <div className="site-section">
         <div className="container">
-          <div className="row mb-5">
-            <div className="col-md-12">
-              <div className="bg-light rounded p-3">
-                <p className="mb-0">Returning customer? <a href="#" className="d-inline-block">Click here</a> to login</p>
-              </div>
-            </div>
-          </div>
+
           <div className="row">
-            <div className="col-md-6 mb-5 mb-md-0">
-              <h2 className="h3 mb-3 text-black">Billing Details</h2>
+            <div className="col-md-12 mb-5 mb-md-0">
+              <h2 className="h3 mb-3 text-center">Address Details</h2>
               <div className="p-3 p-lg-5 border">
                 <form onSubmit={submit}>
-
-
                   <div className="form-group row">
-                    <div className="col-md-6">
-                      <label htmlFor="name" className="text-black">First Name <span className="text-danger">*</span></label>
+                    <div className="col-md-4">
+                      <label htmlFor="name" className="text-black">Name <span className="text-danger">*</span></label>
                       <input
                         type="text"
                         className="form-control"
@@ -217,17 +205,14 @@ export default function CheckOut() {
                         id="name"
                         onChange={handleInputChange}
                         value={formData.name}
-
-
+                        required
                       />
                     </div>
                     {/* <div className="col-md-6">
                       <label className="text-black">Last Name <span className="text-danger">*</span></label>
                       <input type="text" className="form-control" />
                     </div> */}
-                  </div>
-                  <div className="form-group row">
-                    <div className="col-md-12">
+                    <div className="col-md-4">
                       <label htmlFor='email' className="text-black">Email <span className="text-danger">*</span></label>
                       <input
                         type="email"
@@ -239,9 +224,7 @@ export default function CheckOut() {
                         required
                       />
                     </div>
-                  </div>
-                  <div className="form-group row">
-                    <div className="col-md-12">
+                    <div className="col-md-4">
                       <label htmlFor='number' className="text-black">Phone <span className="text-danger">*</span></label>
                       <input
                         type="number"
@@ -250,11 +233,12 @@ export default function CheckOut() {
                         id='phone'
                         onChange={handleInputChange}
                         value={formData.phone}
+                        required
                       />
                     </div>
                   </div>
                   <div className="form-group row">
-                    <div className="col-md-12">
+                    <div className="col-md-4">
                       <label htmlFor='address1' className="text-black">Address 1<span className="text-danger">*</span></label>
                       <input
                         type="text"
@@ -264,11 +248,10 @@ export default function CheckOut() {
                         id='address1'
                         onChange={handleInputChange}
                         value={formData.address1}
+                        required
                       />
                     </div>
-                  </div>
-                  <div className="form-group row">
-                    <div className="col-md-12">
+                    <div className="col-md-4">
                       <label htmlFor='address2' className="text-black">Address 2<span className="text-danger">*</span></label>
                       <input
                         type="text"
@@ -278,15 +261,13 @@ export default function CheckOut() {
                         id='address2'
                         onChange={handleInputChange}
                         value={formData.address2}
+                        required
                       />
                     </div>
-                    {/* <input type="text" className="form-control" placeholder="Apartment, suite, unit etc. (optional)" /> */}
-                  </div>
-                  <div className="form-group row">
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                       <div className="form-group">
-                        <label htmlFor='country' className="text-black">Country <span className="text-danger">*</span></label>
-                        <select value={formData.country} name="country" id="country" onChange={handleInputChange} className='form-control'>
+                        <label for="c_country" className="text-black">Country <span className="text-danger">*</span></label>
+                        <select value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)} className='form-control'>
                           <option value="">Select Country</option>
                           {countries.map((country) => (
                             <option key={country.iso2} value={country.iso2}>{country.name}</option>
@@ -294,7 +275,10 @@ export default function CheckOut() {
                         </select>
                       </div>
                     </div>
-                    <div className="col-md-6">
+                  </div>
+
+                  <div className="form-group row">
+                    <div className="col-md-4">
                       <div className="form-group">
                         <label>State:</label>
                         <select value={selectedState} onChange={(e) => setSelectedState(e.target.value)} disabled={!selectedCountry} className='form-control'>
@@ -305,10 +289,7 @@ export default function CheckOut() {
                         </select>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="form-group row mb-5">
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                       <label>City:</label>
                       <select disabled={!selectedState} className='form-control'>
                         <option value="">Select City</option>
@@ -318,7 +299,7 @@ export default function CheckOut() {
                       </select>
 
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                       <label className="text-black">Posta / Zip <span className="text-danger">*</span></label>
                       <input
                         type="number"
@@ -327,27 +308,30 @@ export default function CheckOut() {
                         id='zipCode'
                         onChange={handleInputChange}
                         value={formData.zipCode}
+                        required
                       />
                     </div>
                   </div>
-                  <button className='btn btn-primary' type='submit'>Submit</button>
+
+
+                  <button className='btn btn-primary'>Next</button>
                 </form>
               </div>
             </div>
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <div className="row mb-5">
                 <div className="col-md-12">
                   <h2 className="h3 mb-3 text-black">Your Order</h2>
                   <div className="p-3 p-lg-5 border">
                     <table className="table site-block-order-table mb-5">
-                      {/* <thead>
+                      <thead>
                         <th>Product</th>
                         <th>Total</th>
-                      </thead> */}
+                      </thead>
                       <tbody>
                       <tr>
                           <td> total Product</td>
-                          {/* <td>{totalProducts}</td> */}
+                          <td>99</td>
                         </tr>
 
                         <tr>
@@ -365,41 +349,7 @@ export default function CheckOut() {
                       </tbody>
                     </table>
 
-                    <div className="border mb-3">
-                      <h3 className="h6 mb-0"><a className="d-block" data-toggle="collapse" href="#collapsebank" role="button"
-                        aria-expanded="false" aria-controls="collapsebank">Direct Bank Transfer</a></h3>
-
-                      <div className="collapse" id="collapsebank">
-                        <div className="py-2 px-4">
-                          <p className="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
-                            payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="border mb-3">
-                      <h3 className="h6 mb-0"><a className="d-block" data-toggle="collapse" href="#collapsecheque" role="button"
-                        aria-expanded="false" aria-controls="collapsecheque">Cheque Payment</a></h3>
-
-                      <div className="collapse" id="collapsecheque">
-                        <div className="py-2 px-4">
-                          <p className="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
-                            payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="border mb-5">
-                      <h3 className="h6 mb-0"><a className="d-block" data-toggle="collapse" href="#collapsepaypal" role="button"
-                        aria-expanded="false" aria-controls="collapsepaypal">Paypal</a></h3>
-
-                      <div className="collapse" id="collapsepaypal">
-                        <div className="py-2 px-4">
-                          <p className="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
-                            payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                        </div>
-                      </div>
-                    </div>
+                 
 
                     <div className="form-group">
                       <button className="btn btn-primary btn-lg btn-block" onclick="window.location='thankyou.html'">Place
@@ -410,7 +360,7 @@ export default function CheckOut() {
                 </div>
               </div>
 
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

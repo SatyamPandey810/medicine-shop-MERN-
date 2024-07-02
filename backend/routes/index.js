@@ -82,8 +82,7 @@ router.get("/search-product", searchProduct)
 // createChekout product route
 router.post("/checkout",authToken, createChekoutController)
 
-router.get('/getcheckout/:id', getCheckoutController)
-//-------------------------------------
-// router.post('/createUser-address', authToken, createChekoutController.addAddress)
+router.get('/getcheckout',authToken, getCheckoutController)
+
 
 module.exports = router

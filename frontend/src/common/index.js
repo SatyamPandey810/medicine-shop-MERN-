@@ -84,6 +84,10 @@ const SummaryApi = {
     createCheckout: {
         url: `${backendDomain}/api/checkout`,
         method: "post"
+    },
+    getCheckout:{
+        url:`${backendDomain}/api/getcheckout`,
+        method:"get"
     }
 
 

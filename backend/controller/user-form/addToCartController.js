@@ -8,7 +8,7 @@ const addToCartController = async (req, res) => {
 
         // product available or not 
         const isProductAvailable = await addToCartModel.findOne({ productId: productId })
-        console.log("isProductAvailable", isProductAvailable);
+        // console.log("isProductAvailable", isProductAvailable);
 
         // if (isProductAvailable) {
         //     return res.json({

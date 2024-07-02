@@ -2,58 +2,42 @@ const mongoose = require('mongoose')
 
 const checkoutSchema = new mongoose.Schema({
 
-    productsId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'addToCart',
-        // required: true
 
-    },
-    userId:String,
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'user', 
-    //     required: true
-    // },
-    
+    userId: String,
+
+
     name: {
         type: String,
-        // required: true
+        required: true
 
     },
     email: {
         type: String,
-        // required: true
+        required: true
     },
     phone: {
         type: Number,
-        // required: true
+        required: true
     },
-    address1: { type: String },
+    address1: {
+        type: String,
+        required: true
+    },
     address2: String,
     country: { type: String },
     state: { type: String },
     city: { type: String },
-    zipCode: { type: String },
-
-    // shippingAddress: {
-    //     state: { type: String, required: true },
-    //     country: { type: String, required: true },
-    //     zipCode: { type: String, required: true }
-    // },
-    paymentDetails: {
-        method: { type: String }, // e.g., 'Credit Card', 'PayPal'
-        status: { type: String }, // e.g., 'Pending', 'Completed'
-        transactionId: String
-    },
-    orderStatus: {
+    zipCode: {
         type: String,
-        defauenum: ['created', 'processing', 'completed', 'cancelled'], // e.g., 'Pending', 'Shipped', 'Delivered', 'Cancelled'
-        // required: true
+        required: true
     },
-    totalAmount: {
-        type: Number,
-        // required: true
-    }
+
+    addtocartId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'addtocart',
+
+    }],
+
 }, { timestamps: true })
-const CeheckoutModel = mongoose.model("chekout", checkoutSchema);
-module.exports = CeheckoutModel
+const CheckoutModel = mongoose.model("customer-address", checkoutSchema);
+module.exports = CheckoutModel
