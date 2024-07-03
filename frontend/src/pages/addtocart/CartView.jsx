@@ -239,8 +239,7 @@ export default function CartView() {
 
                                     <div className="row">
                                         <div className="col-md-12">
-                                            <button className="btn btn-primary btn-lg" onClick={chekoutPage}>Proceed To
-                                                Checkout</button>
+                                            <button className="btn btn-primary btn-lg" onClick={chekoutPage}>Continue</button>
                                         </div>
                                     </div>
                                 </div>

@@ -120,8 +120,7 @@ export default function CheckOut() {
       city: selectedCity,
 
     };
-    console.log("Checkout Data:", checkoutData)
-    console.log("Product ID:", id);
+    
 
     try {
       const dataResponse = await fetch(SummaryApi.createCheckout.url, {

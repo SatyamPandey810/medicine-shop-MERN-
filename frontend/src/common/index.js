@@ -85,9 +85,17 @@ const SummaryApi = {
         url: `${backendDomain}/api/checkout`,
         method: "post"
     },
-    getCheckout:{
-        url:`${backendDomain}/api/getcheckout`,
-        method:"get"
+    getCheckout: {
+        url: `${backendDomain}/api/getcheckout`,
+        method: "get"
+    },
+    checkoutUpdate: {
+        url: (checkoutId)=>`${backendDomain}/api/updatechekout/${checkoutId}`,
+        method: "post"
+    },
+    paymentCreate:{
+        url:`${backendDomain}/api/createPayment`,
+        method:"post"
     }
 
 
