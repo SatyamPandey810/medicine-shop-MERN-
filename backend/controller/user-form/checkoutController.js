@@ -99,7 +99,6 @@ const createChekoutController = async (req, res) => {
 
         if (existingCheckout) {
             // If an existing checkout is found, return the existing details
-            console.log("Existing checkout found:", existingCheckout);
             return res.json({
                 data: existingCheckout,
                 message: "Existing checkout found",
@@ -112,7 +111,6 @@ const createChekoutController = async (req, res) => {
         const cartItems = await addToCartModel.find({ userId: currentUser });
 
         if (!cartItems || cartItems.length === 0) {
-            console.error("No addToCart entries found for user:", currentUser);
             return res.status(404).json({
                 message: "No addToCart entries found for user",
                 error: true,
@@ -120,16 +118,15 @@ const createChekoutController = async (req, res) => {
             });
         }
 
-        const addtocartId = cartItems.map(item => item._id);
-        const products = cartItems.map(item => ({
-            productId: item.productId,
-            quantity: item.quantity,
-            userId: item.userId
-            // Add other relevant fields as needed
-        }));
+        // const addtocartId = cartItems.map(item => item._id);
+        // const products = cartItems.map(item => ({
+        //     productId: item.productId,
+        //     quantity: item.quantity,
+        //     userId: item.userId
+        //     // Add other relevant fields as needed
+        // }));
 
         const payload = {
-            addtocartId,
             userId: currentUser,
             name: req.body.name,
             email: req.body.email,
@@ -140,7 +137,6 @@ const createChekoutController = async (req, res) => {
             state: req.body.state,
             city: req.body.city,
             zipCode: req.body.zipCode,
-            products // Assuming you need to store products in the checkout
         };
 
         const newCheckout = new CeheckoutModel(payload);

@@ -19,6 +19,9 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0",
-    "nodemon": "^3.1.2"
+    "nodemon": "^3.1.2",
+    "paystack": "^2.0.1",
+    "paystack-node": "^0.3.0",
+    "stripe": "^16.1.0"
   }
 }

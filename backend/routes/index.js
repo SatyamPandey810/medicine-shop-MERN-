@@ -23,9 +23,16 @@ const updateAddToCartProduct = require('../controller/user-form/updateAddToCart'
 const deleteAddToCartProduct = require('../controller/user-form/addToCartDelete');
 const searchProduct = require('../controller/admin/searchProduct');
 const createChekoutController = require('../controller/user-form/checkoutController');
+// const getCheckoutController = require('../controller/user-form/getUserAddress');
+// const checkoutUpdateController = require('../controller/user-form/updateUserAddress');
+// const createPaymentController = require('../controller/admin/createPaymentController');
+const paymentController = require('../controller/order/paymentController');
 const getCheckoutController = require('../controller/user-form/checkoutGetController');
 const checkoutUpdateController = require('../controller/user-form/checkoutUpdateController');
-const createPaymentController = require('../controller/admin/createPaymentController');
+const paystackWebhook = require('../controller/order/orderController');
+// const userAddressController = require('../controller/user-form/userAddressController');
+// const getAddressUserController = require('../controller/user-form/getUserAddress');
+// const addressUpdateController = require('../controller/user-form/updateUserAddress');
 
 router.post('/signup', userSignUpController)
 router.post('/login', userLoginController)
@@ -90,7 +97,12 @@ router.get('/getcheckout', authToken, getCheckoutController)
 // update checkout user details route 
 router.post('/updatechekout/:checkoutId', authToken, checkoutUpdateController)
 
-router.post('/createPayment', authToken, createPaymentController)
+// payment and order router
+router.post('/payment-order', authToken, paymentController)
+
+router.get('/payment/callback', paystackWebhook)
+
+
 
 
 module.exports = router

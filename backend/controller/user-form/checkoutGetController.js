@@ -54,7 +54,6 @@ async function getCheckoutController(req, res) {
 
         // Fetch all checkouts for the current user
         const checkouts = await CheckoutModel.find({ userId: currentUser })
-            .populate('addtocartId'); // Populate addtocartId references
 
         if (!checkouts || checkouts.length === 0) {
             return res.status(404).json({
@@ -65,25 +64,26 @@ async function getCheckoutController(req, res) {
         }
 
         // Fetch user details if needed
-        const user = await userModel.findById(currentUser);
+        // const user = await userModel.findById(currentUser);
 
         // Prepare an array to store products for each checkout
-        const checkoutsWithProducts = await Promise.all(checkouts.map(async checkout => {
-            const productIds = checkout.addtocartId.map(item => item.productId);
-            const products = await productUploadModel.find({ _id: { $in: productIds } });
+        // const checkoutsWithProducts = await Promise.all(checkouts.map(async checkout => {
+        //     const productIds = checkout.addtocartId.map(item => item.productId);
+        //     const products = await productUploadModel.find({ _id: { $in: productIds } });
 
-            return {
-                checkout,
-                products
-            };
-        }));
+        //     return {
+        //         checkout,
+        //         products
+        //     };
+        // }));
 
-        console.log("checkoutsWithProducts",checkoutsWithProducts);
+        // console.log("checkoutsWithProducts",checkoutsWithProducts);
         res.json({
-            data: {
-                user,
-                checkouts: checkoutsWithProducts
-            },
+            data:checkouts,
+            // data: {
+            //     user,
+            //     checkouts: checkoutsWithProducts
+            // },
             message: "Checkouts retrieved successfully",
             success: true,
             error: false

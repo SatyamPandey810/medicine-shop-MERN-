@@ -1,11 +1,7 @@
 const mongoose = require('mongoose')
 
 const checkoutSchema = new mongoose.Schema({
-
-
     userId: String,
-
-
     name: {
         type: String,
         required: true
@@ -32,11 +28,11 @@ const checkoutSchema = new mongoose.Schema({
         required: true
     },
 
-    addtocartId: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'addtocart',
+    // addtocartId: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'addtocart',
 
-    }],
+    // }],
 
 }, { timestamps: true })
 const CheckoutModel = mongoose.model("customer-address", checkoutSchema);

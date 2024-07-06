@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SummaryApi from '../../common'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
+import Context from '../../context';
+import { useSelector } from 'react-redux';
+import { loadStripe } from '@stripe/stripe-js';
 
 export default function PaymentView() {
-    const [data, setData] = useState({})
+    const [data, setData] = useState([])
+    const [product, setProduct] = useState([])
+    const [totalUniqueProducts, setTotalUniqueProducts] = useState(0);
     const [editIndex, setEditIndex] = useState(null);
     const [formData, setFormData] = useState({})
     const [paymentMethod, setPaymentMethod] = useState('COD');
@@ -20,7 +26,10 @@ export default function PaymentView() {
         orderStatus: 'Processing'
 
     })
+    const user = useSelector(state => state?.user?.user)
 
+    const userId = user?._id;
+    const context = useContext(Context)
 
     const fetchData = async () => {
         try {
@@ -34,7 +43,6 @@ export default function PaymentView() {
 
 
             const responseData = await response.json();
-            console.log(responseData);
             if (responseData.success) {
                 setData(responseData.data);
             }
@@ -47,24 +55,7 @@ export default function PaymentView() {
     useEffect(() => {
         fetchData()
     }, [])
-    const calculateTotals = () => {
-        let totalProducts = 0;
-        let totalPrice = 0;
 
-        // Iterate through each checkout
-        data.checkouts?.forEach(checkout => {
-            // Iterate through each product in products array
-            checkout.products.forEach(product => {
-                totalProducts += 1; // Increment total products
-                totalPrice += product.sellingPrice; // Add product selling price to total price
-            });
-        });
-
-        return { totalProducts, totalPrice };
-    };
-
-    // Call calculateTotals to get the totals
-    const { totalProducts, totalPrice } = calculateTotals();
 
 
 
@@ -80,7 +71,8 @@ export default function PaymentView() {
     };
     const handleEditClick = (index) => {
         setEditIndex(index);
-        setFormData(data.checkouts[index].checkout);
+        // setFormData(data.checkouts[index].checkout);
+        setFormData(data[index] || {});
     };
 
 
@@ -113,6 +105,78 @@ export default function PaymentView() {
         setFormData({});
     };
 
+    // total products
+    const fetchProduct = async () => {
+        const response = await fetch(SummaryApi.addToCartProductView.url, {
+            method: SummaryApi.addToCartProductView.method,
+            credentials: "include",
+            headers: {
+                "content-type": 'application/json'
+            },
+        })
+        const responseData = await response.json()
+        // console.log(responseData.data);
+        if (responseData.success) {
+            const flattenedData = responseData.data.flat(); // Flatten nested array
+            const uniqueProductIds = new Set(flattenedData.map(item => item.productId._id)); // Extract unique product IDs
+
+            const totalUnique = uniqueProductIds.size;
+            setTotalUniqueProducts(totalUnique);
+
+            setProduct(flattenedData);
+
+        }
+
+    }
+    useEffect(() => {
+        fetchProduct()
+    }, [])
+
+    //-----------------total product qty---------------
+    const getTotalQuantity = (productId) => {
+        let totalQuantity = 0;
+        product.forEach(item => {
+            if (item.productId._id === productId) {
+                totalQuantity += item.quantity;
+            }
+        });
+        return totalQuantity;
+    };
+    // total price accroding to quantity
+
+    const getTotalSellingPrice = () => {
+        let total = 0;
+        product.forEach(item => {
+            total += item.quantity * item.productId.sellingPrice;
+        });
+        return total;
+    };
+    const totalSellingPrice = getTotalSellingPrice();
+
+
+    // delete cart product 
+    const deleteCartProduct = async (id) => {
+        const response = await fetch(SummaryApi.deleteCartProduct.url, {
+            method: SummaryApi.deleteCartProduct.method,
+            credentials: "include",
+            headers: {
+                "content-type": 'application/json'
+            },
+            body: JSON.stringify({
+                _id: id,
+
+            })
+        })
+        const responseData = await response.json()
+        console.log(responseData);
+        if (responseData.success) {
+            fetchData()
+            context.fetchUserAddToCart()
+        }
+    }
+
+
+
     // payment handler
     const handlePaymentMethodChange = (e) => {
         setPaymentMethod(e.target.value);
@@ -122,38 +186,64 @@ export default function PaymentView() {
         setCardDetails({ ...cardDetails, [e.target.name]: e.target.value });
     };
 
-    const handleCreatePayment = async (e) => {
-        e.preventDefault()
+    // const handlePayment = async () => {       
+    //     const stripePromise = await loadStripe("pk_test_51PYmCiGqtpXSwrr1nOfQGOsp0wiKDuJvlmSEP7tXfWz8BrFhifflmtuDvKMrVi21hiFSbnOiFRLgSFQNRzceRqHj00uGQ2DBa7")
+    //     const response = await fetch(SummaryApi.paymentOrder.url, {
+    //         method: SummaryApi.paymentOrder.method,
+    //         credentials: "include",
+    //         headers: {
+    //             "content-type": 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             cartItems: product
+    //         })
+    //     })
+
+    //     const responseData = await response.json()
+    //     if (responseData?.id) {
+    //         stripePromise.redirectToCheckout({ sessionId: responseData.id })
+    //     }
+    //     console.log("responseData", responseData);
+    // }
+    const handlePayment = async () => {
         try {
-            const dataResponse = await fetch(SummaryApi.paymentCreate.url, {
-                method: SummaryApi.paymentCreate.method,
-                credentials: 'include',
+            // Initialize payment request
+            const response = await fetch(SummaryApi.paymentOrder.url, {
+                method: SummaryApi.paymentOrder.method,
+                credentials: "include",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify(checkoutData)
+                body: JSON.stringify({
+                    cartItems: product, // Ensure 'product' contains your cart items
+                }),
             });
-            const responseData = await dataResponse.json();
-
-            if (responseData.success) {
-                console.log('Payment created successfully:', responseData.data);
-                // Optionally, redirect to a success page or display a success message
+    
+            // Parse the response
+            const responseData = await response.json();
+    
+            // Check if the payment initialization was successful
+            if (responseData.status && responseData.data && responseData.data.authorization_url) {
+                console.log("Payment initialization successful:", responseData);
+                // Redirect to Paystack payment page
+                window.location.href = responseData.data.authorization_url;
             } else {
-                console.error('Payment creation failed:', responseData.message);
-                // Optionally, display an error message to the user
+                console.error("Payment initialization failed", responseData);
+                // Optionally show an error message to the user
+                alert("Payment initialization failed. Please try again.");
             }
-
         } catch (error) {
-            console.error('Error creating payment:', error);
+            console.error("An error occurred during payment initialization:", error);
+            // Optionally show an error message to the user
+            alert("An error occurred. Please try again.");
         }
-    }
-
+    };
     return (
 
         <>
             <div className='container'>
 
-                {data.checkouts?.map((checkoutData, index) => (
+                {data.map((checkoutData, index) => (
                     <div key={index}>
                         <div className='row'>
                             <div className='col-md-12'>
@@ -176,7 +266,7 @@ export default function PaymentView() {
                                     <tbody>
                                         {
                                             editIndex === index ? (
-                                                <div>
+                                                <>
                                                     <tr className='table'>
                                                         <td>
                                                             <label>Name</label>
@@ -222,24 +312,24 @@ export default function PaymentView() {
                                                     <tr>
                                                         <td colSpan={3} className='text-center'>
                                                             <div>
-                                                                <button onClick={(e) => handleEditSubmit(e, checkoutData.checkout._id)} className="btn btn-primary">Save</button>
+                                                                <button onClick={(e) => handleEditSubmit(e, checkoutData._id)} className="btn btn-primary">Save</button>
                                                                 <button onClick={handleCancelClick} className="btn btn-secondary mx-3">Cancel</button>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                </div>
+                                                </>
                                             ) : (
                                                 <tr className='table-success'>
-                                                    <td className='text-nowrap'>{checkoutData.checkout.name}</td>
-                                                    <td>{checkoutData.checkout.email}</td>
-                                                    <td>{checkoutData.checkout.phone}</td>
-                                                    <td>{checkoutData.checkout.address1}<br />
-                                                        {checkoutData.checkout.address2}
+                                                    <td className='text-nowrap'>{checkoutData.name}</td>
+                                                    <td>{checkoutData.email}</td>
+                                                    <td>{checkoutData.phone}</td>
+                                                    <td>{checkoutData.address1}<br />
+                                                        {checkoutData.address2}
                                                     </td>
-                                                    <td>{checkoutData.checkout.country}</td>
-                                                    <td>{checkoutData.checkout.state}</td>
-                                                    <td>{checkoutData.checkout.city}<br />
-                                                        Zip code:{checkoutData.checkout.zipCode}
+                                                    <td>{checkoutData.country}</td>
+                                                    <td>{checkoutData.state}</td>
+                                                    <td>{checkoutData.city}<br />
+                                                        Zip code:{checkoutData.zipCode}
                                                     </td>
                                                     <td>
                                                         <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(index)} />
@@ -254,126 +344,137 @@ export default function PaymentView() {
                                 </table>
                             </div>
                         </div>
-                        <div className='row mt-4 d-flex  justify-content-between'>
-                            <div className='col-md-6'>
+                    </div>
+                ))}
+                <div className='row mt-4 d-flex  justify-content-between'>
+                    <div className='col-md-6'>
 
 
-                                <table className='table table-bordered'>
-                                    <thead>
-                                        <tr>
-                                            <th>Product Image</th>
-                                            <th>Product Name</th>
-                                            <th>Price</th>
+                        <table className='table table-bordered'>
+                            <thead>
+                                <tr>
+                                    <th>Product Image</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Total Price</th>
+                                    {/* <th>Remove Item</th> */}
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {checkoutData.products.map(product => (
-                                            <tr key={product._id}>
-                                                <td><img src={product.productImage[0]} alt={product.productName} width="50" /></td>
-                                                <td>{product.productName}</td>
-                                                <td>₦ {product.sellingPrice}</td>
-                                                {/* <td>{new Date(product.createdAt).toLocaleString()}</td>
-                                                <td>{new Date(product.updatedAt).toLocaleString()}</td> */}
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {product.map(item => (
+                                    <tr key={item._id}>
+                                        <td>
+                                            {item.productId.productImage && item.productId.productImage.length > 0 ? (
+                                                <img src={item.productId.productImage[0]} alt={item.productId.productName} width="50" />
+                                            ) : (
+                                                <span>No Image</span>
+                                            )}
+                                        </td>
+                                        <td>{item.productId.productName}</td>
+                                        <td>{getTotalQuantity(item.productId._id)}</td>
+                                        {/* <td>₦ {item.productId.sellingPrice}</td> */}
+                                        <td>₦ {(item?.productId?.sellingPrice * item?.quantity).toFixed(2)}</td>
+                                        {/* <td><p className="btn btn-primary height-auto btn-sm" onClick={() => deleteCartProduct(item.productId?._id)}><FontAwesomeIcon icon={faTrash} /></p></td> */}
+                                    </tr>
+                                ))}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12 text-center border-bottom mb-2">
+                                <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                             </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <span class="text-black">Total Products</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="text-black">{totalUniqueProducts}</strong>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <span class="text-black">Total</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="text-black">₦ {totalSellingPrice}</strong>
+                            </div>
+                        </div>
+                        <form >
+                            <div>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value={checkoutData.paymentMethod}
+                                        checked={paymentMethod === 'COD'}
+                                        onChange={handlePaymentMethodChange}
+                                    />
+                                    &nbsp;  Cash on Delivery
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="Online"
+                                        checked={paymentMethod === 'Online'}
+                                        onChange={handlePaymentMethodChange}
+                                    />
+                                    &nbsp;  Online Payment
+                                </label>
+                            </div>
+                            {paymentMethod === 'Online' && (
+                                <div>
+                                    <h3>Card Details</h3>
+                                    <label>
+                                        <span> Card Number: </span><br />
+                                        <input
+                                            type="text"
+                                            name="cardNumber"
+                                            // value={cardDetails.cardNumber}
+                                            onChange={handlePaymentMethodChange}
 
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12 text-center border-bottom mb-2">
-                                        <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
-                                    </div>
+                                        />
+                                    </label>
+                                    <label>
+                                        <span> Expiry Date:</span><br />
+                                        <input
+                                            type="text"
+                                            name="expiryDate"
+                                            // value={cardDetails.expiryDate}
+                                            onChange={handlePaymentMethodChange}
+
+                                        />
+                                    </label>
+                                    <label>
+                                        <span> CVV:</span><br />
+
+                                        <input
+                                            type="text"
+                                            name="cvv"
+                                            // value={cardDetails.cvv}
+                                            onChange={handlePaymentMethodChange}
+
+                                        />
+                                    </label>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <span class="text-black">Total Products</span>
-                                    </div>
-                                    <div class="col-md-6 text-right">
-                                        <strong class="text-black">{totalProducts}</strong>
-                                    </div>
-                                </div>
-                                <div class="row mb-5">
-                                    <div class="col-md-6">
-                                        <span class="text-black">Total</span>
-                                    </div>
-                                    <div class="col-md-6 text-right">
-                                        <strong class="text-black">₦ {totalPrice}</strong>
-                                    </div>
-                                </div>
-                                <form onSubmit={handleCreatePayment}>
-                                    <div>
-                                        <label>
-                                            <input
-                                                type="radio"
-                                                value={checkoutData.paymentMethod}
-                                                checked={paymentMethod === 'COD'}
-                                                onChange={handlePaymentMethodChange}
-                                            />
-                                            &nbsp;  Cash on Delivery
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <input
-                                                type="radio"
-                                                value="Online"
-                                                checked={paymentMethod === 'Online'}
-                                                onChange={handlePaymentMethodChange}
-                                            />
-                                            &nbsp;  Online Payment
-                                        </label>
-                                    </div>
-                                    {paymentMethod === 'Online' && (
-                                        <div>
-                                            <h3>Card Details</h3>
-                                            <label>
-                                                <span> Card Number: </span><br />
-                                                <input
-                                                    type="text"
-                                                    name="cardNumber"
-                                                    // value={cardDetails.cardNumber}
-                                                    onChange={handlePaymentMethodChange}
+                            )}
 
-                                                />
-                                            </label>
-                                            <label>
-                                                <span> Expiry Date:</span><br />
-                                                <input
-                                                    type="text"
-                                                    name="expiryDate"
-                                                    // value={cardDetails.expiryDate}
-                                                    onChange={handlePaymentMethodChange}
-
-                                                />
-                                            </label>
-                                            <label>
-                                                <span> CVV:</span><br />
-
-                                                <input
-                                                    type="text"
-                                                    name="cvv"
-                                                    // value={cardDetails.cvv}
-                                                    onChange={handlePaymentMethodChange}
-
-                                                />
-                                            </label>
-                                        </div>
-                                    )}
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'">Proceed To
-                                                payment</button>
-                                        </div>
-                                    </div>
-                                </form>
+                        </form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary btn-lg btn-block" onClick={handlePayment}>Proceed To
+                                    payment</button>
                             </div>
                         </div>
                     </div>
-                ))}
+                </div>
+
             </div>
 
             {/* <h1>User Details</h1>

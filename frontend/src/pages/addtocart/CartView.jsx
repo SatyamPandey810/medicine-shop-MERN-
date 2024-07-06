@@ -12,12 +12,12 @@ export default function CartView() {
     const navigate = useNavigate()
     const user = useSelector(state => state?.user?.user)
     const userId = user?._id;
-
     const context = useContext(Context)
     const loadingCart = new Array(context.cartProductCount).fill(null)
-
     const hasProducts = data[0] && data[0].length > 0;
 
+
+    
     const fetchData = async () => {
         const response = await fetch(SummaryApi.addToCartProductView.url, {
             method: SummaryApi.addToCartProductView.method,
@@ -33,10 +33,7 @@ export default function CartView() {
             
         }
         
-    }
-
-
-    
+    }    
     useEffect(() => {
         fetchData()
     }, [])
