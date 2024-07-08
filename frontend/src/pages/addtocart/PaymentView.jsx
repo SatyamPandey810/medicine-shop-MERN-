@@ -117,8 +117,8 @@ export default function PaymentView() {
         const responseData = await response.json()
         // console.log(responseData.data);
         if (responseData.success) {
-            const flattenedData = responseData.data.flat(); // Flatten nested array
-            const uniqueProductIds = new Set(flattenedData.map(item => item.productId._id)); // Extract unique product IDs
+            const flattenedData = responseData.data.flat();
+            const uniqueProductIds = new Set(flattenedData.map(item => item.productId._id)); 
 
             const totalUnique = uniqueProductIds.size;
             setTotalUniqueProducts(totalUnique);
