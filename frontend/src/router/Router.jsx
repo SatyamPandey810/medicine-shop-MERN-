@@ -16,12 +16,13 @@ import AllProducts from '../pages/admin/AllProducts'
 import HomeCategory from '../pages/admin/HomeCategory'
 import CategoryProduct from '../category-front/CategoryProduct'
 import CartView from '../pages/addtocart/CartView'
-import Orders from '../pages/admin/Orders'
+// import Orders from '../pages/admin/Orders'
 import SingleAddtocart from '../pages/addtocart/Single-addtocart'
 import SearchProduct from '../pages/SearchProduct'
 import CheckOut from '../pages/addtocart/CheckOut'
 import PaymentView from '../pages/addtocart/PaymentView'
 import SuccessPage from '../pages/addtocart/SuccessPage'
+import Orders from '../pages/orders/Orders'
 // import PaymentView from '../pages/addtocart/paymentView'
 
 
@@ -72,7 +73,8 @@ export default function Router() {
                 <Route path='home-category' element={<HomeCategory />} />
                 <Route path='user-order' element={<Orders />} />
             </Route>
-            <Route path='/success' element={<SuccessPage/>}/>
+            <Route path='/success/:userId' element={<SuccessPage />} />
+            <Route path='/order/:userId' element={<Orders />} />
 
             {/* single add to cart page route */}
 

@@ -16,6 +16,15 @@ body {
   color: #fff;
 }
 
+@media (min-width: 1200px) {
+  .container {
+      max-width: 1280px;
+  }
+}
+
+
+
+
 a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
@@ -107,6 +116,17 @@ a:hover {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
+.js-logo-clone{
+  display: flex;
+  text-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+
+}
+.js-logo-clone span{
+  font-size: 15px;
+  color: #31abdd;
+}
 
 /* .site-section {
   padding: 2.5em 0;
@@ -182,7 +202,7 @@ a:hover {
 /* Navbar */
 .site-logo a {
   text-transform: uppercase;
-  letter-spacing: .2em;
+  letter-spacing: 1px;
   font-size: 22px;
   color: #000 !important;
   font-weight: 900;

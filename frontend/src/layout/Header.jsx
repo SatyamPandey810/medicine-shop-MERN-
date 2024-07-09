@@ -66,7 +66,10 @@ export default function Header() {
         <div className="d-flex align-items-center justify-content-between">
           <div className="logo">
             <div className="site-logo">
-              <a href="index.html" className="js-logo-clone">Pharma</a>
+              <Link to="/" className="js-logo-clone">
+                <img src='/images/logo.png' width={100} height={100} />
+                <span>Zelon pharma</span>
+              </Link>
             </div>
           </div>
           <div className="main-nav d-none d-lg-block">
@@ -105,7 +108,7 @@ export default function Header() {
                     }</li>
                     <li> {
                       user?._id ? (
-                        <Link onClick={userLogout} to={'/'} >Logout</Link>
+                        <Link onClick={userLogout} to={'/login'} >Logout</Link>
                       ) : (<Link to='/login'>Login</Link>)
                     }</li>
                     <li><Link to='/signup'>Sign up</Link></li>

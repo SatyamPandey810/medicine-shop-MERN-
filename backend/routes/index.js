@@ -29,7 +29,7 @@ const createChekoutController = require('../controller/user-form/checkoutControl
 const paymentController = require('../controller/order/paymentController');
 const getCheckoutController = require('../controller/user-form/checkoutGetController');
 const checkoutUpdateController = require('../controller/user-form/checkoutUpdateController');
-const paystackWebhook = require('../controller/order/orderController');
+const getOrderDetails = require('../controller/order/getAllOrders');
 // const userAddressController = require('../controller/user-form/userAddressController');
 // const getAddressUserController = require('../controller/user-form/getUserAddress');
 // const addressUpdateController = require('../controller/user-form/updateUserAddress');
@@ -100,7 +100,8 @@ router.post('/updatechekout/:checkoutId', authToken, checkoutUpdateController)
 // payment and order router
 router.post('/payment-order', authToken, paymentController)
 
-router.get('/payment/callback', paystackWebhook)
+// router.post('/payment/callback', paystackWebhook)
+router.get('/orders', authToken, getOrderDetails);
 
 
 

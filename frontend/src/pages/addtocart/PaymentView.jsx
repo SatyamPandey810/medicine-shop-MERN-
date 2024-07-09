@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Context from '../../context';
 import { useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
+import { useNavigate } from 'react-router-dom';
 
 export default function PaymentView() {
     const [data, setData] = useState([])
@@ -14,22 +15,12 @@ export default function PaymentView() {
     const [totalUniqueProducts, setTotalUniqueProducts] = useState(0);
     const [editIndex, setEditIndex] = useState(null);
     const [formData, setFormData] = useState({})
-    const [paymentMethod, setPaymentMethod] = useState('COD');
-    const [cardDetails, setCardDetails] = useState({
-        cardNumber: '',
-        expiryDate: '',
-        cvv: ''
-    });
-    const [checkoutData, setCheckoutData] = useState({
-        checkoutId: '',
-        paymentMethod: '',
-        orderStatus: 'Processing'
-
-    })
+    const [paymentMethod, setPaymentMethod] = useState('');   
+    
     const user = useSelector(state => state?.user?.user)
-
     const userId = user?._id;
     const context = useContext(Context)
+    const navigate=useNavigate()
 
     const fetchData = async () => {
         try {
@@ -115,10 +106,9 @@ export default function PaymentView() {
             },
         })
         const responseData = await response.json()
-        // console.log(responseData.data);
         if (responseData.success) {
-            const flattenedData = responseData.data.flat(); // Flatten nested array
-            const uniqueProductIds = new Set(flattenedData.map(item => item.productId._id)); // Extract unique product IDs
+            const flattenedData = responseData.data.flat(); 
+            const uniqueProductIds = new Set(flattenedData.map(item => item.productId._id)); 
 
             const totalUnique = uniqueProductIds.size;
             setTotalUniqueProducts(totalUnique);
@@ -168,81 +158,85 @@ export default function PaymentView() {
             })
         })
         const responseData = await response.json()
-        console.log(responseData);
         if (responseData.success) {
             fetchData()
             context.fetchUserAddToCart()
         }
     }
 
+    // const handlePayment = async () => {
 
+    //     try {
 
-    // payment handler
-    const handlePaymentMethodChange = (e) => {
-        setPaymentMethod(e.target.value);
-    };
+    //         const response = await fetch(SummaryApi.paymentOrder.url, {
+    //             method: SummaryApi.paymentOrder.method,
+    //             credentials: "include",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({
+    //                 cartItems: product, 
+    //             }),
+    //         });
 
-    const handleCardDetailsChange = (e) => {
-        setCardDetails({ ...cardDetails, [e.target.name]: e.target.value });
-    };
+    //         console.log("response",response);
+    //         // Parse the response
+    //         const responseData = await response.json();
+    //         console.log('Parsed response data:', responseData);
 
-    // const handlePayment = async () => {       
-    //     const stripePromise = await loadStripe("pk_test_51PYmCiGqtpXSwrr1nOfQGOsp0wiKDuJvlmSEP7tXfWz8BrFhifflmtuDvKMrVi21hiFSbnOiFRLgSFQNRzceRqHj00uGQ2DBa7")
-    //     const response = await fetch(SummaryApi.paymentOrder.url, {
-    //         method: SummaryApi.paymentOrder.method,
-    //         credentials: "include",
-    //         headers: {
-    //             "content-type": 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             cartItems: product
-    //         })
-    //     })
-
-    //     const responseData = await response.json()
-    //     if (responseData?.id) {
-    //         stripePromise.redirectToCheckout({ sessionId: responseData.id })
+    //         // Check if the payment initialization was successful
+    //         if (responseData.status && responseData.data && responseData.data.authorization_url) {
+    //             console.log("Payment initialization successful:", responseData);
+    //             // Redirect to Paystack payment page
+    //             window.location.href = responseData.data.authorization_url;
+    //         } else {
+    //             console.error("Payment initialization failed", responseData);
+    //             // Optionally show an error message to the user
+    //             alert("Payment initialization failed. Please try again.");
+    //         }
+    //     } catch (error) {
+    //         console.error("An error occurred during payment initialization:", error);
+    //         // Optionally show an error message to the user
+    //         alert("An error occurred. Please try again.");
     //     }
-    //     console.log("responseData", responseData);
-    // }
+    // };
+
     const handlePayment = async () => {
         try {
-            // Initialize payment request
-            const response = await fetch(SummaryApi.paymentOrder.url, {
-                method: SummaryApi.paymentOrder.method,
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    cartItems: product, // Ensure 'product' contains your cart items
-                }),
-            });
+          const response = await fetch(SummaryApi.paymentOrder.url, {
+            method: SummaryApi.paymentOrder.method,
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              cartItems: product,
+              paymentMethod: paymentMethod,
+            }),
+          });
     
-            // Parse the response
-            const responseData = await response.json();
+          const responseData = await response.json();
     
-            // Check if the payment initialization was successful
-            if (responseData.status && responseData.data && responseData.data.authorization_url) {
-                console.log("Payment initialization successful:", responseData);
-                // Redirect to Paystack payment page
-                window.location.href = responseData.data.authorization_url;
-            } else {
-                console.error("Payment initialization failed", responseData);
-                // Optionally show an error message to the user
-                alert("Payment initialization failed. Please try again.");
-            }
+          if (paymentMethod === 'online' && responseData.status && responseData.data && responseData.data.authorization_url) {
+            window.location.href = responseData.data.authorization_url;
+          } else if (paymentMethod === 'cod' && responseData.success) {
+            // alert('Order placed successfully! You will pay on delivery.');
+            toast.success('Order placed successfully!')
+            setTimeout(() => {
+                navigate(`/success/${userId}`);
+              }, 1000);
+          } else {
+            toast.error('Please select payment method!')
+          }
         } catch (error) {
-            console.error("An error occurred during payment initialization:", error);
-            // Optionally show an error message to the user
-            alert("An error occurred. Please try again.");
+          alert('An error occurred. Please try again.');
         }
-    };
-    return (
+      };
 
+
+    return (
         <>
             <div className='container'>
-
                 {data.map((checkoutData, index) => (
                     <div key={index}>
                         <div className='row'>
@@ -410,9 +404,9 @@ export default function PaymentView() {
                                 <label>
                                     <input
                                         type="radio"
-                                        value={checkoutData.paymentMethod}
-                                        checked={paymentMethod === 'COD'}
-                                        onChange={handlePaymentMethodChange}
+                                        name="paymentMethod"
+                                        value="cod"
+                                        onChange={(e) => setPaymentMethod(e.target.value)}
                                     />
                                     &nbsp;  Cash on Delivery
                                 </label>
@@ -421,55 +415,17 @@ export default function PaymentView() {
                                 <label>
                                     <input
                                         type="radio"
-                                        value="Online"
-                                        checked={paymentMethod === 'Online'}
-                                        onChange={handlePaymentMethodChange}
+                                        name="paymentMethod"
+                                        value="online"
+                                        onChange={(e) => setPaymentMethod(e.target.value)}
                                     />
                                     &nbsp;  Online Payment
                                 </label>
                             </div>
-                            {paymentMethod === 'Online' && (
-                                <div>
-                                    <h3>Card Details</h3>
-                                    <label>
-                                        <span> Card Number: </span><br />
-                                        <input
-                                            type="text"
-                                            name="cardNumber"
-                                            // value={cardDetails.cardNumber}
-                                            onChange={handlePaymentMethodChange}
-
-                                        />
-                                    </label>
-                                    <label>
-                                        <span> Expiry Date:</span><br />
-                                        <input
-                                            type="text"
-                                            name="expiryDate"
-                                            // value={cardDetails.expiryDate}
-                                            onChange={handlePaymentMethodChange}
-
-                                        />
-                                    </label>
-                                    <label>
-                                        <span> CVV:</span><br />
-
-                                        <input
-                                            type="text"
-                                            name="cvv"
-                                            // value={cardDetails.cvv}
-                                            onChange={handlePaymentMethodChange}
-
-                                        />
-                                    </label>
-                                </div>
-                            )}
-
                         </form>
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="btn btn-primary btn-lg btn-block" onClick={handlePayment}>Proceed To
-                                    payment</button>
+                                <button class="btn btn-primary btn-lg btn-block" onClick={handlePayment}>Order placed</button>
                             </div>
                         </div>
                     </div>

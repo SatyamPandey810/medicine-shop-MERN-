@@ -23,5 +23,5 @@ export default function AddToCartHook() {
     useEffect(() => {
         fetchData()
     }, [])
-  return data
+    return data
 }

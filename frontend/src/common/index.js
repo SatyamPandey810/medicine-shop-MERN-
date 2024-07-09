@@ -90,12 +90,16 @@ const SummaryApi = {
         method: "get"
     },
     checkoutUpdate: {
-        url: (checkoutId)=>`${backendDomain}/api/updatechekout/${checkoutId}`,
+        url: (checkoutId) => `${backendDomain}/api/updatechekout/${checkoutId}`,
         method: "post"
     },
-    paymentOrder:{
-        url:`${backendDomain}/api/payment-order`,
-        method:"post"
+    paymentOrder: {
+        url: `${backendDomain}/api/payment-order`,
+        method: "post"
+    },
+    getOrder: {
+        url: `${backendDomain}/api/orders`,
+        method: "get"
     }
 
 
