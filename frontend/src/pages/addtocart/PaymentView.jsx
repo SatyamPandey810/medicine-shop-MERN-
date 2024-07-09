@@ -107,7 +107,9 @@ export default function PaymentView() {
         })
         const responseData = await response.json()
         if (responseData.success) {
-            const flattenedData = responseData.data.flat(); 
+
+
+            const flattenedData = responseData.data.flat();
             const uniqueProductIds = new Set(flattenedData.map(item => item.productId._id)); 
 
             const totalUnique = uniqueProductIds.size;
@@ -223,7 +225,8 @@ export default function PaymentView() {
             // alert('Order placed successfully! You will pay on delivery.');
             toast.success('Order placed successfully!')
             setTimeout(() => {
-                navigate(`/success/${userId}`);
+                // navigate(`/success/${userId}`);
+                navigate('/success')
               }, 1000);
           } else {
             toast.error('Please select payment method!')
