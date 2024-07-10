@@ -32,6 +32,7 @@ const checkoutUpdateController = require('../controller/user-form/checkoutUpdate
 const getOrderDetails = require('../controller/order/getAllOrders');
 const deleteProductController = require('../controller/admin/deleteProduct');
 const navUploadProductController = require('../controller/admin/navUploadProduct');
+const adminAllOrderController = require('../controller/order/adminAllOrder');
 // const userAddressController = require('../controller/user-form/userAddressController');
 // const getAddressUserController = require('../controller/user-form/getUserAddress');
 // const addressUpdateController = require('../controller/user-form/updateUserAddress');
@@ -75,7 +76,7 @@ router.post('/update-home', authToken, updateHomeCategoryController)
 router.get('/category/:id', getProductbyCategoryController)
 
 // navbar product category route
-router.post('/nav-product',navUploadProductController)
+router.post('/nav-product', navUploadProductController)
 
 
 // add to cart route
@@ -108,8 +109,11 @@ router.post('/updatechekout/:checkoutId', authToken, checkoutUpdateController)
 // payment and order router
 router.post('/payment-order', authToken, paymentController)
 
-// router.post('/payment/callback', paystackWebhook)
+// order get by user router
 router.get('/orders', authToken, getOrderDetails);
+
+// all order get by admin
+router.get("/admin-order", adminAllOrderController)
 
 
 

@@ -221,6 +221,7 @@ export default function PaymentView() {
     
           if (paymentMethod === 'online' && responseData.status && responseData.data && responseData.data.authorization_url) {
             window.location.href = responseData.data.authorization_url;
+
           } else if (paymentMethod === 'cod' && responseData.success) {
             // alert('Order placed successfully! You will pay on delivery.');
             toast.success('Order placed successfully!')

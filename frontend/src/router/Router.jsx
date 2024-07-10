@@ -23,6 +23,7 @@ import CheckOut from '../pages/addtocart/CheckOut'
 import PaymentView from '../pages/addtocart/PaymentView'
 import SuccessPage from '../pages/addtocart/SuccessPage'
 import Orders from '../pages/orders/Orders'
+import TotalOrders from '../pages/admin/TotalOrders'
 // import PaymentView from '../pages/addtocart/paymentView'
 
 
@@ -71,6 +72,7 @@ export default function Router() {
                 <Route path='all-user' element={<AllUser />} />
                 <Route path='all-products' element={<AllProducts />} />
                 <Route path='home-category' element={<HomeCategory />} />
+                <Route path='total-orders' element={<TotalOrders />} />
             </Route>
             <Route path='/success' element={<SuccessPage />} />
             <Route path='/order/:userId' element={<Orders />} />
@@ -80,7 +82,7 @@ export default function Router() {
 
             {/* userProfile */}
             {/* <Route path='/profile' element={<UserProfile />} /> */}
-        </Routes>
+        </Routes >
 
     )
 }

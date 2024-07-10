@@ -150,7 +150,7 @@ export default function EditHomeProduct({ onClose, productData, fetchdata }) {
               </div>
             </div>
 
-            <button className='btn btn-success mb-4'>Updat products</button>
+            <button className='btn btn-success mb-4'>Update products</button>
           </form>
 
         </div>
