@@ -8,7 +8,7 @@ export default function AdminHomeCategoryCard({ data, fetchdata }) {
     setEdit(false)
   }
 
-  const handleEditClose=()=>{
+  const handleEditClose = () => {
     setEdit(true)
   }
 
@@ -16,12 +16,19 @@ export default function AdminHomeCategoryCard({ data, fetchdata }) {
 
   return (
     <>
+      <div>
+        {
+          edit && (
+            <EditHomeProduct productData={data} onClose={handelEdit} fetchdata={fetchdata} />
+          )
+        }
+      </div>
       <tbody>
         <tr>
 
           <td className='text-capitalize'>{data?.productCategoryName}</td>
           <td className='text-capitalize'>{data?.productCategoryDescription}</td>
-          <td className='text-capitalize'>{data?.subcategory}</td>
+          {/* <td className='text-capitalize'>{data?.subcategory}</td> */}
           <td><img src={data?.productCategoryimage[0]} alt="img" width={80} height={100} /></td>
           <td>
             <div className='d-flex'>
@@ -32,11 +39,7 @@ export default function AdminHomeCategoryCard({ data, fetchdata }) {
           </td>
         </tr>
       </tbody>
-      {
-        edit && (
-          <EditHomeProduct productData={data} onClose={handelEdit} fetchdata={fetchdata} />
-        )
-      }
+    
 
     </>
   )

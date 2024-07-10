@@ -71,7 +71,6 @@ export default function Router() {
                 <Route path='all-user' element={<AllUser />} />
                 <Route path='all-products' element={<AllProducts />} />
                 <Route path='home-category' element={<HomeCategory />} />
-                <Route path='user-order' element={<Orders />} />
             </Route>
             <Route path='/success' element={<SuccessPage />} />
             <Route path='/order/:userId' element={<Orders />} />

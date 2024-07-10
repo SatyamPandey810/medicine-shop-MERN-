@@ -55,7 +55,7 @@ export default function HomeCategory() {
                         <tr>
                             <th>Product name</th>
                             <th>Descriptionn</th>
-                            <th>Category</th>
+                            {/* <th>Category</th> */}
                             <th className='text-nowrap'>Product image</th>
                             <th>Action</th>
                         </tr>

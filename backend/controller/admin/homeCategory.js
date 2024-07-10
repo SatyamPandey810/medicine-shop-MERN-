@@ -4,21 +4,10 @@ const productCategoryModel = require("../../models/adminmodel.js/homeCategories"
 async function homeCategoryUploadController(req, res) {
     try {
 
-        const sessionUserId = req.userId
-
-        // if (!productUploadpermission(sessionUserId)) {
-        //     throw new Error('Permission denid')
-        // }
+        const sessionUserId = req.userId       
 
         const uploadHomeCategory = new productCategoryModel(req.body);
-        const saveHomeCategory = await uploadHomeCategory.save();
-
-        // const { productCategoryName, productCategoryDescription, productCategoryimage } = req.body;
-        // const homeCategory = await productCategoryModel.create({
-        //     productCategoryName,
-        //     productCategoryimage,
-        //     productCategoryDescription
-        // })
+        const saveHomeCategory = await uploadHomeCategory.save();      
 
         res.status(201).json({
             message: "Product upload sucessfully",
