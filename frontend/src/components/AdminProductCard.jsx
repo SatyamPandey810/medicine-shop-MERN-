@@ -1,21 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import EditProduct from './EditProduct'
 import SummaryApi from '../common'
+import { toast } from 'react-toastify'
 
 export default function AdminProductCard({ data, fetchdata }) {
     const [editProduct, setEditProduct] = useState(false)
     const[categories,setCategories]= useState([])
-    // const fetchAllProduct = async () => {
-    //     const response = await fetch(SummaryApi.getHomeCategoryProduct.url)
-    //     const dataResponse = await response.json()
+    
 
-    //     setCategories(dataResponse?.saveHomeCategory)
-    //     console.log(dataResponse);
+    const deleteProduct = async (id) => {
+        const response = await fetch(SummaryApi.productDelete.url, {
+            method: SummaryApi.productDelete.method,
+            credentials: "include",
+            headers: {
+                "content-type": 'application/json'
+            },
+            body: JSON.stringify({
+                _id: id,
 
-    // }
-    // useEffect(() => {
-    //     fetchAllProduct()
-    // }, [])
+            })
+        })
+        const responseData = await response.json()
+
+        if (responseData.success) {
+            toast.success('product deleted')
+            fetchdata()
+        }
+    }
+    
 
     return (
         <>
@@ -31,7 +43,7 @@ export default function AdminProductCard({ data, fetchdata }) {
                     <td>
                         <div className='d-flex'>
                             <button className='btn btn-success' onClick={() => setEditProduct(true)}>Edit</button>
-                            <button className='btn btn-danger mx-2'>Delete</button>
+                            <button className='btn btn-danger mx-2' onClick={()=>deleteProduct(data?._id)}>Delete</button>
                         </div>
                     </td>
                 </tr>

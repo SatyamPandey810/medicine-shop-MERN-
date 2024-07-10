@@ -73,7 +73,7 @@ export default function Router() {
                 <Route path='home-category' element={<HomeCategory />} />
                 <Route path='user-order' element={<Orders />} />
             </Route>
-            <Route path='/success/:userId' element={<SuccessPage />} />
+            <Route path='/success' element={<SuccessPage />} />
             <Route path='/order/:userId' element={<Orders />} />
 
             {/* single add to cart page route */}

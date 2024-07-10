@@ -38,21 +38,32 @@ export default function Orders() {
         fetchOrders()
     }, [])
 
-
     return (
         <div className='container'>
-            <h1>All Orders</h1>
+            <div className='text-center'>
+                <h1>Your Orders</h1>
+                <h5>{user.name}</h5>
+            </div>
             <div>
                 <h1>Order Details</h1>
-                <p>Order ID: {order._id}</p>
-                <p>Status: {order.status}</p>
-                <p>address {order.address?.address1}</p>
+                <p><b>Order ID: </b>{order._id}</p>
+                <p><b>Name:</b> {user.name}</p>
+                <p><b>Email:</b> {user.email}</p>
+                <p><b>Contact no: </b>{order.address?.phone}</p>
+                <p><b>Address:</b> {order.address?.address1}<br />
+                    {order.address?.address2}<br />
+                    {order.address?.city} &nbsp;
+                    {order.address?.state}  &nbsp; {order.address?.country}<br/>
+                    <b>Pin code:</b> {order.address?.zipCode}<br />
+                </p>
+                <p><b>Payment method: </b> {order.paymentMethod}</p>
+                <p><b>Status:</b> {order.status}</p>
+               
 
-                <h1>User Details</h1>
+                {/* <h1>User Details</h1>
                 <p>User ID: {user._id}</p>
                 <p>Name: {user.name}</p>
-                <p>Email: {user.email}</p>
-                {/* Add more user details as needed */}
+                <p>Email: {user.email}</p> */}
             </div>
 
         </div>

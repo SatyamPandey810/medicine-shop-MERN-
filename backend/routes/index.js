@@ -30,6 +30,7 @@ const paymentController = require('../controller/order/paymentController');
 const getCheckoutController = require('../controller/user-form/checkoutGetController');
 const checkoutUpdateController = require('../controller/user-form/checkoutUpdateController');
 const getOrderDetails = require('../controller/order/getAllOrders');
+const deleteProductController = require('../controller/admin/deleteProduct');
 // const userAddressController = require('../controller/user-form/userAddressController');
 // const getAddressUserController = require('../controller/user-form/getUserAddress');
 // const addressUpdateController = require('../controller/user-form/updateUserAddress');
@@ -53,6 +54,9 @@ router.get('/get-product', getProductController)
 
 // update product route
 router.post('/update-product', authToken, updateProductController)
+
+// delete product
+router.post('/product-delete', deleteProductController)
 
 // product categories route
 router.get('/get-categoryProduct', getCategoryProduct)

@@ -10,6 +10,7 @@ const HomeProductCategory = [
         { id: 102, label: "groceries product", value: "groceries product" },
         { id: 102, label: "medicine product", value: "medicine product" },
         { id: 102, label: "other product", value: "other product" },
+        { id: 102, label: "other", value: "other product" },
       ] 
     },
    
