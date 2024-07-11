@@ -42,8 +42,8 @@ export default function DashboardSidebar() {
                             <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-th me-2"></i><span className='mx-2'>Products</span></a>
                             <div className="dropdown-menu bg-transparent border-0">
                                 <Link to="/admin-panel/all-products" className="dropdown-item">All Products</Link>
-                                <Link to="/admin-panel/home-category" className="dropdown-item">Home products</Link>
-                                <a href="404.html" className="dropdown-item">404 Error</a>
+                                <Link to="/admin-panel/home-category" className="dropdown-item">Home category</Link>
+                                <Link to="/admin-panel/navbar-category" className="dropdown-item">Navbar category</Link>
                                 <a href="blank.html" className="dropdown-item">Blank Page</a>
                             </div>
                         </div>

@@ -14,6 +14,8 @@ import { Oval, TailSpin } from 'react-loader-spinner'
 export default function Home() {
   const [categoryProduct, setCategoryProduct] = useState([])
   const [loading, setLoading] = useState()
+  const [allNavProduct, setAllnavProduct] = useState([])
+
 
 
 
@@ -30,6 +32,17 @@ export default function Home() {
     fetchProductCategory()
   }, [])
 
+
+
+  const fetchAllProduct = async () => {
+    const response = await fetch(SummaryApi.getNavProduct.url)
+    const dataResponse = await response.json()
+
+    setAllnavProduct(dataResponse?.data || [])
+  }
+  useEffect(() => {
+    fetchAllProduct()
+  }, [])
 
 
 
@@ -103,7 +116,7 @@ export default function Home() {
           </div>
 
           <div className="row">
-            
+
             {
               loading ? (
 
@@ -153,32 +166,16 @@ export default function Home() {
           <div className="row">
             <div className="col-md-12 block-3 products-wrap">
               <OwlCarousel items={3} className="owl-theme" loop nav margin={8} >
-                <div className="text-center item mb-4">
-                  <a href="shop-single.html"> <img src="images/product_03.png" alt="Image" /></a>
-                  <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
-                  <p className="price">$120.00</p>
-                </div>
-
-                <div className="text-center item mb-4">
-                  <a href="shop-single.html"> <img src="images/product_01.png" alt="Image" /></a>
-                  <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
-                  <p className="price">$120.00</p>
-                </div>
-
-                <div className="text-center item mb-4">
-                  <a href="shop-single.html"> <img src="images/product_02.png" alt="Image" /></a>
-                  <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
-                  <p className="price">$120.00</p>
-                </div>
-
-                <div className="text-center item mb-4">
-                  <a href="shop-single.html"> <img src="images/product_04.png" alt="Image" /></a>
-                  <h3 className="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
-                  <p className="price">$120.00</p>
-                </div>
+                {
+                  allNavProduct.map((product, index) => (
+                    <div className="text-center item mb-4">
+                      <img src={product?.image} alt="Image" />
+                      <h3 className="text-dark"><a href="shop-single.html">{product?.name}</a></h3>
+                      <Link to={`/navcategory/${product?._id}`}>Shop now</Link>
+                    </div>
+                  ))
+                }
               </OwlCarousel>
-
-
             </div>
           </div>
         </div>

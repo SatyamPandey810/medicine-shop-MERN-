@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,7 @@ export default function Header() {
   const navigate = useNavigate()
   const searchInput = useLocation()
   const [search, setSearch] = useState(searchInput?.search?.split("=")[1])
+  const [allNavProduct, setAllnavProduct] = useState([])
 
   // console.log("searchInput", searchInput);
 
@@ -49,7 +50,15 @@ export default function Header() {
 
   }
 
+  const fetchAllProduct = async () => {
+    const response = await fetch(SummaryApi.getNavProduct.url)
+    const dataResponse = await response.json()
 
+    setAllnavProduct(dataResponse?.data || [])
+  }
+  useEffect(() => {
+    fetchAllProduct()
+  }, [])
 
   return (
     <div className="site-navbar py-2">
@@ -80,18 +89,12 @@ export default function Header() {
                 <li className="has-children">
                   <a href="#">Shop</a>
                   <ul className="dropdown">
-                    <li><a href="#">Supplements</a></li>
-                    <li className="has-children">
-                      <a href="#">Vitamins</a>
-                      <ul className="dropdown">
-                        <li><a href="#">Supplements</a></li>
-                        <li><a href="#">Vitamins</a></li>
-                        <li><a href="#">Diet &amp; Nutrition</a></li>
-                        <li><a href="#">Tea &amp; Coffee</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Diet &amp; Nutrition</a></li>
-                    <li><a href="#">Tea &amp; Coffee</a></li>
+                    {
+                      allNavProduct.map((products,index)=>(
+                         <li><Link to={`/navcategory/${products?._id}`}>{products.name}</Link></li>
+                      ))
+                    }
+                    
 
                   </ul>
                 </li>

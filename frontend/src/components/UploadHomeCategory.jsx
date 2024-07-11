@@ -44,7 +44,7 @@ export default function UploadHomeCategory({ onClose, fetchdata }) {
     if (responseData.success) {
       toast.success(responseData?.message)
       onClose()
-      // fetchdata()
+      fetchdata()
     }
 
     if (responseData.error) {
@@ -78,7 +78,7 @@ export default function UploadHomeCategory({ onClose, fetchdata }) {
           <h2>upload product</h2>
         </div>
         <div>
-          <FontAwesomeIcon icon={faXmark} className='cancle-btn' onClick={onClose} />
+          <FontAwesomeIcon icon={faXmark} className='cancle-btn' onClick={()=>onClose} />
         </div>
 
       </div>

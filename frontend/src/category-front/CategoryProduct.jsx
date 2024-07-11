@@ -18,7 +18,7 @@ export default function CategoryProduct() {
     fetchUserAddToCart()
     navigate(`/category/${id}/single-card`)
     // navigate(`/category/${encodeURIComponent(product.productName)}/single-card`);
-    
+
   }
 
 
@@ -45,10 +45,6 @@ export default function CategoryProduct() {
     }
   };
 
-
-
-
-
   useEffect(() => {
     fetchProductCategory(_id)
   }, [_id])
@@ -62,7 +58,7 @@ export default function CategoryProduct() {
         <div className="container">
           <div className="row">
             <div className="col-md-12 mb-0"><Link to="/">Home</Link> <span className="mx-2 mb-0">/</span>
-              <strong className="text-black">{categoryName?.productCategoryName}</strong>
+              <strong className="text-black">{categoryName}</strong>
             </div>
           </div>
         </div>
@@ -86,8 +82,11 @@ export default function CategoryProduct() {
                       <div className="product-price"><small>${el.price}</small> ${el.sellingPrice}</div>
                       <div className="product-links">
                         {/* <i className="fa fa-heart"></i> */}
-                        <button className='btn btn-primary' onClick={(e) => handelAddToCart(e, el?._id)}><i className="fa fa-shopping-cart" ></i> Add to Cart</button>
-                        <a href=""></a>
+                        <button className='btn btn-primary'
+                          onClick={(e) => handelAddToCart(e, el?._id)}>
+                          <i className="fa fa-shopping-cart" >
+                          </i> Add to Cart</button>
+
                       </div>
                     </div>
                   </div>

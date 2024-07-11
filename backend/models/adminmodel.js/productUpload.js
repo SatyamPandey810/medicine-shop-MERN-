@@ -8,6 +8,10 @@ const uploadProductSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'homeproduct'
     },
+    navCategory: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "navbarproducts"
+    },
 
     productImage: [],
 

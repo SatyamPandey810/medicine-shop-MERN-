@@ -9,7 +9,8 @@ import { toast } from 'react-toastify'
 
 export default function UploadProducts({ onClose, fetchData }) {
     // const [allHomeProduct, setAllHomeproduct] = useState([])
-    const[categories,setCategories]= useState([])
+    const [categories, setCategories] = useState([])
+    const [allNavProduct, setAllnavProduct] = useState([])
     const [data, setData] = useState({
         productName: "",
         brandName: "",
@@ -85,7 +86,16 @@ export default function UploadProducts({ onClose, fetchData }) {
         console.log("upload image", uploadIamgeCloudinary);
     }
 
+    // navbar category upload
+    const fetchAllProducts = async () => {
+        const response = await fetch(SummaryApi.getNavProduct.url)
+        const dataResponse = await response.json()
 
+        setAllnavProduct(dataResponse?.data || [])
+    }
+    useEffect(() => {
+        fetchAllProducts()
+    }, [])
 
     return (
         <div className='container'>
@@ -140,20 +150,24 @@ export default function UploadProducts({ onClose, fetchData }) {
                                         )
                                     })
                                 }
-                                
+
                             </select>
                         </div>
-                        {/* {data.category && (
-                            <div className="mb-3">
-                                <label htmlFor="subcategory" className="form-label">Subcategory</label>
-                                <select className='form-control' onChange={inputChange} name='subcategory' required>
-                                    <option>Select subcategory</option>
-                                    {productCategory.find(category => category.value === data.category)?.subcategories?.map((subcategory) => (
-                                        <option key={subcategory.id} value={subcategory.value}>{subcategory.label}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        )} */}
+                        <div className="mb-3">
+                            <label htmlFor="category" className="form-label">nav Category name</label>
+                            <select className='form-control' onChange={inputChange} name='navCategory'  required>
+                                <option>Select nav category</option>
+                                {
+                                    allNavProduct?.map((category) => {
+                                        return (
+                                            <option value={category._id} key={category._id}>{category.name}</option>
+                                        )
+                                    })
+                                }
+
+                            </select>
+                        </div>
+                       
                         <div className="mb-3">
                             <label htmlFor="uploadImageInput" className="form-label">Image</label>
                             <input

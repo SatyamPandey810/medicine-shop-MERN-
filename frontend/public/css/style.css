@@ -461,6 +461,7 @@ a:hover {
 .site-navbar .site-navigation .site-menu .has-children .dropdown>li>a {
   padding: 9px 20px;
   display: block;
+  text-wrap: nowrap;
 }
 
 .site-navbar .site-navigation .site-menu .has-children .dropdown>li>a:hover {

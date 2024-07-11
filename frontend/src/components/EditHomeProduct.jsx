@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast } from 'react-toastify'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SummaryApi from '../common';
 import uploadIamgeCloud from '../helper/uploadImage';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HomeProductCategory from '../helper/HomeProduct';
 export default function EditHomeProduct({ onClose, productData, fetchdata }) {
 

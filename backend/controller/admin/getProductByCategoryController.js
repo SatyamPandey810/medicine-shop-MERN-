@@ -14,6 +14,7 @@ async function getProductbyCategoryController(req, res) {
       return res.status(404).json({ message: "Category not found", error: true, success: false });
     }
     const products = await productUploadModel.find({ category: categoryId }).populate("category");
+
     res.status(200).json({
       success: true,
       category,

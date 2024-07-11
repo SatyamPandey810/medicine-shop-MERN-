@@ -61,9 +61,25 @@ const SummaryApi = {
         url: `${backendDomain}/api/category/:id`,
         method: "get"
     },
+    uploadNavCategoryProduct: {
+        url: `${backendDomain}/api/nav-product`,
+        method: "post"
+    },
+    getNavProduct: {
+        url: `${backendDomain}/api/get-nav`,
+        method: "get"
+    },
+    updateNavProduct: {
+        url: `${backendDomain}/api/update-nav`,
+        method: "post"
+    },
     addToCartProduct: {
         url: `${backendDomain}/api/addtocart`,
         method: "post"
+    },
+    getNavCategoryProduct: {
+        url: `${backendDomain}/api/nav-category/:id`,
+        method: "get"
     },
     addTocardProductCount: {
         url: `${backendDomain}/api/countAddToCardProduct`,

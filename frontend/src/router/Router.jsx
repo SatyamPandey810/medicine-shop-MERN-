@@ -24,6 +24,9 @@ import PaymentView from '../pages/addtocart/PaymentView'
 import SuccessPage from '../pages/addtocart/SuccessPage'
 import Orders from '../pages/orders/Orders'
 import TotalOrders from '../pages/admin/TotalOrders'
+// import UploadNavCategory from '../components/UploadNavCategory'
+import NavbarCategory from '../pages/admin/NavbarCategory'
+import NavCategory from '../category-front/NavCategory'
 // import PaymentView from '../pages/addtocart/paymentView'
 
 
@@ -38,6 +41,8 @@ export default function Router() {
             <Route path='/contact-us' element={<ContactUs />} />
             {/* <Route path="/addtocart" element={}/> */}
             <Route path="/checkout/:userId" element={<CheckOut />} />
+
+            <Route path="/navcategory/:id" element={<NavCategory />} />
 
             {/* category product route */}
             <Route path="/category/:id" element={<CategoryProduct />} />
@@ -72,6 +77,7 @@ export default function Router() {
                 <Route path='all-user' element={<AllUser />} />
                 <Route path='all-products' element={<AllProducts />} />
                 <Route path='home-category' element={<HomeCategory />} />
+                <Route path='navbar-category' element={<NavbarCategory/>}/>
                 <Route path='total-orders' element={<TotalOrders />} />
             </Route>
             <Route path='/success' element={<SuccessPage />} />

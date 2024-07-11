@@ -33,6 +33,9 @@ const getOrderDetails = require('../controller/order/getAllOrders');
 const deleteProductController = require('../controller/admin/deleteProduct');
 const navUploadProductController = require('../controller/admin/navUploadProduct');
 const adminAllOrderController = require('../controller/order/adminAllOrder');
+const getNavProductCategoryController = require('../controller/admin/getNavProductCategory');
+const getNavProductController = require('../controller/admin/getNavProduct');
+const updateNavCategoryController = require('../controller/admin/updateNavCategory');
 // const userAddressController = require('../controller/user-form/userAddressController');
 // const getAddressUserController = require('../controller/user-form/getUserAddress');
 // const addressUpdateController = require('../controller/user-form/updateUserAddress');
@@ -75,9 +78,17 @@ router.post('/update-home', authToken, updateHomeCategoryController)
 // product find by category route
 router.get('/category/:id', getProductbyCategoryController)
 
-// navbar product category route
+// navbar product upload category route
 router.post('/nav-product', navUploadProductController)
 
+// navbar product get category route
+router.get('/get-nav', getNavProductController)
+
+// navbar product update category route
+router.post('/update-nav',updateNavCategoryController)
+
+// nav product find by category route
+router.get("/nav-category/:id", getNavProductCategoryController)
 
 // add to cart route
 router.post('/addtocart', authToken, addToCartController)
