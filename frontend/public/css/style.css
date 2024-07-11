@@ -417,6 +417,8 @@ a:hover {
   font-family: 'icomoon';
 }
 
+
+
 .site-navbar .site-navigation .site-menu .has-children .dropdown {
   visibility: hidden;
   opacity: 0;
@@ -2294,4 +2296,8 @@ text-decoration: underline;
   justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
+}
+
+.owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next, .owl-carousel button.owl-dot{
+  font-size: 47px !important;
 }

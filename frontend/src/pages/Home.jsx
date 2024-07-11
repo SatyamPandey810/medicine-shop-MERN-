@@ -165,7 +165,7 @@ export default function Home() {
           </div>
           <div className="row">
             <div className="col-md-12 block-3 products-wrap">
-              <OwlCarousel items={3} className="owl-theme" loop nav margin={8} >
+              <OwlCarousel items={3} className="owl-theme" loop margin={8} nav >
                 {
                   allNavProduct.map((product, index) => (
                     <div className="text-center item mb-4">
