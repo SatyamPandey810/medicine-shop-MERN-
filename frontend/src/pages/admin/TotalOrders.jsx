@@ -23,7 +23,6 @@ export default function TotalOrders() {
         fetchData();
     }, []);
 
-console.log("order",order);
     const groupOrdersByUser = (order) => {
         return order.reduce((acc, order) => {
             const { userId } = order;
@@ -37,6 +36,45 @@ console.log("order",order);
 
     const groupedOrders = groupOrdersByUser(order);
     // console.log(groupedOrders);
+
+// update order status
+const updateOrderStatus = async (orderId, newStatus) => {
+    const url = `${SummaryApi.orderUpdate.url.replace(':id', orderId)}`;
+    console.log('Updating order status...');
+    console.log('Order ID:', orderId);
+    console.log('New Status:', newStatus);
+    console.log('Request URL:', url);
+
+    try {
+        const response = await fetch(url, {
+            method: SummaryApi.orderUpdate.method,
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${token}` // Uncomment if you need authentication
+            },
+            body: JSON.stringify({ status: newStatus })
+        });
+
+        const data = await response.json();
+        console.log(data);
+        if (data.success) {
+            console.log('Order status updated successfully');
+            // Update UI accordingly, e.g., refresh order list
+        } else {
+            console.error('Failed to update order status:', data.message);
+        }
+    } catch (error) {
+        console.error('Error updating order status:', error);
+    }
+};
+
+
+useEffect(()=>{
+    updateOrderStatus()
+},[])
+
+
+
     return (
         <>
             <DashboardSidebar />

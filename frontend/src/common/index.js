@@ -73,6 +73,10 @@ const SummaryApi = {
         url: `${backendDomain}/api/update-nav`,
         method: "post"
     },
+    deleteNavCategory: {
+        url: `${backendDomain}/api/delete-nav`,
+        method: "post"
+    },
     addToCartProduct: {
         url: `${backendDomain}/api/addtocart`,
         method: "post"
@@ -124,6 +128,10 @@ const SummaryApi = {
     getAdminAllOrder: {
         url: `${backendDomain}/api/admin-order`,
         method: "get"
+    },
+    orderUpdate: {
+        url: `("${backendDomain}/api/transaction/:id/status`,
+        method: "post"
     }
 
 

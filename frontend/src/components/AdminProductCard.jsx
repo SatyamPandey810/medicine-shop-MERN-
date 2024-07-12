@@ -3,9 +3,8 @@ import EditProduct from './EditProduct'
 import SummaryApi from '../common'
 import { toast } from 'react-toastify'
 
-export default function AdminProductCard({ data, fetchdata }) {
+export default function AdminProductCard({ data, fetchdata,uniqueKey }) {
     const [editProduct, setEditProduct] = useState(false)
-    const[categories,setCategories]= useState([])
     
 
     const deleteProduct = async (id) => {
@@ -33,6 +32,7 @@ export default function AdminProductCard({ data, fetchdata }) {
         <>
             <tbody>
                 <tr>
+                    <td>{uniqueKey}.</td>
                     <td className='text-capitalize'>{data?.productName}</td>
                     <td className='text-capitalize'>{data?.brandName}</td>
                     <td>{data?.price}</td>

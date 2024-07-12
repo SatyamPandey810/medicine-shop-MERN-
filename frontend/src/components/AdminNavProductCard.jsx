@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import EditNavProduct from './EditNavProduct'
+import SummaryApi from '../common'
+import { toast } from 'react-toastify'
 
 export default function AdminNavProductCard({ data, fetchData, uniqueKey }) {
     const [edit, setEdit] = useState(false)
@@ -12,11 +14,29 @@ export default function AdminNavProductCard({ data, fetchData, uniqueKey }) {
         setEdit(true)
     }
 
+    const deleteCategory = async (id) => {
+        const response = await fetch(SummaryApi.deleteNavCategory.url, {
+            method: SummaryApi.deleteNavCategory.method,
+            credentials: "include",
+            headers: {
+                "content-type": 'application/json'
+            },
+            body: JSON.stringify({
+                _id: id,
+            })
+        })
+        const responseData = await response.json()
+
+        if (responseData.success) {
+            toast.success(responseData.message)
+            fetchData()
+        }
+    }
 
 
     return (
         <>
-           
+
             <tbody>
                 <tr >
                     <td>{uniqueKey}.</td>
@@ -25,7 +45,7 @@ export default function AdminNavProductCard({ data, fetchData, uniqueKey }) {
                     <td>
                         <div className='d-flex'>
                             <button className='btn btn-success' onClick={handleEditClose}>Edit</button>
-                            <button className='btn btn-danger mx-2'>Delete</button>
+                            <button className='btn btn-danger mx-2' onClick={() => deleteCategory(data?._id)}>Delete</button>
                         </div>
 
                     </td>

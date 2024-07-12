@@ -107,11 +107,11 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="site-section p-4">
-        <div className="container-fluid">
+      <div className="site-section ">
+        <div className="container">
           <div className="row">
             <div className="title-section text-center col-12">
-              <h2 className="text-uppercase">Popular Products</h2>
+              <h2 className="text-uppercase">Products categories</h2>
             </div>
           </div>
 
