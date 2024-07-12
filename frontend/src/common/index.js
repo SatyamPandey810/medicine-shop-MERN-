@@ -130,7 +130,7 @@ const SummaryApi = {
         method: "get"
     },
     orderUpdate: {
-        url: `("${backendDomain}/api/transaction/:id/status`,
+        url: `("${backendDomain}/api/transaction-status/:id`,
         method: "post"
     }
 

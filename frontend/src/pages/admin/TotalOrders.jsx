@@ -37,41 +37,42 @@ export default function TotalOrders() {
     const groupedOrders = groupOrdersByUser(order);
     // console.log(groupedOrders);
 
-// update order status
-const updateOrderStatus = async (orderId, newStatus) => {
-    const url = `${SummaryApi.orderUpdate.url.replace(':id', orderId)}`;
-    console.log('Updating order status...');
-    console.log('Order ID:', orderId);
-    console.log('New Status:', newStatus);
-    console.log('Request URL:', url);
+    // update order status
+    const updateOrderStatus = async (orderId, newStatus) => {
+        const url = `${SummaryApi.orderUpdate.url.replace(':id', orderId)}`;
 
-    try {
-        const response = await fetch(url, {
-            method: SummaryApi.orderUpdate.method,
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Authorization': `Bearer ${token}` // Uncomment if you need authentication
-            },
-            body: JSON.stringify({ status: newStatus })
-        });
+        console.log('Order ID:', orderId);
+        console.log('New Status:', newStatus);
+        console.log('Request URL:', url);
 
-        const data = await response.json();
-        console.log(data);
-        if (data.success) {
-            console.log('Order status updated successfully');
-            // Update UI accordingly, e.g., refresh order list
-        } else {
-            console.error('Failed to update order status:', data.message);
+        try {
+            const response = await fetch(url, {
+                method: SummaryApi.orderUpdate.method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status: newStatus })
+            });
+
+            const data = await response.json();
+            console.log(data);
+            if (data.success) {
+                console.log('Order status updated successfully');
+                // Update UI accordingly, e.g., refresh order list
+                fetchData();
+            } else {
+                console.error('Failed to update order status:', data.message);
+            }
+        } catch (error) {
+            console.error('Error updating order status:', error);
         }
-    } catch (error) {
-        console.error('Error updating order status:', error);
-    }
-};
+    };
 
 
-useEffect(()=>{
-    updateOrderStatus()
-},[])
+    const handleStatusChange = (orderId, event) => {
+        const newStatus = event.target.value;
+        updateOrderStatus(orderId, newStatus);
+    };
 
 
 
@@ -109,7 +110,16 @@ useEffect(()=>{
                                                 <td>{order._id}</td>
                                                 <td>{order.amount}</td>
                                                 <td>{order.paymentMethod}</td>
-                                                <td>{order.status}</td>
+                                                {/* <td>{order.status}</td> */}
+                                                <td>
+                                                    <select value={order.status} onChange={(e) => handleStatusChange(order._id, e)}>
+                                                        <option value="pending">Pending</option>
+                                                        <option value="order confirmed">Order Confirmed</option>
+                                                        <option value="order packed">Order Packed</option>
+                                                        <option value="order delivered">Order Delivered</option>
+                                                        <option value="order canceled">Order Canceled</option>
+                                                    </select>
+                                                </td>
                                                 <td>{new Date(order.createdAt).toLocaleString()}</td>
                                                 <td>
                                                     <ul>
@@ -120,6 +130,12 @@ useEffect(()=>{
                                                             </li>
                                                         ))}
                                                     </ul>
+                                                </td>
+                                                <td>
+                                                    <button onClick={() => updateOrderStatus(order._id, 'order confirmed')}>Confirm Order</button>
+                                                    <button onClick={() => updateOrderStatus(order._id, 'order packed')}>Pack Order</button>
+                                                    <button onClick={() => updateOrderStatus(order._id, 'order delivered')}>Deliver Order</button>
+                                                    <button onClick={() => updateOrderStatus(order._id, 'order canceled')}>Cancel Order</button>
                                                 </td>
                                             </tr>
                                         ))}

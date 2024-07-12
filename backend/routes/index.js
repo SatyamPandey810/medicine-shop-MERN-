@@ -132,7 +132,7 @@ router.get('/orders', authToken, getOrderDetails);
 router.get("/admin-order", adminAllOrderController)
 
 // order status updating
-router.post("/transaction/:id/status", updateTransactionStatus)
+router.post("/transaction-status/:id", updateTransactionStatus)
 
 
 
