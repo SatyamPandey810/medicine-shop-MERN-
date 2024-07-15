@@ -57,7 +57,7 @@ export default function Orders() {
                     <b>Pin code:</b> {order.address?.zipCode}<br />
                 </p>
                 <p><b>Payment method: </b> {order.paymentMethod}</p>
-                <p><b>Status:</b> {order.status}</p>
+                <p className='text-capitalize'><b>Status:</b> {order.status}</p>
                
 
                 {/* <h1>User Details</h1>

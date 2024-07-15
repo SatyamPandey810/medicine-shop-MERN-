@@ -11,4 +11,4 @@ const productUploadpermission = async (userId) => {
     // return user && user.role === 'admin';
 
 }
-module.exports=productUploadpermission
+module.exports = productUploadpermission

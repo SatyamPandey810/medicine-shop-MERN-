@@ -33,6 +33,7 @@ a {
 
 a:hover {
   text-decoration: none;
+  color: #31abdd;
 }
 
 .text-black {
@@ -210,6 +211,7 @@ a:hover {
 
 .site-logo a:hover {
   text-decoration: none;
+
 }
 
 .icons-btn {
@@ -1230,9 +1232,9 @@ a:hover {
   height: 25px;
   border-radius: 50%;
   line-height: 28px;
-  color: #000;
+  color: white;
   font-size: 16px;
-  background: #51eaea;
+  background: #31abdd;
   right: 9px;
 }
 

@@ -1,48 +1,6 @@
 const Transaction = require("../../models/ordermodel/transactionsDetailsSchema");
 
 const updateTransactionStatus = async (req, res) => {
-    // try {
-    //     const { id } = req.params.id;
-    //     const { status } = req.body;
-    //     console.log("id", id);
-    //     // Validate status
-    //     const validStatuses = ['pending', 'order confirmed', 'order packed', 'order delivered', 'order canceled'];
-    //     if (!validStatuses.includes(status)) {
-    //         return res.status(400).json({
-    //             message: "Invalid status",
-    //             error: true,
-    //             success: false,
-    //         });
-    //     }
-
-    //     // Find the transaction by ID and update status
-    //     const transaction = await Transaction.findByIdAndUpdate(
-    //         id,
-    //         { status },
-    //         { new: true }
-    //     );
-
-    //     if (!transaction) {
-    //         return res.status(404).json({
-    //             message: "Transaction not found",
-    //             error: true,
-    //             success: false,
-    //         });
-    //     }
-
-    //     res.status(200).json({
-    //         message: "Transaction status updated successfully",
-    //         success: true,
-    //         transaction,
-    //     });
-    // } catch (error) {
-    //     console.error('Error updating transaction status:', error.message || error);
-    //     res.status(500).json({
-    //         message: error.message || error,
-    //         error: true,
-    //         success: false,
-    //     });
-    // }
     const { id } = req.params;
     const { status } = req.body;
 
@@ -53,7 +11,25 @@ const updateTransactionStatus = async (req, res) => {
     }
 
     try {
-        const transaction = await Transaction.findByIdAndUpdate(id, { status }, { new: true });
+        const updateFields = { status };
+        const currentDate = new Date();
+
+        switch (status) {
+            case 'order confirmed':
+                updateFields['statusUpdatedDates.orderConfirmedDate'] = currentDate;
+                break;
+            case 'order packed':
+                updateFields['statusUpdatedDates.orderPackedDate'] = currentDate;
+                break;
+            case 'order delivered':
+                updateFields['statusUpdatedDates.orderDeliveredDate'] = currentDate;
+                break;
+            case 'order canceled':
+                updateFields['statusUpdatedDates.orderCanceledDate'] = currentDate;
+                break;
+        }
+
+        const transaction = await Transaction.findByIdAndUpdate(id, { $set: updateFields }, { new: true });
         if (!transaction) {
             return res.status(404).send({ error: 'Transaction not found' });
         }
@@ -63,4 +39,5 @@ const updateTransactionStatus = async (req, res) => {
     }
 };
 
-module.exports = updateTransactionStatus
+module.exports = updateTransactionStatus;
+

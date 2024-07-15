@@ -106,7 +106,7 @@ export default function CheckOut() {
   const submit = async (event, id) => {
     event?.preventDefault();
 
-    const requiredFields = ['name', 'email', 'phone', 'address1', 'zipCode', ];
+    const requiredFields = ['name', 'email', 'phone', 'address1', 'zipCode',];
     const isFormValid = requiredFields.every(field => formData[field] && formData[field].trim() !== '');
 
     if (!isFormValid) {
@@ -120,7 +120,7 @@ export default function CheckOut() {
       city: selectedCity,
 
     };
-    
+
 
     try {
       const dataResponse = await fetch(SummaryApi.createCheckout.url, {
@@ -195,7 +195,7 @@ export default function CheckOut() {
               <div className="p-3 p-lg-5 border">
                 <form onSubmit={submit}>
                   <div className="form-group row">
-                    <div className="col-md-4">
+                    {/* <div className="col-md-4">
                       <label htmlFor="name" className="text-black">Name <span className="text-danger">*</span></label>
                       <input
                         type="text"
@@ -207,10 +207,7 @@ export default function CheckOut() {
                         required
                       />
                     </div>
-                    {/* <div className="col-md-6">
-                      <label className="text-black">Last Name <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" />
-                    </div> */}
+                   
                     <div className="col-md-4">
                       <label htmlFor='email' className="text-black">Email <span className="text-danger">*</span></label>
                       <input
@@ -222,19 +219,8 @@ export default function CheckOut() {
                         value={formData.email}
                         required
                       />
-                    </div>
-                    <div className="col-md-4">
-                      <label htmlFor='number' className="text-black">Phone <span className="text-danger">*</span></label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        name='phone'
-                        id='phone'
-                        onChange={handleInputChange}
-                        value={formData.phone}
-                        required
-                      />
-                    </div>
+                    </div> */}
+
                   </div>
                   <div className="form-group row">
                     <div className="col-md-4">
@@ -260,6 +246,18 @@ export default function CheckOut() {
                         id='address2'
                         onChange={handleInputChange}
                         value={formData.address2}
+                        required
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <label htmlFor='number' className="text-black">Phone <span className="text-danger">*</span></label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        name='phone'
+                        id='phone'
+                        onChange={handleInputChange}
+                        value={formData.phone}
                         required
                       />
                     </div>

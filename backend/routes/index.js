@@ -129,10 +129,10 @@ router.post('/payment-order', authToken, paymentController)
 router.get('/orders', authToken, getOrderDetails);
 
 // all order get by admin
-router.get("/admin-order", adminAllOrderController)
+router.get("/admin-order",authToken, adminAllOrderController)
 
 // order status updating
-router.post("/transaction-status/:id", updateTransactionStatus)
+router.post("/transaction-status/:id",authToken, updateTransactionStatus)
 
 
 

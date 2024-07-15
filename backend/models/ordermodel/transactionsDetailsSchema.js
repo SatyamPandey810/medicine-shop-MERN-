@@ -108,7 +108,6 @@ const transactionSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        // enum: ['pending', 'completed', 'failed'],
         enum: ['pending', 'order confirmed', 'order packed', 'order delivered', 'order canceled'],
         default: 'pending',
         required: true,

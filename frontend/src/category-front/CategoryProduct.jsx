@@ -69,7 +69,7 @@ export default function CategoryProduct() {
             product.map((el) => (
               <div key={el._id} className="col-sm-6 col-lg-4 text-center item mb-4">
                 <div className="product-card">
-                  <div className="badge">Hot</div>
+                  {/* <div className="badge">Hot</div> */}
                   <div className="product-tumb">
                     <img src={el.productImage} alt="" />
                   </div>

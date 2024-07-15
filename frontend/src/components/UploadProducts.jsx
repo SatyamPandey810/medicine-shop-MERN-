@@ -140,7 +140,7 @@ export default function UploadProducts({ onClose, fetchData }) {
 
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="category" className="form-label">Category name</label>
+                            <label htmlFor="category" className="form-label">Home category name</label>
                             <select className='form-control' onChange={inputChange} name='category' required>
                                 <option>Select category</option>
                                 {
@@ -154,7 +154,7 @@ export default function UploadProducts({ onClose, fetchData }) {
                             </select>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="category" className="form-label">nav Category name</label>
+                            <label htmlFor="category" className="form-label">Nav category name</label>
                             <select className='form-control' onChange={inputChange} name='navCategory'  required>
                                 <option>Select nav category</option>
                                 {

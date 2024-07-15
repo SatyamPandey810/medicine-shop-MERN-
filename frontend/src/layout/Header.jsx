@@ -20,6 +20,7 @@ export default function Header() {
 
   const disaptch = useDispatch();
   const user = useSelector(state => state?.user?.user)
+  const userId = user?._id;
   // console.log(user);
 
   const userLogout = async () => {
@@ -106,7 +107,7 @@ export default function Header() {
                   <ul className="dropdown">
                     <li>{
                       user?._id ? (
-                        <Link to="/profile">Profile</Link>
+                        <Link to={`/order/${userId}`}>Your order</Link>
                       ) : (<></>)
                     }</li>
                     <li> {
@@ -130,44 +131,7 @@ export default function Header() {
               </ul>
 
             </nav>
-            {/* <div className="icons d-flex justify-content-center align-items-center">
-              <Dropdown >
-                <Dropdown.Toggle variant="success" id="dropdown-basic" className='drop-btn'>
-                  <FontAwesomeIcon icon={faUser} style={{ fontSize: "26px" }} />
-                  &nbsp; account
-
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item>
-                    {
-                      user?._id ? (
-                        <Link to="/profile">Profile</Link>
-                      ) : (<></>)
-                    }
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    {
-                      user?._id ? (
-                        <Link onClick={userLogout} to={'/'} >Logout</Link>
-                      ) : (<Link to='/login'>Login</Link>)
-                    }
-                  </Dropdown.Item>
-                  <Dropdown.Item><Link to='/signup'>Sign up</Link></Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <div>
-                <Link to="/cart-view" className="icons-btn d-inline-block bag mx-3">
-                  <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: "26px" }} />
-                  {
-                    user?._id && user?._id.length > 0 ? (
-                      <span className="number">{context.cartProductCount}</span>
-                    ) : <span className="number">0</span>
-                  }
-                </Link>
-              </div>
-
-            </div> */}
+           
           </div>
 
           <div class="icons">
