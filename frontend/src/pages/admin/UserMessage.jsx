@@ -2,7 +2,7 @@ import React from 'react'
 import DashboardSidebar from '../../components/Dashboard-sidebar'
 
 export default function UserMessage() {
-    
+
 
 
 
@@ -14,9 +14,10 @@ export default function UserMessage() {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Subject</th>
+                            <th scope="col">Message</th>
                         </tr>
                     </thead>
                     <tbody>
