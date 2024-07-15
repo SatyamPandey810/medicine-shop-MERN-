@@ -15,7 +15,7 @@ export default function AllUser() {
         email: "",
         name: "",
         role: "",
-        _id:"",
+        _id: "",
     })
     const [openUpdateRole, setOpenUpdateRole] = useState(false)
     // const user = useSelector(state => state?.user?.user)
@@ -41,7 +41,7 @@ export default function AllUser() {
     }, [])
     return (
         <>
-        <DashboardSidebar/>
+            <DashboardSidebar />
             <div className='content container mt-5'>
                 <table className="table table-bordered">
                     <thead className='bg-dark text-light'>

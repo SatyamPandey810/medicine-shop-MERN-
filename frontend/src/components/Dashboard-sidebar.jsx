@@ -48,7 +48,7 @@ export default function DashboardSidebar() {
                             </div>
                         </div>
                         <Link to="/admin-panel/total-orders" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Orders</span></Link>
-                        <a href="table.html" className="nav-item nav-link"><i className="fa fa-table me-2"></i><span className='mx-2'>Tables</span></a>
+                        <Link to="/admin-panel/user-message" className="nav-item nav-link"><i className="fa fa-table me-2"></i><span className='mx-2'>User messages</span></Link>
                         <a href="chart.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Charts</span></a>
                         <div className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Pages</span></a>

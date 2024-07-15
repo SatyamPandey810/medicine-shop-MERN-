@@ -38,6 +38,7 @@ const getNavProductController = require('../controller/admin/getNavProduct');
 const updateNavCategoryController = require('../controller/admin/updateNavCategory');
 const deleteNavCategory = require('../controller/admin/deleteNavCategory');
 const updateTransactionStatus = require('../controller/order/orderStatusController');
+const contactUsController = require('../controller/messages/contactUsController');
 // const userAddressController = require('../controller/user-form/userAddressController');
 // const getAddressUserController = require('../controller/user-form/getUserAddress');
 // const addressUpdateController = require('../controller/user-form/updateUserAddress');
@@ -129,10 +130,14 @@ router.post('/payment-order', authToken, paymentController)
 router.get('/orders', authToken, getOrderDetails);
 
 // all order get by admin
-router.get("/admin-order",authToken, adminAllOrderController)
+router.get("/admin-order", authToken, adminAllOrderController)
 
 // order status updating
-router.post("/transaction-status/:id",authToken, updateTransactionStatus)
+router.post("/transaction-status/:id", authToken, updateTransactionStatus)
+
+// contact-us message route
+
+router.post("/contact-message", authToken, contactUsController)
 
 
 

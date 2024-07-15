@@ -38,7 +38,7 @@ export default function News() {
                         <div className="box">
                             <div className="img-box">
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"
-                                    x="0px" y="0px" viewBox="0 0 422.518 422.518" style={{enableBackground:"new 0 0 422.518 422.518"}}
+                                    x="0px" y="0px" viewBox="0 0 422.518 422.518" style={{ enableBackground: "new 0 0 422.518 422.518" }}
                                     xml="preserve">
                                     <path d="M422.512,215.424c0-0.079-0.004-0.158-0.005-0.237c-0.116-5.295-4.368-9.514-9.727-9.514h-2.554l-39.443-76.258
                  c-1.664-3.22-4.983-5.225-8.647-5.226l-67.34-0.014l2.569-20.364c0.733-8.138-1.783-15.822-7.086-21.638
@@ -135,7 +135,7 @@ export default function News() {
                         <div className="box">
                             <div className="img-box">
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink"
-                                    x="0px" y="0px" viewBox="0 0 315.377 315.377" style={{enableBackground:"new 0 0 315.377 315.377"}}
+                                    x="0px" y="0px" viewBox="0 0 315.377 315.377" style={{ enableBackground: "new 0 0 315.377 315.377" }}
                                     xml="preserve">
                                     <g>
                                         <g>

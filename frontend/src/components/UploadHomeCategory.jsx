@@ -111,32 +111,7 @@ export default function UploadHomeCategory({ onClose, fetchdata }) {
                 onChange={inputChange}
                 required
               />
-            </div>
-            {/* <div className="mb-3">
-              <label htmlFor="category" className="form-label">Category name</label>
-              <select className='form-control' onChange={inputChange} name='category' required>
-                <option>Select category</option>
-                {
-                  HomeProductCategory.map((el, index) => {
-                    return (
-                      <option value={el.value} key={index}>{el.label}</option>
-                    )
-                  })
-                }
-              </select>
-            </div>
-            {dataCategory.category && (
-              <div className="mb-3">
-                <label htmlFor="subcategory" className="form-label">Subcategory</label>
-                <select className='form-control' onChange={inputChange} name='subcategory' required>
-                  <option>Select subcategory</option>
-                  {HomeProductCategory.find(category => category.value === dataCategory.category)?.subcategories?.map((subcategory) => (
-                    <option key={subcategory.id} value={subcategory.value}>{subcategory.label}</option>
-                  ))}
-                </select>
-              </div>
-            )} */}
-
+            </div>          
             <div className="mb-3">
               <label htmlFor="uploadImageInput" className="form-label">Image</label>
               <input

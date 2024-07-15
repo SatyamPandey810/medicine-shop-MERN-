@@ -134,8 +134,11 @@ const SummaryApi = {
         // method: "post"
         url: `${backendDomain}/api/transaction-status/:id`,
         method: "POST"
+    },
+    contactUs: {
+        url: `${backendDomain}/api/contact-message`,
+        method: "post"
     }
-
 
 
 }

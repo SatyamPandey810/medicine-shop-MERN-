@@ -92,11 +92,9 @@ export default function Header() {
                   <ul className="dropdown">
                     {
                       allNavProduct.map((products,index)=>(
-                         <li><Link to={`/navcategory/${products?._id}`}>{products.name}</Link></li>
+                         <li key={index}><Link to={`/navcategory/${products?._id}`}>{products.name}</Link></li>
                       ))
-                    }
-                    
-
+                    }                  
                   </ul>
                 </li>
                 <li><Link to="/about">About</Link></li>

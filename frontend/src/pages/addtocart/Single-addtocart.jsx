@@ -118,15 +118,10 @@ export default function SingleAddtocart() {
                         <div className="col-md-6">
                             <h2 className="text-black text-capitalize">{data?.productId?.productName}</h2>
                             <p>{data?.productId?.description}</p>
-
-
                             <p>
                                 <del>${data?.productId?.price}</del>
                                 <strong className="text-primary h4 mx-4">${totalSellingPrice}</strong>
                             </p>
-
-
-
                             <div className="mb-5">
                                 <div className="input-group mb-3" style={{ maxWidth: "220px" }}>
                                     <div className="input-group-prepend">
@@ -138,12 +133,10 @@ export default function SingleAddtocart() {
                                         <button onClick={() => increseQuantity(data?._id, data?.quantity)} className="btn btn-outline-primary js-btn-plus" type="button">+</button>
                                     </div>
                                 </div>
-
                             </div>
                             <p>
                                 <button className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary" onClick={handleCheckout}>Checkout</button>
                             </p>
-
                             <div className="mt-5">
                                 <ul className="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">
                                     <li className="nav-item">
@@ -154,7 +147,6 @@ export default function SingleAddtocart() {
                                         <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
                                             aria-controls="pills-profile" aria-selected="false">Specifications</a>
                                     </li>
-
                                 </ul>
                                 <div className="tab-content" id="pills-tabContent">
                                     <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -207,13 +199,9 @@ export default function SingleAddtocart() {
                                                 </tr>
                                             </tbody>
                                         </table>
-
                                     </div>
-
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>

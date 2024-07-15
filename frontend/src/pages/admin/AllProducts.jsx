@@ -53,7 +53,7 @@ export default function AllProducts() {
                 <table className="table table-bordered">
                     <thead>
                         <tr>
-                             <th>No</th>
+                            <th>No</th>
                             <th>Product name</th>
                             <th>Product brand</th>
                             <th>Price</th>
@@ -70,8 +70,8 @@ export default function AllProducts() {
                         allProduct.map((product, index) => {
                             return (
                                 <AdminProductCard data={product} key={index + "allProduct"}
-                                uniqueKey={index + 1} 
-                                fetchdata={fetchAllProduct} />
+                                    uniqueKey={index + 1}
+                                    fetchdata={fetchAllProduct} />
                             )
                         })
                     }

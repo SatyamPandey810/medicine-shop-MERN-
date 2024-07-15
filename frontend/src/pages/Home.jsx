@@ -168,7 +168,7 @@ export default function Home() {
               <OwlCarousel items={3} className="owl-theme" loop margin={8} nav >
                 {
                   allNavProduct.map((product, index) => (
-                    <div className="text-center item mb-4">
+                    <div key={index} className="text-center item mb-4">
                       <img src={product?.image} alt="Image" />
                       <h3 className="text-dark"><a href="shop-single.html">{product?.name}</a></h3>
                       <Link to={`/navcategory/${product?._id}`}>Shop now</Link>

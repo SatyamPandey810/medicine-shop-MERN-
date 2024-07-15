@@ -1,6 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import SummaryApi from '../common'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
+  const [allNavProduct, setAllnavProduct] = useState([])
+
+
+  const fetchAllProduct = async () => {
+    const response = await fetch(SummaryApi.getNavProduct.url)
+    const dataResponse = await response.json()
+
+    setAllnavProduct(dataResponse?.data || [])
+  }
+  useEffect(() => {
+    fetchAllProduct()
+  }, [])
+
+
   return (
     <footer className="site-footer">
       <div className="container">
@@ -17,10 +33,11 @@ export default function Footer() {
           <div className="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 className="footer-heading mb-4">Quick Links</h3>
             <ul className="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
+              {
+                allNavProduct.map((products, index) => (
+                  <li key={index}><Link to={`/navcategory/${products?._id}`}>{products.name}</Link></li>
+                ))
+              }
             </ul>
           </div>
 
@@ -42,7 +59,7 @@ export default function Footer() {
             <p>
               {/* <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
               Copyright &copy;
-              <script>document.write(new Date().getFullYear());</script> All rights reserved 
+              <script>document.write(new Date().getFullYear());</script> All rights reserved
               {/* <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> */}
             </p>
           </div>

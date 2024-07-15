@@ -140,20 +140,20 @@ export default function TotalOrders() {
                                                 </td>
                                                 <td className='text-nowrap'>
                                                     <div className="form-check">
-                                                        <input class="form-check-input"
+                                                        <input className="form-check-input"
                                                             type="radio"
                                                             name="orderStatus"
                                                             value="order confirmed"
                                                             id="confirmedRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
-                                                            
+
                                                         />
                                                         <label class="form-check-label" for="flexCheckChecked">
                                                             Pending
                                                         </label>
                                                     </div>
                                                     <div className="form-check">
-                                                        <input class="form-check-input"
+                                                        <input className="form-check-input"
                                                             type="radio"
                                                             name="orderStatus"
                                                             value="order packed"
@@ -165,7 +165,7 @@ export default function TotalOrders() {
                                                         </label>
                                                     </div>
                                                     <div className="form-check">
-                                                        <input class="form-check-input"
+                                                        <input className="form-check-input"
                                                             type="radio"
                                                             name="orderStatus"
                                                             value="order packed"
@@ -177,7 +177,7 @@ export default function TotalOrders() {
                                                         </label>
                                                     </div>
                                                     <div className="form-check">
-                                                        <input class="form-check-input"
+                                                        <input className="form-check-input"
                                                             type="radio"
                                                             name="orderStatus"
                                                             value="order delivered"
@@ -189,14 +189,14 @@ export default function TotalOrders() {
                                                         </label>
                                                     </div>
                                                     <div className="form-check">
-                                                        <input class="form-check-input"
+                                                        <input className="form-check-input"
                                                             type="radio"
                                                             name="orderStatus"
                                                             value="order canceled"
                                                             id="canceledRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
                                                         />
-                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                        <label className="form-check-label" for="flexCheckChecked">
                                                             Order canceled
                                                         </label>
                                                     </div>

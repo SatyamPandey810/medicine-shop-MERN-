@@ -224,7 +224,7 @@ export default function CheckOut() {
                   </div>
                   <div className="form-group row">
                     <div className="col-md-4">
-                      <label htmlFor='address1' className="text-black">Address 1<span className="text-danger">*</span></label>
+                      <label htmlFor='address1' className="text-black">Address 1 <span className="text-danger">*</span></label>
                       <input
                         type="text"
                         className="form-control"
@@ -277,7 +277,7 @@ export default function CheckOut() {
                   <div className="form-group row">
                     <div className="col-md-4">
                       <div className="form-group">
-                        <label>State:</label>
+                        <label>State <span className="text-danger">*</span> </label>
                         <select value={selectedState} onChange={(e) => setSelectedState(e.target.value)} disabled={!selectedCountry} className='form-control'>
                           <option value="">Select State</option>
                           {states.map((state) => (
@@ -287,7 +287,7 @@ export default function CheckOut() {
                       </div>
                     </div>
                     <div className="col-md-4">
-                      <label>City:</label>
+                      <label>City <span className="text-danger">*</span></label>
                       <select disabled={!selectedState} className='form-control'>
                         <option value="">Select City</option>
                         {cities.map((city) => (
