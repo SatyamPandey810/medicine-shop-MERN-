@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import DashboardSidebar from '../../components/Dashboard-sidebar'
 import UploadProducts from '../../components/UploadProducts'
 import SummaryApi from '../../common'
-import EditProduct from '../../components/EditProduct'
 import AdminProductCard from '../../components/AdminProductCard'
 
 export default function AllProducts() {

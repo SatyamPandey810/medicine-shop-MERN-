@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import SummaryApi from '../common'
-import { Oval, TailSpin } from 'react-loader-spinner'
+import { Oval } from 'react-loader-spinner'
 import addToCart from './addtocart/AddToCart'
 import Context from '../context'
 
@@ -59,23 +59,23 @@ export default function SearchProduct() {
             {
                 data.length === 0 && !loading && (
                     <div className="col-12 text-center">
-                        <img src="\images\no-products-found.png" />
+                        <img src="\images\no-products-found.png" alt='img' />
                     </div>
                 )
             }
             <div className='row'>
                 {
                     data.length !== 0 && !loading && (
-                        data.map((product, index) => (
+                        data.map((product) => (
                             <div key={product._id} className="col-sm-6 col-lg-4 text-center item mb-4">
                                 <div className="product-card">
                                     {/* <div className="badge">Hot</div> */}
                                     <div className="product-tumb">
-                                        <img src={product.productImage} alt="" />
+                                        <img src={product.productImage} alt="img" />
                                     </div>
                                     <div className="product-details">
                                         <span className="product-catagory">{product.brandName}</span>
-                                        <h4><a href="">{product.productName}</a></h4>
+                                        <h4><span>{product.productName}</span></h4>
                                         <p>{product.description}</p>
                                         {/* <p>{el._id}</p> */}
                                         <div className="product-bottom-details">
@@ -83,7 +83,7 @@ export default function SearchProduct() {
                                             <div className="product-links">
                                                 {/* <i className="fa fa-heart"></i> */}
                                                 <button className='btn btn-primary'  onClick={(e) => handelAddToCart(e, product?._id)}><i className="fa fa-shopping-cart"></i> Add to Cart</button>
-                                                <a href=""></a>
+                                               
                                             </div>
                                         </div>
                                     </div>

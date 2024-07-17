@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import productCategory from '../helper/ProductCategory';
 import uploadIamgeCloud from '../helper/uploadImage';
 import SummaryApi from '../common';
 import { toast } from 'react-toastify'
@@ -21,7 +20,7 @@ export default function UploadProducts({ onClose, fetchData }) {
         sellingPrice: ""
     })
 
-    const [uploadImage, setUploadImage] = useState("")
+    // const [uploadImage, setUploadImage] = useState("")
 
     const fetchAllProduct = async () => {
         const response = await fetch(SummaryApi.getHomeCategoryProduct.url)

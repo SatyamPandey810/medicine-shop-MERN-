@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { Link, json, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SummaryApi from '../common';
 import { toast } from 'react-toastify';
 
@@ -16,7 +16,7 @@ export default function Signup() {
     });
     const navigate = useNavigate()
 
-    let { name, email, password, confirmPassword } = data
+    // let { name, email, password, confirmPassword } = data
 
     const togglePasswordVisibility = () => {
         setShowpassword(!showpassword);

@@ -3,7 +3,7 @@ import Header from './layout/Header'
 import Footer from './layout/Footer'
 import Router from './router/Router'
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SummaryApi from './common';
 import Context from './context';

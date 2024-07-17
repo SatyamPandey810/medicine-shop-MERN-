@@ -15,7 +15,7 @@ export default function Login() {
     const navigate = useNavigate();
     const { fetchuserDetails,fetchUserAddToCart } = useContext(Context);
 
-    let { email, password } = data
+    // let { email, password } = data
 
     const togglePasswordVisibility = () => {
         setShowpassword(!showpassword);

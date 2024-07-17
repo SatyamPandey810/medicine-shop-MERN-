@@ -3,7 +3,6 @@ const productUploadModel = require("../../models/adminmodel.js/productUpload")
 const getCategoryProduct = async (req, res) => {
     try {
         const productCategory = await productUploadModel.distinct('category')
-        // console.log("productCategory", productCategory);
 
         const productByCategory = [];
 

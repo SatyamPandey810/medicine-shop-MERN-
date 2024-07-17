@@ -16,9 +16,9 @@ export default function OnlineBuy() {
             <div className="item">
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-1.jpg" alt="" />
@@ -47,9 +47,9 @@ export default function OnlineBuy() {
               </div>
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-5.jpg" alt="" />
@@ -80,9 +80,9 @@ export default function OnlineBuy() {
             <div className="item">
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-2.jpg" alt="" />
@@ -111,9 +111,9 @@ export default function OnlineBuy() {
               </div>
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-5.jpg" alt="" />
@@ -144,9 +144,9 @@ export default function OnlineBuy() {
             <div className="item">
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-3.jpg" alt="" />
@@ -175,9 +175,9 @@ export default function OnlineBuy() {
               </div>
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-5.jpg" alt="" />
@@ -208,9 +208,9 @@ export default function OnlineBuy() {
             <div className="item">
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-4.jpg" alt="" />
@@ -239,9 +239,9 @@ export default function OnlineBuy() {
               </div>
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-5.jpg" alt="" />
@@ -284,9 +284,9 @@ export default function OnlineBuy() {
             <div className="item">
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-6.jpg" alt="" />
@@ -317,9 +317,9 @@ export default function OnlineBuy() {
             <div className="item">
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-6.jpg" alt="" />
@@ -350,9 +350,9 @@ export default function OnlineBuy() {
             <div className="item">
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-6.jpg" alt="" />
@@ -383,9 +383,9 @@ export default function OnlineBuy() {
             <div className="item">
               <div className="box">
                 <div className="btn_container">
-                  <a href="">
+                  <div>
                     Buy Now
-                  </a>
+                  </div>
                 </div>
                 <div className="img-box">
                   <img src="images/p-6.jpg" alt="" />
@@ -417,9 +417,9 @@ export default function OnlineBuy() {
         </div>
       </div>
       <div className="d-flex justify-content-center">
-        <a href="">
+        <div>
           See more
-        </a>
+        </div>
       </div>
     </section >
   )

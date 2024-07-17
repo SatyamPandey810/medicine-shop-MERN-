@@ -43,7 +43,6 @@ const getOrderDetails = async (req, res) => {
             user,
             // address
         };
-        console.log("response", response);
         res.json({
             data: response,
             success: true,

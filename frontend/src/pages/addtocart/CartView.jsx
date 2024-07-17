@@ -13,7 +13,7 @@ export default function CartView() {
     const user = useSelector(state => state?.user?.user)
     const userId = user?._id;
     const context = useContext(Context)
-    const loadingCart = new Array(context.cartProductCount).fill(null)
+    // const loadingCart = new Array(context.cartProductCount).fill(null)
     const hasProducts = data[0] && data[0].length > 0;
 
 
@@ -40,13 +40,12 @@ export default function CartView() {
     
     const chekoutPage = () => {
         if (userId) {
-            navigate(`/checkout/${userId}`); // Navigating to checkout page with userId
+            navigate(`/checkout/${userId}`); 
         } else {
-            console.error('User ID not found.'); // Handle error scenario if userId is not available
+            console.error('User ID not found.');
         }
 
     }
-
 
     // increse and decrase product updateQuantity
     const increseQuantity = async (id, qty) => {
@@ -167,7 +166,7 @@ export default function CartView() {
                                         {data[0].map((product, index) => (
                                             <tr key={product?._id}>
                                                 <td className="product-thumbnail">
-                                                    <img src={product?.productId?.productImage[0]} alt="Image" className="img-fluid" />
+                                                    <img src={product?.productId?.productImage[0]} alt="img" className="img-fluid" />
                                                 </td>
                                                 <td className="product-name">
                                                     <p className="text-black">{product?.productId?.productName}</p>
@@ -244,7 +243,7 @@ export default function CartView() {
                         </div>
 
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-md-6">
                             <div className="row mb-5">
                                 <div className="col-md-6 mb-3 mb-md-0">
@@ -268,12 +267,12 @@ export default function CartView() {
                             </div>
                         </div>
 
-                    </div>
+                    </div> */}
                 </div>
 
             ) : (
                 <div className="col-12 text-center">
-                    <img src="\images\no-products-found.png" />
+                    <img src="\images\no-products-found.png" alt='img'/>
                 </div>
             )}
         </>

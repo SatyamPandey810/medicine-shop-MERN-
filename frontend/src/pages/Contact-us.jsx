@@ -6,8 +6,7 @@ export default function ContactUs({ onClose, fetchData }) {
   const [data, setData] = useState({
     name: "",
     email: "",
-    subject: "",
-    subject: "",
+    subject: "",    
     message: "",
 
   })
@@ -42,8 +41,7 @@ export default function ContactUs({ onClose, fetchData }) {
       setData({
         name: "",
         email: "",
-        subject: "",
-        subject: "",
+        subject: "",        
         message: "",
       });
     }

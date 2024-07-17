@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faChartBar, faKeyboard, faTachometerAlt, faUser } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import AllUser from './AllUser';
+import React, {} from 'react'
+
 import DashboardSidebar from '../../components/Dashboard-sidebar';
-import ROLE from '../../common/role';
+// import ROLE from '../../common/role';
 // import AdminPannelSidebar from '../../components/Admin-pannel-sidebar';
 
 export default function AdminPanel() {
-    const user = useSelector(state => state?.user?.user)
-    const navigate = useNavigate();
+    // const user = useSelector(state => state?.user?.user)
+    // const navigate = useNavigate();
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
+    
 
     // useEffect(() => {
     //     if (user?.role !== ROLE.ADMIN) {

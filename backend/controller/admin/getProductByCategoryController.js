@@ -21,7 +21,6 @@ async function getProductbyCategoryController(req, res) {
       products
     });
   } catch (error) {
-    console.error('Error fetching category:', error);
     res.status(400).json({
       message: error.message || error,
       error: true,

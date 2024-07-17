@@ -3,17 +3,8 @@ const addToCartModel = require("../../models/adminmodel.js/CartProduct")
 const addToCartViewProduct = async (req, res) => {
     try {
         const currentUser = req.userId
-        // const allProduct = await addToCartModel.find({ userId: currentUser }).populate('productId')
-
-
         const allProduct = await addToCartModel.find({ userId: currentUser })
-            .populate('productId');
-            // console.log(currentUser);
-        // res.json(allProduct);
-
-
-
-
+            .populate('productId');       
         res.json({
             data: [allProduct],
             success: true,

@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import AllUser from '../pages/admin/AllUser'
+import React from 'react'
+import { Link } from 'react-router-dom'
+// import AllUser from '../pages/admin/AllUser'
 import { useSelector } from 'react-redux'
-import ROLE from '../common/role'
+// import ROLE from '../common/role'
 
 export default function DashboardSidebar() {
     const user = useSelector(state => state?.user?.user)
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     //  useEffect(() => {
     //     if (user?.role !== ROLE.ADMIN) {
@@ -39,7 +39,7 @@ export default function DashboardSidebar() {
 
                         {/* <Link to="/admin-panel/all-products" className="nav-item nav-link"><i className="fa fa-th me-2"></i></Link> */}
                         <div className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-th me-2"></i><span className='mx-2'>Products</span></a>
+                            <div className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-th me-2"></i><span className='mx-2'>Products </span></div>
                             <div className="dropdown-menu bg-transparent border-0">
                                 <Link to="/admin-panel/all-products" className="dropdown-item">All Products</Link>
                                 <Link to="/admin-panel/home-category" className="dropdown-item">Home category</Link>
@@ -49,8 +49,8 @@ export default function DashboardSidebar() {
                         </div>
                         <Link to="/admin-panel/total-orders" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Orders</span></Link>
                         <Link to="/admin-panel/user-message" className="nav-item nav-link"><i className="fa fa-table me-2"></i><span className='mx-2'>User messages</span></Link>
-                        <a href="chart.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Charts</span></a>
-                        <div className="nav-item dropdown">
+                        {/* <a href="chart.html" className="nav-item nav-link"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Charts</span></a> */}
+                        {/* <div className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fa fa-laptop me-2"></i><span className='mx-2'>Pages</span></a>
                             <div className="dropdown-menu bg-transparent border-0">
                                 <a href="signin.html" className="dropdown-item">Sign In</a>
@@ -58,7 +58,7 @@ export default function DashboardSidebar() {
                                 <a href="404.html" className="dropdown-item">404 Error</a>
                                 <a href="blank.html" className="dropdown-item">Blank Page</a>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </nav>
             </div>

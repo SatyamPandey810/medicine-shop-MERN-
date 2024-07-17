@@ -112,7 +112,7 @@ export default function SingleAddtocart() {
                     <div className="row">
                         <div className="col-md-5 mr-auto">
                             <div className="border text-center addtocart">
-                                <img src={data?.productId?.productImage[0]} alt="Image" className="img-fluid p-5" />
+                                <img src={data?.productId?.productImage[0]} alt="img" className="img-fluid p-5" />
                             </div>
                         </div>
                         <div className="col-md-6">

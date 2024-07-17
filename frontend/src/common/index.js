@@ -138,6 +138,14 @@ const SummaryApi = {
     contactUs: {
         url: `${backendDomain}/api/contact-message`,
         method: "post"
+    },
+    getContactUs: {
+        url: `${backendDomain}/api/get-message`,
+        method: "get"
+    },
+    delteContactUs: {
+        url: `${backendDomain}/api/delete-message`,
+        method: "post"
     }
 
 

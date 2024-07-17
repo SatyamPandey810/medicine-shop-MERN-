@@ -6,7 +6,7 @@ import uploadIamgeCloud from '../helper/uploadImage';
 // import SummaryApi from '../common';
 import { toast } from 'react-toastify'
 // import SummaryApi from '../common';
-import productCategory from '../helper/ProductCategory';
+// import productCategory from '../helper/ProductCategory';
 import SummaryApi from '../common';
 
 export default function EditProduct({ onClose, productData, fetchdata }) {
@@ -24,7 +24,7 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
         sellingPrice: productData?.sellingPrice
     })
 
-    const [uploadImage, setUploadImage] = useState("")
+    // const [uploadImage, setUploadImage] = useState("")
 
 
     const fetchAllProduct = async () => {

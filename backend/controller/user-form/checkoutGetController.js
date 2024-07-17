@@ -4,52 +4,6 @@ const userModel = require("../../models/usermodel/userModel");
 
 async function getCheckoutController(req, res) {
     try {
-        // const currentUser = req.userId
-        // const UserAllProduct = await CheckoutModel.find({ userId: currentUser })
-        //     .populate('addtocartId')
-        //     // .populate({
-        //     //     path: 'addtocartId',
-        //     //     populate: {
-        //     //         path: 'productId',
-        //     //         model: 'products'
-        //     //     }
-        //     // });
-
-        // let totalAmount = 0;
-        // UserAllProduct.forEach(checkout => {
-        //     if (checkout.addtocartId && checkout.addtocartId.productId) {
-        //         totalAmount += checkout.addtocartId.quantity * checkout.addtocartId.productId.price;
-        //     }
-        // });
-        // const responseData = UserAllProduct.map(checkout => ({
-        //     _id: checkout._id,
-        //     userId: checkout.userId,
-        //     name: checkout.name,
-        //     email: checkout.email,
-        //     phone: checkout.phone,
-        //     address1: checkout.address1,
-        //     address2: checkout.address2,
-        //     country: checkout.country,
-        //     state: checkout.state,
-        //     city: checkout.city,
-        //     zipCode: checkout.zipCode,
-        //     products: checkout.addtocartId && checkout.addtocartId.productId ? [checkout.addtocartId.productId] : []
-        //     // Add more fields as needed
-        // }));
-
-
-        // console.log("responseData", responseData);
-
-        // res.json({
-        //     data: responseData,
-        //     // totalAmount,
-        //     success: true,
-        //     error: false
-        // })
-        // console.log("UserAllProduct", total);
-
-        //-----------------------------------------------------
-
         const currentUser = req.userId;
 
         // Fetch all checkouts for the current user
@@ -63,23 +17,9 @@ async function getCheckoutController(req, res) {
             });
         }
 
-        // Fetch user details if needed
-        // const user = await userModel.findById(currentUser);
 
-        // Prepare an array to store products for each checkout
-        // const checkoutsWithProducts = await Promise.all(checkouts.map(async checkout => {
-        //     const productIds = checkout.addtocartId.map(item => item.productId);
-        //     const products = await productUploadModel.find({ _id: { $in: productIds } });
-
-        //     return {
-        //         checkout,
-        //         products
-        //     };
-        // }));
-
-        // console.log("checkoutsWithProducts",checkoutsWithProducts);
         res.json({
-            data:checkouts,
+            data: checkouts,
             // data: {
             //     user,
             //     checkouts: checkoutsWithProducts

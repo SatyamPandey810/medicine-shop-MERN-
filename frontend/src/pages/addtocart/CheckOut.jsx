@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const config = {
@@ -17,7 +16,6 @@ export default function CheckOut() {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
-  const [data, setData] = useState([])
   // const [totalProducts, setTotalProducts] = useState(0);
   // const { id} = useParams();
 
@@ -195,7 +193,7 @@ export default function CheckOut() {
               <div className="p-3 p-lg-5 border">
                 <form onSubmit={submit}>
                   <div className="form-group row">
-                    {/* <div className="col-md-4">
+                     <div className="col-md-4">
                       <label htmlFor="name" className="text-black">Name <span className="text-danger">*</span></label>
                       <input
                         type="text"
@@ -219,7 +217,7 @@ export default function CheckOut() {
                         value={formData.email}
                         required
                       />
-                    </div> */}
+                    </div>
 
                   </div>
                   <div className="form-group row">
@@ -361,26 +359,26 @@ export default function CheckOut() {
           </div>
         </div>
       </div>
-      <div className="site-section bg-secondary bg-image" style={{ backgroundImage: "url('images/bg_2.jpg')" }}>
+      <div className="site-section bg-secondary bg-image" style={{ backgroundImage: "url('/images/bg_2.jpg')" }}>
         <div className="container">
-          <div className="row align-items-stretch">
+          <div className="row align-items-stretch ">
             <div className="col-lg-6 mb-5 mb-lg-0">
-              <a href="#" className="banner-1 h-100 d-flex" style={{ backgroundImage: "url('images/bg_1.jpg')" }}>
+              <div className="banner-1 h-100 d-flex" style={{ backgroundImage: "url('/images/bg_1.jpg')" }}>
                 <div className="banner-1-inner align-self-center">
                   <h2>Pharma Products</h2>
                   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
                   </p>
                 </div>
-              </a>
+              </div>
             </div>
             <div className="col-lg-6 mb-5 mb-lg-0">
-              <a href="#" className="banner-1 h-100 d-flex" style={{ backgroundImage: "url('images/bg_2.jpg')" }}>
-                <div className="banner-1-inner ml-auto  align-self-center">
+              <div className="banner-1 h-100 d-flex"  style={{ backgroundImage: "url('/images/discount.jpg')" }}>
+                <div className="banner-1-inner ml-auto  align-self-center text-white">
                   <h2>Rated by Experts</h2>
                   <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
                   </p>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SummaryApi from '../common';
 import uploadIamgeCloud from '../helper/uploadImage';
-import HomeProductCategory from '../helper/HomeProduct';
+// import HomeProductCategory from '../helper/HomeProduct';
 export default function EditHomeProduct({ onClose, productData, fetchdata }) {
 
   const [dataCategory, setDataCategory] = useState({
@@ -17,7 +17,7 @@ export default function EditHomeProduct({ onClose, productData, fetchdata }) {
     productCategoryDescription: productData?.productCategoryDescription
 
   })
-  const [uploadImage, setUploadImage] = useState("")
+  // const [uploadImage, setUploadImage] = useState("")
 
 
   const inputChange = (event) => {

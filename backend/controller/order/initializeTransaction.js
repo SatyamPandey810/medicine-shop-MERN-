@@ -12,8 +12,12 @@ const initializeTransaction = async (transactionDetails) => {
         const response = await axios.post(url, transactionDetails, { headers });
         return response.data;
     } catch (error) {
-        console.error('Error initializing transaction:', error.response ? error.response.data : error.message);
-        throw error;
+        res.status(400).json({
+            message: error.message || error,
+            error: true,
+            success: false
+
+        })
     }
 };
 

@@ -18,7 +18,7 @@ body {
 
 @media (min-width: 1200px) {
   .container {
-      max-width: 1280px;
+    max-width: 1280px;
   }
 }
 
@@ -117,14 +117,16 @@ a:hover {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
-.js-logo-clone{
+
+.js-logo-clone {
   display: flex;
   text-wrap: nowrap;
   justify-content: center;
   align-items: center;
 
 }
-.js-logo-clone span{
+
+.js-logo-clone span {
   font-size: 15px;
   color: #31abdd;
 }
@@ -743,7 +745,8 @@ a:hover {
 .site-blocks-cover h1 {
   font-size: 50px;
   font-weight: 900;
-  color: #fff;
+  /* color: #31abdd; */
+  color: whitesmoke;
   margin-bottom: 30px;
   text-transform: uppercase;
 }
@@ -1493,6 +1496,7 @@ text-decoration: underline;
 .item .price {
   color: #000;
 }
+
 /* .item img{
   width: 300px;
 } */
@@ -1519,29 +1523,29 @@ text-decoration: underline;
   border-radius: 4px;
 }
 
-.banner-wrap a {
+.banner-wrap span {
   padding: 30px;
   display: block;
   text-align: center;
 }
 
-.banner-wrap a h5 {
+.banner-wrap span h5 {
   font-size: 2rem;
   font-style: italic;
   margin-bottom: 10px;
 }
 
-.banner-wrap a h5,
-.banner-wrap a p {
+.banner-wrap span h5,
+.banner-wrap span p {
   color: #fff;
 }
 
-.banner-wrap a p {
+.banner-wrap span p {
   color: #fff;
   font-size: 1.4rem;
 }
 
-.banner-wrap a p strong {
+.banner-wrap span p strong {
   font-size: .9rem;
   display: block;
 }
@@ -1574,7 +1578,7 @@ text-decoration: underline;
 }
 
 .banner-1 .banner-1-inner h2 {
-  color: #000;
+  /* color: #000; */
   text-transform: uppercase;
   font-weight: 900;
 }
@@ -1689,7 +1693,7 @@ text-decoration: underline;
   /* height: 300px; */
   /* padding: 50px; */
   height: 181px;
-    padding: 100px;
+  padding: 100px;
   background: #f0f0f0;
 }
 
@@ -2216,7 +2220,7 @@ text-decoration: underline;
 
 .box-child {
   border: 1px solid;
-  box-shadow: 0px 0px 11px -1px lightslategray ;
+  box-shadow: 0px 0px 11px -1px lightslategray;
   width: 100%;
   /* padding: 30px; */
 }
@@ -2230,10 +2234,12 @@ text-decoration: underline;
   background-color: lightslategray;
   cursor: pointer;
 }
-.dataimg{
+
+.dataimg {
   display: flex;
-  gap:10px;
+  gap: 10px;
 }
+
 .scrollable {
   width: 100%;
   height: 570px;
@@ -2242,52 +2248,62 @@ text-decoration: underline;
   padding: 10px;
   margin-top: 20px;
 }
-.se{
+
+.se {
   width: 100%;
 }
+
 .clear-button {
   background: none;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  margin-left: -30px; /* Adjust this value based on your styling needs */
+  margin-left: -30px;
+  /* Adjust this value based on your styling needs */
 }
-.popular-img{
+
+.popular-img {
   width: 100%;
   height: 290px;
 }
-.product{
-  border:none !important;
+
+.product {
+  border: none !important;
 }
-.product img{
+
+.product img {
   height: 150px;
   width: auto;
   margin-bottom: -50px;
   margin-left: 1rem;
   transition: 0.5s;
 }
+
 /* .product:hover img{
   transform: scale(1.05) rotate(-10deg);
 } */
-.product .card-title{
+.product .card-title {
   margin-top: 50px;
 }
 
-.img-in-cart{
+.img-in-cart {
   height: 50px;
 }
+
 /* .overflow-scroll{
   overflow: scroll;
 } */
 
-.product-thumbnail img{
+.product-thumbnail img {
   width: 100%;
   height: 8rem;
 }
-.addtocart img{
+
+.addtocart img {
   width: 100%;
   height: 33rem;
 }
+
 .tail-spin {
   /* position: absolute;
   top: 0;
@@ -2300,6 +2316,207 @@ text-decoration: underline;
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-.owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next, .owl-carousel button.owl-dot{
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel button.owl-dot {
   font-size: 47px !important;
+}
+
+/* diffrent css */
+
+.madic-prod {
+  background: #efedea;
+}
+
+.Medi-book {
+  background: #fffefe;
+}
+
+.med-ims {
+  width: 87%;
+  object-fit: cover;
+  padding-left: 11px;
+  border-radius: 3px;
+}
+
+.med-ims.hover-effect:hover {
+  transform: scale(6.5);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card-m:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+/* .med-ims:hover {
+  transform: rotateY(180deg);
+} */
+.mak-1 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mani-mac {
+  display: flex;
+  align-items: center;
+}
+
+.card-m {
+  background: #f3f0f0;
+  width: 11%;
+  height: 8rem;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.bran-tx {
+  font-weight: bold;
+  font-size: 19px;
+  text-wrap: nowrap;
+
+}
+
+.medi-dat {
+  padding: 23px;
+}
+
+.ram-tx {
+  color: #626161;
+  text-wrap: nowrap;
+}
+
+.pric-tx {
+  padding: 23px;
+}
+
+.mani-mac-1 {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  border-top: 2px solid lightgray;
+}
+
+.ram-tx-1 {
+  font-size: 23px;
+  color: #424242;
+}
+
+.ram-tx-2 {
+  font-size: 20px;
+  color: #464644;
+}
+
+.bran-tx-3 {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.bran-tx-3 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: -52px;
+}
+
+.medi-dat-1 {
+  display: flex;
+  gap: 10px;
+  padding-top: 30px;
+}
+
+.Invol {
+  padding: 5px;
+  background: #c1e2ed;
+  border: 1px solid #b3adad;
+  border-radius: 5px;
+  font-weight: bold;
+  width: 7rem;
+}
+
+.track-or {
+  padding: 5px;
+  background: #3f62df;
+  border: 1px solid #b3adad;
+  border-radius: 5px;
+  font-weight: bold;
+  width: 7rem;
+  color: white;
+}
+
+.mani-mac-2 {
+  display: flex;
+  padding-left: 79px;
+}
+
+.mak-2 {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 2px solid lightgray;
+}
+
+@media screen and (max-width:767px) {
+  .mak-1 {
+    display: block;
+    justify-content: space-around;
+  }
+
+  .mak-2 {
+    display: block;
+    border-bottom: 2px solid lightgray;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+
+  .mani-mac-2 {
+    display: flex;
+    padding-left: 17px;
+  }
+
+  .mani-mac-1 {
+    display: block;
+    border-top: 2px solid lightgray;
+  }
+
+  .medi-dat-tx {
+    padding-left: 25px;
+  }
+
+  .medi-dat-1 {
+    display: flex;
+    gap: 10px;
+    padding-top: 30px;
+    padding-left: 13px;
+  }
+
+  .mani-mac {
+    display: flex;
+    justify-content: center;
+  }
+
+  .card-m {
+    background: #f3f0f0;
+    width: 40%;
+    height: 8rem;
+    border-radius: 4px;
+    padding: 15px;
+  }
+
+  .pric-tx {
+    padding-left: 23px;
+    padding-top: 10px;
+  }
+}
+
+.items img {
+  width: 100%;
+  height: 40vh;
+}
+
+.item h3 {
+  margin-top: 40px;
+  text-transform: capitalize;
+}
+
+.item a {
+  font-size: 20px;
 }

@@ -5,7 +5,7 @@ import SummaryApi from '../common'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import HomeProductCategory from '../helper/HomeProduct';
+// import HomeProductCategory from '../helper/HomeProduct';
 
 export default function UploadHomeCategory({ onClose, fetchdata }) {
   const [dataCategory, setDataCategory] = useState({
@@ -16,7 +16,7 @@ export default function UploadHomeCategory({ onClose, fetchdata }) {
     productCategoryDescription: ""
 
   })
-  const [uploadImage, setUploadImage] = useState("")
+  // const [uploadImage, setUploadImage] = useState("")
 
 
   const inputChange = (event) => {

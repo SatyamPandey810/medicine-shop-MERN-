@@ -65,7 +65,7 @@ export default function Header() {
     <div className="site-navbar py-2">
       <div className="search-wrap">
         <div className="container">
-          <a href="#" className="search-close js-search-close"><span className="icon-close2"></span></a>
+          <Link to="/" className="search-close js-search-close"><span className="icon-close2"></span></Link>
           <form action="#" method="post">
             <input type="text" className="form-control" placeholder="Search keyword and hit enter..." onChange={handleSearch} value={search} />
           </form>
@@ -77,7 +77,7 @@ export default function Header() {
           <div className="logo">
             <div className="site-logo">
               <Link to="/" className="js-logo-clone">
-                <img src='/images/logo.png' width={100} height={100} />
+                <img src='/images/logo.png' width={100} height={100} alt="img" />
                 <span>Zelon pharma</span>
               </Link>
             </div>
@@ -88,11 +88,11 @@ export default function Header() {
                 <li className="active"><Link to="/">Home</Link></li>
                 {/* <li><Link to="/">Store</Link></li> */}
                 <li className="has-children">
-                  <a href="#">Shop</a>
+                  <Link to="/">Shop</Link>
                   <ul className="dropdown">
                     {
                       allNavProduct.map((products,index)=>(
-                         <li key={index}><Link to={`/navcategory/${products?._id}`}>{products.name}</Link></li>
+                         <li key={index}><Link to={`/navcategory/${products?._id}`} className=' text-capitalize'>{products.name}</Link></li>
                       ))
                     }                  
                   </ul>
@@ -101,7 +101,7 @@ export default function Header() {
                 <li><Link to="/contact-us">Contact</Link></li>
 
                 <li className="has-children">
-                  <a href="#"> <FontAwesomeIcon icon={faUser} style={{ fontSize: "20px" }} /> Account</a>
+                  <Link to=""> <FontAwesomeIcon icon={faUser} style={{ fontSize: "20px" }} /> Account</Link>
                   <ul className="dropdown">
                     <li>{
                       user?._id ? (
@@ -133,12 +133,12 @@ export default function Header() {
           </div>
 
           <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="cart.html" class="icons-btn d-inline-block bag">
+            <Link to="/" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></Link>
+            {/* <a href="cart.html" class="icons-btn d-inline-block bag">
 
-            </a>
-            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
-              class="icon-menu"></span></a>
+            </a> */}
+            <Link to="/" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+              class="icon-menu"></span></Link>
           </div>
         </div>
       </div>

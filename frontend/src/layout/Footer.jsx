@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
           <div className="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 className="footer-heading mb-4">Quick Links</h3>
-            <ul className="list-unstyled">
+            <ul className="list-unstyled text-capitalize">
               {
                 allNavProduct.map((products, index) => (
                   <li key={index}><Link to={`/navcategory/${products?._id}`}>{products.name}</Link></li>

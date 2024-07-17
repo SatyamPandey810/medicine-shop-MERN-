@@ -84,11 +84,11 @@ export default function NavCategory() {
                                 <div className="product-card">
                                     {/* <div className="badge">Hot</div> */}
                                     <div className="product-tumb">
-                                        <img src={el.productImage} alt="" />
+                                        <img src={el.productImage} alt="img" />
                                     </div>
                                     <div className="product-details">
                                         <span className="product-catagory">{el.brandName}</span>
-                                        <h4><a href="">{el.productName}</a></h4>
+                                        <h4>{el.productName}</h4>
                                         <p>{el.description}</p>
                                         {/* <p>{el._id}</p> */}
                                         <div className="product-bottom-details">

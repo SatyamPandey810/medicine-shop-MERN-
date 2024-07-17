@@ -42,8 +42,7 @@ export default function TotalOrders() {
     const updateOrderStatus = async (orderId, newStatus) => {
         try {
             const url = `${SummaryApi.orderUpdate.url.replace(':id', orderId)}`;
-            console.log('Updating order status:', orderId, 'to', newStatus);
-            console.log('Request URL:', url);
+           
 
             const response = await fetch(url, {
                 method: SummaryApi.orderUpdate.method,
@@ -54,12 +53,11 @@ export default function TotalOrders() {
             });
 
             const data = await response.json();
-            console.log('Response:', data);
+            // console.log('Response:', data);
 
             if (data.error) {
                 console.error('Failed to update order status:', data.error);
             } else {
-                console.log('Order status updated successfully');
                 // Update the order in state
                 setOrder(prevOrders => {
                     const updatedOrders = prevOrders.map(order => {
@@ -86,6 +84,14 @@ export default function TotalOrders() {
         updateOrderStatus(orderId, newStatus);
     };
 
+    // let paymentMethodText;
+
+    // if (order.paymentMethod === 'cod') {
+    //     paymentMethodText = 'Cash on delivery';
+    // } else if (order.paymentMethod === 'online') {
+    //     paymentMethodText = 'Paid online';
+    // }
+
 
 
     return (
@@ -94,23 +100,26 @@ export default function TotalOrders() {
             <div className='content container'>
                 {Object.entries(groupedOrders).map(([userId, userOrders]) => {
                     const { phone, address1, address2, city, state, country, zipCode } = userOrders[0].address;
-                    const { name, email } = userOrders[0];
+                    const { name, email, status } = userOrders[0];
                     return (
                         <div key={userId} className="mb-5">
-                            <h4 className='fw-bold'>User ID: {userId}</h4>
+                            <div className='d-flex justify-content-between'>
+                                <h4 className='fw-bold'>User ID: {userId}</h4>
+                                <h4 style={{ color: status === 'Order Canceled' ? 'red' : 'inherit' }}>Order update by user : {status}</h4>
+                            </div>
                             <p><b>Name:</b> {name}</p>
                             <p><b>Email:</b> {email}</p>
                             <p><b>Phone:</b> {phone}</p>
                             <p><b>Address:</b> {address1}, {address2}, {city}, {state}, {country}, {zipCode}</p>
-                            <div className='w-100'>
-                                <table className="table table-bordered ">
+                            <div>
+                                <table className="table table-bordered"  style={{ width: "100%" }}>
                                     <thead>
                                         <tr className='table-danger'>
                                             <th scope="col">No</th>
                                             <th scope="col">Order ID</th>
                                             <th scope="col">Amount</th>
                                             <th scope="col" className='text-nowrap'>Payment Method</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">Status admin</th>
                                             <th scope="col" className='text-nowrap'>Order At</th>
                                             <th scope="col">Cart Items</th>
                                             <th scope="col">Actions</th>
@@ -123,6 +132,7 @@ export default function TotalOrders() {
                                                 <td>{order._id}</td>
                                                 <td>{order.amount}</td>
                                                 <td>{order.paymentMethod}</td>
+                                                {/* <td>{paymentMethodText}</td> */}
                                                 <td>
                                                     <button className={`btn ${order.status === 'order canceled' ? 'btn-danger' : 'btn-success'}`}>
                                                         {order.status}
@@ -143,12 +153,12 @@ export default function TotalOrders() {
                                                         <input className="form-check-input"
                                                             type="radio"
                                                             name="orderStatus"
-                                                            value="order confirmed"
+                                                            value="pending"
                                                             id="confirmedRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
 
                                                         />
-                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                        <label class="form-check-label" htmlFor="flexCheckChecked">
                                                             Pending
                                                         </label>
                                                     </div>
@@ -156,11 +166,11 @@ export default function TotalOrders() {
                                                         <input className="form-check-input"
                                                             type="radio"
                                                             name="orderStatus"
-                                                            value="order packed"
+                                                            value="order confirmed"
                                                             id="packedRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
                                                         />
-                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                        <label class="form-check-label" htmlFor="flexCheckChecked">
                                                             Order confirmed
                                                         </label>
                                                     </div>
@@ -172,7 +182,7 @@ export default function TotalOrders() {
                                                             id="packedRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
                                                         />
-                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                        <label class="form-check-label" htmlFor="flexCheckChecked">
                                                             Order packed
                                                         </label>
                                                     </div>
@@ -184,7 +194,7 @@ export default function TotalOrders() {
                                                             id="deliveredRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
                                                         />
-                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                        <label class="form-check-label" htmlFor="flexCheckChecked">
                                                             Order delivered
                                                         </label>
                                                     </div>
@@ -196,7 +206,7 @@ export default function TotalOrders() {
                                                             id="canceledRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
                                                         />
-                                                        <label className="form-check-label" for="flexCheckChecked">
+                                                        <label className="form-check-label" htmlFor="flexCheckChecked">
                                                             Order canceled
                                                         </label>
                                                     </div>

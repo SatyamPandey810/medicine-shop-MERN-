@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import SummaryApi from '../../common'
-import { useSelector } from 'react-redux'
 import DashboardSidebar from '../../components/Dashboard-sidebar'
 import { toast } from 'react-toastify'
 import moment from "moment"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChangeUserDetails from '../../components/Change-user-details'
-import AdminPanel from './AdminPanel'
 
 
 export default function AllUser() {

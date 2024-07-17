@@ -39,6 +39,8 @@ const updateNavCategoryController = require('../controller/admin/updateNavCatego
 const deleteNavCategory = require('../controller/admin/deleteNavCategory');
 const updateTransactionStatus = require('../controller/order/orderStatusController');
 const contactUsController = require('../controller/messages/contactUsController');
+const getMessageController = require('../controller/messages/getMessageController');
+const deleteMesageController = require('../controller/messages/deleteMessage');
 // const userAddressController = require('../controller/user-form/userAddressController');
 // const getAddressUserController = require('../controller/user-form/getUserAddress');
 // const addressUpdateController = require('../controller/user-form/updateUserAddress');
@@ -133,13 +135,16 @@ router.get('/orders', authToken, getOrderDetails);
 router.get("/admin-order", authToken, adminAllOrderController)
 
 // order status updating
-router.post("/transaction-status/:id", authToken, updateTransactionStatus)
+router.post("/transaction-status/:id", updateTransactionStatus)
 
 // contact-us message route
-
 router.post("/contact-message", authToken, contactUsController)
 
+// get contact-us message route
+router.get("/get-message", getMessageController)
 
+// delete contact-us message route
+router.post("/delete-message", deleteMesageController)
 
 
 module.exports = router

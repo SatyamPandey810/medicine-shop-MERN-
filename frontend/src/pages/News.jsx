@@ -21,9 +21,9 @@ export default function News() {
                             opposed to using 'Content here, content here', making it
                         </p>
                         <div className="d-flex justify-content-center">
-                            <a href="">
+                            <div>
                                 Read More
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -251,9 +251,9 @@ export default function News() {
                                         It is a long established fact that a reader will be distracted by
                                     </p>
                                     <div>
-                                        <a href="">
+                                        <div>
                                             Buy Now
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

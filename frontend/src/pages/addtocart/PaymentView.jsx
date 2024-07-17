@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import SummaryApi from '../../common'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
-import Context from '../../context';
 import { useSelector } from 'react-redux';
-import { loadStripe } from '@stripe/stripe-js';
 import { useNavigate } from 'react-router-dom';
 
 export default function PaymentView() {
@@ -15,12 +12,10 @@ export default function PaymentView() {
     const [totalUniqueProducts, setTotalUniqueProducts] = useState(0);
     const [editIndex, setEditIndex] = useState(null);
     const [formData, setFormData] = useState({})
-    const [paymentMethod, setPaymentMethod] = useState('');   
-    
+    const [paymentMethod, setPaymentMethod] = useState('');
+
     const user = useSelector(state => state?.user?.user)
-    const userId = user?._id;
-    const context = useContext(Context)
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const fetchData = async () => {
         try {
@@ -110,7 +105,7 @@ export default function PaymentView() {
 
 
             const flattenedData = responseData.data.flat();
-            const uniqueProductIds = new Set(flattenedData.map(item => item.productId._id)); 
+            const uniqueProductIds = new Set(flattenedData.map(item => item.productId._id));
 
             const totalUnique = uniqueProductIds.size;
             setTotalUniqueProducts(totalUnique);
@@ -147,24 +142,24 @@ export default function PaymentView() {
 
 
     // delete cart product 
-    const deleteCartProduct = async (id) => {
-        const response = await fetch(SummaryApi.deleteCartProduct.url, {
-            method: SummaryApi.deleteCartProduct.method,
-            credentials: "include",
-            headers: {
-                "content-type": 'application/json'
-            },
-            body: JSON.stringify({
-                _id: id,
+    // const deleteCartProduct = async (id) => {
+    //     const response = await fetch(SummaryApi.deleteCartProduct.url, {
+    //         method: SummaryApi.deleteCartProduct.method,
+    //         credentials: "include",
+    //         headers: {
+    //             "content-type": 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             _id: id,
 
-            })
-        })
-        const responseData = await response.json()
-        if (responseData.success) {
-            fetchData()
-            context.fetchUserAddToCart()
-        }
-    }
+    //         })
+    //     })
+    //     const responseData = await response.json()
+    //     if (responseData.success) {
+    //         fetchData()
+    //         context.fetchUserAddToCart()
+    //     }
+    // }
 
     // const handlePayment = async () => {
 
@@ -205,37 +200,37 @@ export default function PaymentView() {
 
     const handlePayment = async () => {
         try {
-          const response = await fetch(SummaryApi.paymentOrder.url, {
-            method: SummaryApi.paymentOrder.method,
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              cartItems: product,
-              paymentMethod: paymentMethod,
-            }),
-          });
-    
-          const responseData = await response.json();
-    
-          if (paymentMethod === 'online' && responseData.status && responseData.data && responseData.data.authorization_url) {
-            window.location.href = responseData.data.authorization_url;
+            const response = await fetch(SummaryApi.paymentOrder.url, {
+                method: SummaryApi.paymentOrder.method,
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    cartItems: product,
+                    paymentMethod: paymentMethod,
+                }),
+            });
 
-          } else if (paymentMethod === 'cod' && responseData.success) {
-            // alert('Order placed successfully! You will pay on delivery.');
-            toast.success('Order placed successfully!')
-            setTimeout(() => {
-                // navigate(`/success/${userId}`);
-                navigate('/success')
-              }, 1000);
-          } else {
-            toast.error('Please select payment method!')
-          }
+            const responseData = await response.json();
+
+            if (paymentMethod === 'online' && responseData.status && responseData.data && responseData.data.authorization_url) {
+                window.location.href = responseData.data.authorization_url;
+
+            } else if (paymentMethod === 'cod' && responseData.success) {
+                // alert('Order placed successfully! You will pay on delivery.');
+                toast.success('Order placed successfully!')
+                setTimeout(() => {
+                    // navigate(`/success/${userId}`);
+                    navigate('/success')
+                }, 1000);
+            } else {
+                toast.error('Please select payment method!')
+            }
         } catch (error) {
-          alert('An error occurred. Please try again.');
+            alert('An error occurred. Please try again.');
         }
-      };
+    };
 
 
     return (
@@ -267,44 +262,89 @@ export default function PaymentView() {
                                                 <>
                                                     <tr className='table'>
                                                         <td>
-                                                            <label>Name</label>
-                                                            <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
+                                                            <label htmlFor='name'>Name</label><br />
+                                                            <input
+                                                                type="text"
+                                                                name="name"
+                                                                value={formData.name}
+                                                                onChange={handleInputChange}
+                                                            />
                                                         </td>
                                                         <td>
-                                                            <label>Email</label>
-                                                            <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
+                                                            <label htmlFor='email'>Email</label><br />
+                                                            <input
+                                                                type="email"
+                                                                name="email"
+                                                                value={formData.email}
+                                                                onChange={handleInputChange}
+                                                            />
                                                         </td>
                                                         <td>
-                                                            <label>Phone</label>
-                                                            <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} />
+                                                            <label htmlFor='phone'>Phone</label><br />
+                                                            <input
+                                                                type="text"
+                                                                name="phone"
+                                                                value={formData.phone}
+                                                                onChange={handleInputChange}
+                                                            />
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <label>Address1</label>
-                                                            <input type="text" name="address1" value={formData.address1} onChange={handleInputChange} />
+                                                            <label htmlFor='address1'>Address1</label><br />
+                                                            <input
+                                                                type="text"
+                                                                name="address1"
+                                                                value={formData.address1}
+                                                                onChange={handleInputChange}
+                                                            />
                                                         </td>
                                                         <td>
-                                                            <label>Address2</label>
-                                                            <input type="text" name="address2" value={formData.address2} onChange={handleInputChange} />
+                                                            <label htmlFor='address2'>Address2</label><br />
+                                                            <input
+                                                                type="text"
+                                                                name="address2"
+                                                                value={formData.address2}
+                                                                onChange={handleInputChange}
+                                                            />
                                                         </td>
                                                         <td>
-                                                            <label>Country</label>
-                                                            <input type="text" name="country" value={formData.country} onChange={handleInputChange} />
+                                                            <label htmlFor='country'>Country</label><br />
+                                                            <input
+                                                                type="text"
+                                                                name="country"
+                                                                value={formData.country}
+                                                                onChange={handleInputChange}
+                                                            />
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <label>State</label>
-                                                            <input type="text" name="state" value={formData.state} onChange={handleInputChange} />
+                                                            <label htmlFor='state'>State</label><br />
+                                                            <input
+                                                                type="text"
+                                                                name="state"
+                                                                value={formData.state}
+                                                                onChange={handleInputChange}
+                                                            />
                                                         </td>
                                                         <td>
-                                                            <label>City</label>
-                                                            <input type="text" name="city" value={formData.city} onChange={handleInputChange} />
+                                                            <label htmlFor='city'>City</label><br />
+                                                            <input
+                                                                type="text"
+                                                                name="city"
+                                                                value={formData.city}
+                                                                onChange={handleInputChange}
+                                                            />
                                                         </td>
                                                         <td>
-                                                            <label>Zip code</label>
-                                                            <input type="text" name="zipCode" value={formData.zipCode} onChange={handleInputChange} />
+                                                            <label htmlFor='zipCode'>Zip code</label><br />
+                                                            <input
+                                                                type="text"
+                                                                name="zipCode"
+                                                                value={formData.zipCode}
+                                                                onChange={handleInputChange}
+                                                            />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -318,8 +358,8 @@ export default function PaymentView() {
                                                 </>
                                             ) : (
                                                 <tr className='table-success'>
-                                                    <td className='text-nowrap'>{checkoutData.name}</td>
-                                                    <td>{checkoutData.email}</td>
+                                                    <td className='text-nowrap'>{user?.name}</td>
+                                                    <td>{user?.email}</td>
                                                     <td>{checkoutData.phone}</td>
                                                     <td>{checkoutData.address1}<br />
                                                         {checkoutData.address2}
@@ -416,7 +456,7 @@ export default function PaymentView() {
                                 </label>
                             </div>
                             <div>
-                                <label>
+                                <label >
                                     <input
                                         type="radio"
                                         name="paymentMethod"

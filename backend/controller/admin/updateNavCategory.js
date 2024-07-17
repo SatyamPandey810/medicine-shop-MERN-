@@ -8,10 +8,8 @@ async function updateNavCategoryController(req, res) {
         // if (!productUploadpermission(sessionUserId)) {
         //     throw new Error('Permission denid')
         // }
-        console.log('req.body:', req.body);
         const { _id, ...resBody } = req.body
         const updateNavProduct = await navProductModel.findByIdAndUpdate(_id, resBody)
-        console.log('_id:', _id);
         res.json({
             message: "Product updated successfully",
             success: true,
