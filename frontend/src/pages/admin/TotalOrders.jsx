@@ -158,7 +158,7 @@ export default function TotalOrders() {
                                                             onChange={(e) => handleStatusChange(order._id, e)}
 
                                                         />
-                                                        <label class="form-check-label" htmlFor="flexCheckChecked">
+                                                        <label className="form-check-label" htmlFor="flexCheckChecked">
                                                             Pending
                                                         </label>
                                                     </div>
@@ -170,7 +170,7 @@ export default function TotalOrders() {
                                                             id="packedRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
                                                         />
-                                                        <label class="form-check-label" htmlFor="flexCheckChecked">
+                                                        <label className="form-check-label" htmlFor="flexCheckChecked">
                                                             Order confirmed
                                                         </label>
                                                     </div>
@@ -182,7 +182,7 @@ export default function TotalOrders() {
                                                             id="packedRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
                                                         />
-                                                        <label class="form-check-label" htmlFor="flexCheckChecked">
+                                                        <label className="form-check-label" htmlFor="flexCheckChecked">
                                                             Order packed
                                                         </label>
                                                     </div>
@@ -194,7 +194,7 @@ export default function TotalOrders() {
                                                             id="deliveredRadio"
                                                             onChange={(e) => handleStatusChange(order._id, e)}
                                                         />
-                                                        <label class="form-check-label" htmlFor="flexCheckChecked">
+                                                        <label className="form-check-label" htmlFor="flexCheckChecked">
                                                             Order delivered
                                                         </label>
                                                     </div>

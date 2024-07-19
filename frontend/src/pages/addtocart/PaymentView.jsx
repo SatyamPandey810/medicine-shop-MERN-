@@ -421,26 +421,26 @@ export default function PaymentView() {
                         </table>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12 text-center border-bottom mb-2">
-                                <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                    <div className="col-md-4">
+                        <div className="row">
+                            <div className="col-md-12 text-center border-bottom mb-2">
+                                <h3 className="text-black h4 text-uppercase">Cart Totals</h3>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <span class="text-black">Total Products</span>
+                        <div className="row mb-3">
+                            <div className="col-md-6">
+                                <span className="text-black">Total Products</span>
                             </div>
-                            <div class="col-md-6 text-right">
-                                <strong class="text-black">{totalUniqueProducts}</strong>
+                            <div className="col-md-6 text-right">
+                                <strong className="text-black">{totalUniqueProducts}</strong>
                             </div>
                         </div>
-                        <div class="row mb-5">
-                            <div class="col-md-6">
-                                <span class="text-black">Total</span>
+                        <div className="row mb-5">
+                            <div className="col-md-6">
+                                <span className="text-black">Total</span>
                             </div>
-                            <div class="col-md-6 text-right">
-                                <strong class="text-black">₦ {totalSellingPrice}</strong>
+                            <div className="col-md-6 text-right">
+                                <strong className="text-black">₦ {totalSellingPrice}</strong>
                             </div>
                         </div>
                         <form >
@@ -467,9 +467,9 @@ export default function PaymentView() {
                                 </label>
                             </div>
                         </form>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button class="btn btn-primary btn-lg btn-block" onClick={handlePayment}>Order placed</button>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <button className="btn btn-primary btn-lg btn-block" onClick={handlePayment}>Order placed</button>
                             </div>
                         </div>
                     </div>

@@ -132,13 +132,13 @@ export default function Header() {
            
           </div>
 
-          <div class="icons">
-            <Link to="/" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></Link>
-            {/* <a href="cart.html" class="icons-btn d-inline-block bag">
+          <div className="icons">
+            <Link to="/" className="icons-btn d-inline-block js-search-open"><span className="icon-search"></span></Link>
+            {/* <a href="cart.html" className="icons-btn d-inline-block bag">
 
             </a> */}
-            <Link to="/" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
-              class="icon-menu"></span></Link>
+            <Link to="/" className="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+              className="icon-menu"></span></Link>
           </div>
         </div>
       </div>

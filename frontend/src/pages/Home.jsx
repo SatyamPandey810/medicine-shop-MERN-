@@ -193,7 +193,6 @@ export default function Home() {
                         <img src="images/user.png" alt="img" className="img-fluid w-25 mb-4 rounded-circle" />
                         <p>{el?.message}</p>
                       </blockquote>
-
                       <p className='text-capitalize'>&mdash; {el?.name}</p>
                     </div>
                   ))

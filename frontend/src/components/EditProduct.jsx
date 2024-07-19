@@ -214,9 +214,6 @@ export default function EditProduct({ onClose, productData, fetchdata }) {
                         </div>
                         <button className='btn btn-success'>Update product</button>
                     </form>
-
-
-
                 </div>
             </div>
         </div>
